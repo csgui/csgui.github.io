@@ -2,17 +2,17 @@
 SET HEIGHT
 ****************************************************/
 $(document).ready(function() {
-	function handleResize() {
-	var h = $(window).height();
-	        $('section').css({'height':h+'px'});
-	}
-	$(function(){
-	        handleResize();
+  function handleResize() {
+    var h = $(window).height();
+    $('section').css({'height':h+'px'});
+  }
+  $(function(){
+    handleResize();
 
-	        $(window).resize(function(){
-	        handleResize();
-	    });
-	});
+    $(window).resize(function(){
+      handleResize();
+    });
+  });
 });
 
 
@@ -32,32 +32,32 @@ PATHLOADER
  */
 ;( function( window ) {
 
-	'use strict';
+  'use strict';
 
-	function PathLoader( el ) {
-		this.el = el;
-		// clear fill
-//		this.el.style.fillDasharray = this.el.style.fillDashoffset = this.el.getTotalLength();
-	}
+  function PathLoader( el ) {
+    this.el = el;
+    // clear fill
+    //		this.el.style.fillDasharray = this.el.style.fillDashoffset = this.el.getTotalLength();
+  }
 
-	PathLoader.prototype._draw = function( val ) {
-		// this.el.style.fillDashoffset = this.el.getTotalLength() * ( 1 - val );
-	}
+  PathLoader.prototype._draw = function( val ) {
+    // this.el.style.fillDashoffset = this.el.getTotalLength() * ( 1 - val );
+  }
 
-	PathLoader.prototype.setProgress = function( val, callback ) {
-		// this._draw(val);
-		// if( callback && typeof callback === 'function' ) {
-			// give it a time (ideally the same like the transition time) so that the last progress increment animation is still visible.
-			// setTimeout( callback, 0 );
-		// }
-	}
+  PathLoader.prototype.setProgress = function( val, callback ) {
+    // this._draw(val);
+    // if( callback && typeof callback === 'function' ) {
+    // give it a time (ideally the same like the transition time) so that the last progress increment animation is still visible.
+    // setTimeout( callback, 0 );
+    // }
+  }
 
-	PathLoader.prototype.setProgressFn = function( fn ) {
-		if( typeof fn === 'function' ) { fn( this ); }
-	}
+  PathLoader.prototype.setProgressFn = function( fn ) {
+    if( typeof fn === 'function' ) { fn( this ); }
+  }
 
-	// add to global namespace
-	window.PathLoader = PathLoader;
+  // add to global namespace
+  window.PathLoader = PathLoader;
 
 })( window );
 
@@ -75,80 +75,81 @@ PATHLOADER
  */
 (function() {
 
-	var support = { animations : Modernizr.cssanimations },
-		container = document.getElementById( 'ip-container' ),
-		header = container.querySelector( 'header.ip-header' ),
-		loader = new PathLoader( document.getElementById( 'ip-loader-jobtitle' ) ),
-		animEndEventNames = { 'WebkitAnimation' : 'webkitAnimationEnd', 'OAnimation' : 'oAnimationEnd', 'msAnimation' : 'MSAnimationEnd', 'animation' : 'animationend' },
-		// animation end event name
-		animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ];
 
-	function init() {
-		var onEndInitialAnimation = function() {
-			if( support.animations ) {
-				this.removeEventListener( animEndEventName, onEndInitialAnimation );
-			}
+  var support = { animations : Modernizr.cssanimations },
+  container = document.getElementById( 'ip-container' ),
+  header = container.querySelector( 'header.ip-header' ),
+  loader = new PathLoader( document.getElementById( 'ip-loader-jobtitle' ) ),
+  animEndEventNames = { 'WebkitAnimation' : 'webkitAnimationEnd', 'OAnimation' : 'oAnimationEnd', 'msAnimation' : 'MSAnimationEnd', 'animation' : 'animationend' },
+  // animation end event name
+  animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ];
 
-			startLoading();
-		};
+  function init() {
+    var onEndInitialAnimation = function() {
+      if( support.animations ) {
+	this.removeEventListener( animEndEventName, onEndInitialAnimation );
+      }
 
-		// disable scrolling
-		window.addEventListener( 'scroll', noscroll );
+      startLoading();
+    };
 
-		// initial animation
-		classie.add( container, 'loading' );
+    // disable scrolling
+    window.addEventListener( 'scroll', noscroll );
 
-		if( support.animations ) {
-			container.addEventListener( animEndEventName, onEndInitialAnimation );
-		}
-		else {
-			onEndInitialAnimation();
-		}
+    // initial animation
+    classie.add( container, 'loading' );
+
+    if( support.animations ) {
+      container.addEventListener( animEndEventName, onEndInitialAnimation );
+    }
+    else {
+      onEndInitialAnimation();
+    }
+  }
+
+  function startLoading() {
+    // simulate loading something..
+    var simulationFn = function(instance) {
+      var progress = 0,
+      interval = setInterval( function() {
+	progress = Math.min( progress + Math.random() * 0.1, 1 );
+
+	instance.setProgress( progress );
+
+	// reached the end
+	if( progress === 1 ) {
+	  classie.remove( container, 'loading' );
+	  classie.add( container, 'loaded' );
+	  clearInterval( interval );
+
+	  var onEndHeaderAnimation = function(ev) {
+	    if( support.animations ) {
+	      if( ev.target !== header ) return;
+	      this.removeEventListener( animEndEventName, onEndHeaderAnimation );
+	    }
+
+	    classie.add( document.body, 'layout-switch' );
+	    window.removeEventListener( 'scroll', noscroll );
+	  };
+
+	  if( support.animations ) {
+	    header.addEventListener( animEndEventName, onEndHeaderAnimation );
+	  }
+	  else {
+	    onEndHeaderAnimation();
+	  }
 	}
+      }, 80 );
+    };
 
-	function startLoading() {
-		// simulate loading something..
-		var simulationFn = function(instance) {
-			var progress = 0,
-				interval = setInterval( function() {
-					progress = Math.min( progress + Math.random() * 0.1, 1 );
+    loader.setProgressFn( simulationFn );
+  }
 
-					instance.setProgress( progress );
+  function noscroll() {
+    window.scrollTo( 0, 0 );
+  }
 
-					// reached the end
-					if( progress === 1 ) {
-						classie.remove( container, 'loading' );
-						classie.add( container, 'loaded' );
-						clearInterval( interval );
-
-						var onEndHeaderAnimation = function(ev) {
-							if( support.animations ) {
-								if( ev.target !== header ) return;
-								this.removeEventListener( animEndEventName, onEndHeaderAnimation );
-							}
-
-							classie.add( document.body, 'layout-switch' );
-							window.removeEventListener( 'scroll', noscroll );
-						};
-
-						if( support.animations ) {
-							header.addEventListener( animEndEventName, onEndHeaderAnimation );
-						}
-						else {
-							onEndHeaderAnimation();
-						}
-					}
-				}, 80 );
-		};
-
-		loader.setProgressFn( simulationFn );
-	}
-
-	function noscroll() {
-		window.scrollTo( 0, 0 );
-	}
-
-	init();
+  init();
 
 })();
 
@@ -159,14 +160,14 @@ STICKY TITLES
 ****************************************************/
 
 $(document).ready(function() {
-	$(function(){
-		$('body').stacks({
-			body: '.ip-main',
-			title: 'h2',
-			margin: 0,
-			offset: 51
-		})
-	})
+  $(function(){
+    $('body').stacks({
+      body: '.ip-main',
+      title: 'h2',
+      margin: 0,
+      offset: 51
+    })
+  })
 });
 
 
@@ -174,34 +175,34 @@ $(document).ready(function() {
 SCROLL TO SECTIONS
 ****************************************************/
 
-jQuery(document).ready(function($) {
-    $('a[href^="#"]').bind('click.smoothscroll',function (e) {
-        e.preventDefault();
-        var target = this.hash,
-        $target = $(target);
+// $(document).ready(function() {
+  // $('a[href^="#"]').bind('click.smoothscroll',function (e) {
+  // e.preventDefault();
+  // var target = this.hash,
+  // $target = $(target);
 
-        $('html, body').stop().animate( {
-            'scrollTop': $target.offset().top-0
-        }, 900, 'swing', function () {
-            window.location.hash = target;
-        } );
-    } );
-} );
+  // $('html, body').stop().animate( {
+  // 'scrollTop': $target.offset().top-0
+  // }, 900, 'swing', function () {
+  // window.location.hash = target;
+  // } );
+  // } );
+// });
 
 /****************************************************
 SLIDER FADE
 ****************************************************/
 
 $(window).load(function(){
-	var target = $('#intro'),
-		targetHeight = target.outerHeight();
-	$(window).on('scroll',function(e) {
-		var scrollPercent = 0;
-		scrollPercent = (targetHeight-$(window).scrollTop())/targetHeight;
-		if (scrollPercent >= 0.1) {
-			target.css('opacity', scrollPercent);
-		}
-	});
+  var target = $('#intro'),
+  targetHeight = target.outerHeight();
+  $(window).on('scroll',function(e) {
+    var scrollPercent = 0;
+    scrollPercent = (targetHeight-$(window).scrollTop())/targetHeight;
+    if (scrollPercent >= 0.1) {
+      target.css('opacity', scrollPercent);
+    }
+  });
 });
 
 /****************************************************
@@ -209,53 +210,30 @@ FADE INTRO TEXT
 ****************************************************/
 
 $(document).ready(function(){
-	var $window = $(window);
-	var scrollFade = function ($element, friction, offset) {
-	  friction  = (friction  === undefined)? 0.5 : friction;
-	  offset = (offset === undefined)? 0 : offset;
+  var $window = $(window);
+  var scrollFade = function ($element, friction, offset) {
+    friction  = (friction  === undefined)? 0.5 : friction;
+    offset = (offset === undefined)? 0 : offset;
 
-	  var parentHeight = $element.parent().outerHeight() * 4;
-	  var previousOpacity = Infinity;
+    var parentHeight = $element.parent().outerHeight() * 4;
+    var previousOpacity = Infinity;
 
-	  $window.scroll(function() {
-	    var scrollTop = Math.max(0, $window.scrollTop()),
-	      opacity   = 1 - (scrollTop / parentHeight - (parentHeight * offset))
+    $window.scroll(function() {
+      var scrollTop = Math.max(0, $window.scrollTop()),
+      opacity   = 1 - (scrollTop / parentHeight - (parentHeight * offset))
 
-	    if (opacity < 0 && previousOpacity < 0) return;
+      if (opacity < 0 && previousOpacity < 0) return;
 
-	    $element.css({
-	      opacity: opacity
-	    });
+      $element.css({
+	opacity: opacity
+      });
 
-	    previousOpacity = opacity;
-	  });
-	}
+      previousOpacity = opacity;
+    });
+  }
 
-	scrollFade($('#intro .container')
-	  , 0  // Friction (0 ~ 1): lower = none
-	  , 0    // Fade duration (0 ~ 1): lower = longer
-	);
-});
-
-/****************************************************
-SIMPLY WEATHER APP
-****************************************************/
-
-$(document).ready(function() {
-  $.simpleWeather({
-    location: 'Berlin, Germany',
-    woeid: '',
-    unit: 'c',
-    success: function(weather) {
-      html = '<span class="line">'+weather.city+', '+weather.country+'</span>';
-      html += '<span>'+weather.temp+'&deg;'+weather.units.temp+'</span> ';
-      html += '<span class="currently">'+weather.currently+'</span>';
-      html += '<span  class="line">'+weather.wind.direction+' '+weather.wind.speed+' '+weather.units.speed+'</span>';
-
-      $("#weather").html(html);
-    },
-    error: function(error) {
-      $("#weather").html('<p>'+error+'</p>');
-    }
-  });
+  scrollFade($('#intro .container')
+	     , 0  // Friction (0 ~ 1): lower = none
+	     , 0    // Fade duration (0 ~ 1): lower = longer
+	    );
 });
