@@ -20,19 +20,19 @@ $(document).ready(function() {
 
     //
     //
-    // function handleResize() {
-      // var h = $(window).height();
-      // $('section').css({'height': h + 'px'});
-    // }
+    function handleResize() {
+      var h = $(window).height();
+      $('section').css({'height': h + 'px'});
+    }
 
     return {
-      animatedScrolling: addAnimatedScrollingToAllAnchors
-      // resize: handleResize
+      animatedScrolling: addAnimatedScrollingToAllAnchors,
+      resize: handleResize
     };
 
   })();
 
   site.animatedScrolling();
-  // site.resize();
+  site.resize();
 
 });

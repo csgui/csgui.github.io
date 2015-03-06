@@ -1,19 +1,19 @@
 /****************************************************
 SET HEIGHT
 ****************************************************/
-$(document).ready(function() {
-  function handleResize() {
-    var h = $(window).height();
-    $('section').css({'height':h+'px'});
-  }
-  $(function(){
-    handleResize();
+// $(document).ready(function() {
+  // function handleResize() {
+    // var h = $(window).height();
+    // $('section').css({'height':h+'px'});
+  // }
+  // $(function(){
+    // handleResize();
 
-    $(window).resize(function(){
-      handleResize();
-    });
-  });
-});
+    // $(window).resize(function(){
+      // handleResize();
+    // });
+  // });
+// });
 
 
 /****************************************************
