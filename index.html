@@ -1,199 +1,195 @@
-<!doctype html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
-    <meta name="keywords" content=""/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Language" content="en-US"/>
-    <title>Christian Guimarães</title>
-    <link rel='stylesheet' href='./css/site.css' type='text/css' media='all'/>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Software Engineer - Web3/L2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      ga('create', 'UA-60469640-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-  </head>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fafafa;
+        }
 
-  <body>
-    <div id="ip-container" class="ip-container">
+        .header {
+            margin-bottom: 4rem;
+        }
 
-      <header class="ip-header">
-        <div class="ip-loader">
-          <div id="ip-loader-jobtitle">
-            <h1>I am a Software Engineer</h1>
-          </div>
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .timeline {
+            border-left: 2px solid #ddd;
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 0.8rem;
+            height: 0.8rem;
+            background: #fff;
+            border: 2px solid #666;
+            border-radius: 50%;
+        }
+
+        .timeline-item.highlight::before {
+            background: #666;
+        }
+
+        .year {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .expertise-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact a:hover {
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Software Engineer</h1>
+        <div class="subtitle">Systems Programming & Web3</div>
+        <div class="contact">
+            <a href="https://github.com/csgui">GitHub</a>
+            <a href="https://linkedin.com/in/csgui">LinkedIn</a>
+            <a href="https://x.com/csgui">Twitter</a>
         </div>
-      </header>
+    </header>
 
-      <div class="ip-main">
-        <section id="bg-section1"></section>
-
-        <section id="intro" class="persist-area cd-section clearfix">
-          <nav>
-            <div class="half left">
-              <ul>
-                <li>
-                </li>
-              </ul>
+    <main>
+        <section class="section">
+            <h2>Career Overview</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="year">2000s - Present</div>
+                    <div>Software Engineering & Architecture</div>
+                    <p>Over two decades of experience building enterprise-scale systems and leading development teams.</p>
+                </div>
+                <div class="timeline-item highlight">
+                    <div class="year">2020 - Present</div>
+                    <div>Web3 & Bitcoin Layers 2</div>
+                    <p>Focused on blockchain technology, specializing in Bitcoin Layer 2 solutions and decentralized systems.</p>
+                </div>
             </div>
-            <div class="half right">
-              <div class="menu-onepage-container">
-                <ul id="menu-onepage" >
-                  <li><a href="#interests">interests</a></li>
-                  <li><a href="#skills">skills</a></li>
-                  <li><a href="#education">education</a></li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-          <div class="container">
-            <div class="half left">
-              <h1>Christian Guimarães</h1>
-            </div>
-            <div class="half right hero">
-              <p>I am a polyglot developer who loves to embrace other frameworks, languages, platforms and paradigms, as and when business problems require.</p>
-              <p>I’ve been working in the software industry since the mid-90’s where I worked as a system architect, developer and consultant on projects in a wide range of businesses.</p>
-              <p>Nowadays, I spend most of my spare time working with functional programming, Open Source projects and writing my own stuff.</p>
-            </div>
-          </div>
         </section>
 
-        <section id="interests" class="persist-area cd-section clearfix">
-          <div class="half left">
-            <h2>Interests <img src="./img/arrow-right.svg" width="7" height="7" alt="arrow right"></h2>
-          </div>
-          <div class="half right">
-            <ul>
-              <li>
-                <p>My main interest is programming languages, web development and software guided by tests. I'm always in pursuit of technologies that improves the software quality as well as the development process.</p>
-                <p>Also, as a side interest, I try to apply together mathematics and computation. This means understand the interface between applied mathematics, numerical computation and the applications in software systems, focusing on new algorithms, their analysis and numerical results.</p>
-                <p>I want to be part of an organization where technology matters, and the people in the organization know that it does. I want to be part of an organization comprised of smart collaborative people where my individual efforts can make a difference.</p>
-                <p>I can contribute with an extensive experience writing robust, well-tested code. Also I have a frontend and user interface experience, but my massively work is focused on backend programming.</p>
-                <p>I like to build software in short iterations. Working this way provides a continuous value and adapt the software to changing in the requirements.</p>
-              </li>
-              <a href="#intro"><img src="./img/arrow-left.svg" width="7" height="7"> back to the top</a>
-          </div>
+        <section class="section">
+            <h2>Current Focus</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <h3>Layer 2 Solutions</h3>
+                    <p>Building scalable Bitcoin Layer 2 protocols and infrastructure</p>
+                </div>
+                <div class="expertise-card">
+                    <h3>Web3 Development</h3>
+                    <p>Smart contracts and decentralized application architecture</p>
+                </div>
+                <div class="expertise-card">
+                    <h3>System Design</h3>
+                    <p>High-performance distributed systems and blockchain networks</p>
+                </div>
+            </div>
         </section>
 
-
-        <section id="skills" class="persist-area cd-section clearfix">
-          <div class="half left">
-            <h2>Technical Skills <img src="./img/arrow-right.svg" width="7" height="7" alt="arrow right"></h2>
-          </div>
-          <div class="half right">
-            <ul>
-              <li>
-                <span class="year">Core Skills</span>
-                <p style="margin-bottom: -0.5em;">Software Engineering</p>
-                <p style="margin-bottom: -0.5em;">TDD (<em>Test-Driven Development</em>)</p>
-                <p style="margin-bottom: -0.5em;">REST API's</p>
-                <p style="margin-bottom: -0.5em;">Experienced with system operation being a long time *nix operator/user</p>
-              </li>
-              <li>
-                <span class="year">Programming Languages</span>
-                <p style="margin-bottom: -0.5em;">Ruby, Javascript, Java</p>
-                <p style="margin-bottom: -0.5em;">Lisp, Clojure</p>
-                <p style="margin-bottom: -0.5em;">Shell Scripting</p>
-              </li>
-              <li>
-                <span class="year">SQL/NoSQL Databases &#038; In-memory data store</span>
-                <p style="margin-bottom: -0.5em;">PostgreSQL, MySQL, Oracle</p>
-                <p style="margin-bottom: -0.5em;">CouchDB, MongoDB</p>
-                <p style="margin-bottom: -0.5em;">Redis, Memcached</p>
-              </li>
-              <li>
-                <span class="year">UI / UX</span>
-                <p style="margin-bottom: -0.5em;">Good notions of web design</p>
-                <p style="margin-bottom: -0.5em;">HTML5, CSS3, Saas</p>
-              </li>
-              <li>
-                <span class="year">Version Control</span>
-                <p style="margin-bottom: -0.5em;">GIT, HG, SVN</p>
-              </li>
-              <li>
-                <span class="year">Ruby <em>Tooling</em> &#038; Frameworks</span>
-                <p style="margin-bottom: -0.5em;">Rails, Sinatra</p>
-                <p style="margin-bottom: -0.5em;">RSpec, Minitest</p>
-                <p style="margin-bottom: -0.5em;">Rack middleware</p>
-                <p style="margin-bottom: -0.5em;">Gems development</p>
-                <p style="margin-bottom: -0.5em;">Capistrano</p>
-              </li>
-              <li>
-                <span class="year">Javascript <em>Tooling</em> &#038; Frameworks</span>
-                <p style="margin-bottom: -0.5em;">AngularJS, Backbone</p>
-                <p style="margin-bottom: -0.5em;">JQuery</p>
-                <p style="margin-bottom: -0.5em;">Jasmine, Karma</p>
-                <p style="margin-bottom: -0.5em;">NodeJS</p>
-                <p style="margin-bottom: -0.5em;">HapiJS, ExpressJS</p>
-                <p style="margin-bottom: -0.5em;">NPM</p>
-              </li>
-              <li>
-                <span class="year">Java <em>Tooling</em> &#038; Frameworks</span>
-                <p style="margin-bottom: -0.5em;">Java EE</p>
-                <p style="margin-bottom: -0.5em;">Spring MVC</p>
-                <p style="margin-bottom: -0.5em;">JBoss, Tomcat, Play Framework</p>
-                <p style="margin-bottom: -0.5em;">Hibernate, iBatis</p>
-              </li>
-            </ul>
-            <a href="#intro"><img src="./img/arrow-left.svg" width="7" height="7"> back to the top</a>
-          </div>
+        <section class="section">
+            <h2>Core Expertise</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div>Traditional Systems</div>
+                    <p>Enterprise architecture, distributed systems, high-performance computing</p>
+                </div>
+                <div class="timeline-item">
+                    <div>Blockchain Technology</div>
+                    <p>Bitcoin protocol, Layer 2 scaling solutions, cross-chain bridges</p>
+                </div>
+                <div class="timeline-item">
+                    <div>Recent Projects</div>
+                    <p>Compiler for generating WebAssembly from Clarity programming language (Stacks Blockchain).</p>
+                </div>
+            </div>
         </section>
-
-        <section id="education" class="persist-area cd-section clearfix">
-          <div class="half left">
-            <h2>Education &#038; Qualification <img src="./img/arrow-right.svg" width="7" height="7" alt="arrow right"></h2>
-          </div>
-          <div class="half right">
-            <ul>
-              <li>
-                <span class="year">2005</span>
-                <p> Master degree in Computational Mathematics, Federal University of Minas Gerais - UFMG, Brazil. <a href="http://dcc.ufmg.br" target="_blank">Computer Science Department</a></p>
-              </li>
-              <li>
-                <span class="year">2003</span>
-                <p> Specialization in Software Engineering, Federal University of Minas Gerais - UFMG, Brazil. <a href="http://dcc.ufmg.br" target="_blank">Computer Science Department</a></p>
-              </li>
-              <li>
-                <span class="year">2002</span>
-                <p> Bachelor Degree in Electrical Engineering, <a href="http://www.ufmg.br" target="_blank">Federal University of Minas Gerais - UFMG</a>, Brazil, <em>Minor: Computational Engineering</em></p>
-              </li>
-            </ul>
-            <a href="#intro"><img src="./img/arrow-left.svg" width="7" height="7"> back to the top</a>
-          </div>
-        </section>
-
-      </div>
-    </div>
-
-    <footer>
-      <div style="width: 70%; margin: 0 auto; text-align:center;">
-        <span class="line">
-		<h2>I'm <span style='color: red'>available</span> to contribute in a new project</h2>
-          <p>If my skills fits your project needs, feel free to be in touch</p>
-        </span>
-        <span class="line">
-          <img src="./img/mail.svg" width="15" height="15" style="vertical-align: middle;">
-          cguimaraes.br@gmail.com
-        </span>
-        <span class="line" style="line-height: 40px;">
-          <img src="./img/twitter.svg" width="15" height="15" style="vertical-align: middle;">
-          <a href="https://twitter.com/csgui" target="_blank"> @csgui</a>
-        </span>
-        <span class="line">
-          <img src="./img/github.svg" width="15" height="15" style="vertical-align: middle;">
-          <a href="http://github.com/csgui" target="_blank"> csgui</a>
-        </span>
-      </div>
-    </footer>
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script type='text/javascript' src='./js/modernizr.js'></script>
-    <script type='text/javascript' src='./js/library.js'></script>
-    <script type='text/javascript' src='./js/scripts.js'></script>
-    <script type="text/javascript" src="./js/site.js"></script>
-  </body>
+    </main>
+</body>
 </html>
+
