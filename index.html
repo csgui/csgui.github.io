@@ -113,7 +113,7 @@
 
     <script type="text/babel" data-type="module">
         import { GoogleGenAI } from "@google/genai";
-        import React from 'react';
+        import React, { useState, useEffect, useRef } from 'react';
         import ReactDOM from 'react-dom';
 
         // --- DATA ---
@@ -210,14 +210,48 @@
           </section>
         );
 
-        const ChatAssistant = () => {
-          const [isOpen, setIsOpen] = React.useState(false);
-          const [input, setInput] = React.useState('');
-          const [messages, setMessages] = React.useState([{ role: 'assistant', content: 'Welcome to Chris G.\'s research portal. How can I assist you with questions regarding Bitcoin protocols or distributed systems?' }]);
-          const [isLoading, setIsLoading] = React.useState(false);
-          const endRef = React.useRef(null);
+        const AboutModal = ({ isOpen, onClose }) => {
+          if (!isOpen) return null;
 
-          React.useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+          useEffect(() => {
+            const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
+            window.addEventListener('keydown', handleEsc);
+            return () => window.removeEventListener('keydown', handleEsc);
+          }, [onClose]);
+
+          return (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-ink/30 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}>
+              <div 
+                className="bg-white max-w-2xl w-full p-8 md:p-12 border-t-8 border-btc shadow-2xl relative animate-in zoom-in-95 duration-300" 
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button onClick={onClose} className="absolute top-4 right-4 text-muted hover:text-btc transition-colors">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div className="text-xl leading-relaxed text-ink/90 space-y-6 pt-4">
+                  <p>
+                    I am a software engineer with over 20 years of experience coding, architecting, and delivering distributed systems, SaaS applications, and high-performance platforms. Since 2020, my work has been deeply focused on Web3, Bitcoin, and blockchain protocols—specifically implementing decentralized systems, smart contract platforms, blockchain indexing pipelines, and developer APIs.
+                  </p>
+                  <p>
+                    I have a strong interest in protocol-level design, compilers, programming language design, and the backend infrastructure underlying decentralized networks. With a track record of building scalable, secure systems across telecom, finance, healthcare, and Bitcoin-anchored ecosystems, I combine technical expertise with systems thinking and a commitment to open-source contributions and effective remote collaboration.
+                  </p>
+                </div>
+                <div className="mt-10 flex justify-end">
+                  <button onClick={onClose} className="bg-ink text-white px-6 py-2 rounded sc font-bold hover:bg-btc transition-colors">Close</button>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const ChatAssistant = () => {
+          const [isOpen, setIsOpen] = useState(false);
+          const [input, setInput] = useState('');
+          const [messages, setMessages] = useState([{ role: 'assistant', content: 'Welcome to Chris G.\'s research portal. How can I assist you with questions regarding Bitcoin protocols or distributed systems?' }]);
+          const [isLoading, setIsLoading] = useState(false);
+          const endRef = useRef(null);
+
+          useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
           const handleSubmit = async (e) => {
             e.preventDefault();
@@ -288,10 +322,11 @@
         };
 
         const App = () => {
-          const [postId, setPostId] = React.useState(null);
+          const [postId, setPostId] = useState(null);
+          const [isAboutOpen, setIsAboutOpen] = useState(false);
           const post = BLOG_POSTS.find(p => p.id === postId);
 
-          React.useEffect(() => {
+          useEffect(() => {
             if (postId) window.scrollTo(0, 0);
           }, [postId]);
 
@@ -309,6 +344,7 @@
                   <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
                 </article>
                 <ChatAssistant />
+                <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
               </div>
             );
           }
@@ -316,13 +352,16 @@
           return (
             <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
               <header className="mb-16 text-center md:text-left">
-                <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 tracking-tight">Chris G.</h1>
+                <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+                  <button onClick={() => setIsAboutOpen(true)} className="hover:text-btc transition-colors text-left focus:outline-none">
+                    Chris G.
+                  </button>
+                </h1>
                 <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight">
-                  Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and <span className="text-btc font-bold not-italic">Blockchain Systems</span>
+                  Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and Blockchain Systems
                 </div>
                 <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
                   <a href="#" className="btc-underline btc-link">GitHub</a> 
-                  <a href="#" className="btc-underline btc-link">LinkedIn</a>
                   <a href="mailto:hey@imchris.me" className="btc-underline btc-link text-muted font-mono font-normal">hey@imchris.me</a>
                 </div>
               </header>
@@ -398,6 +437,7 @@
                 Updated @ Jan 2026. Set in academic Garamond with Bitcoin accents.
               </footer>
               <ChatAssistant />
+              <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
             </div>
           );
         };
