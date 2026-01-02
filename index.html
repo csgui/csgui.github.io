@@ -42,6 +42,11 @@
               paper: '#ffffff',
               ink: '#1a1a1a',
               muted: '#666666',
+              btc: {
+                DEFAULT: '#F7931A',
+                light: '#FFF8F0',
+                muted: '#E58A18',
+              }
             }
           }
         }
@@ -64,11 +69,11 @@
       .blog-content h2 { font-size: 2.25rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1.5rem; font-family: "Libre Baskerville", serif; }
       .blog-content h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; font-variant: small-caps; }
       .blog-content p { margin-bottom: 1.75rem; font-size: 1.25rem; }
-      .blog-content blockquote { border-left: 3px solid #1a1a1a; padding-left: 2rem; font-style: italic; margin: 2.5rem 0; color: #666; font-size: 1.35rem; }
+      .blog-content blockquote { border-left: 4px solid #F7931A; padding-left: 2rem; font-style: italic; margin: 2.5rem 0; color: #666; font-size: 1.35rem; background-color: #FFF8F0; padding-top: 1rem; padding-bottom: 1rem; }
       
-      ::selection { background-color: #e5e7eb; }
+      ::selection { background-color: #F7931A; color: #fff; }
 
-      /* Custom refined drop cap */
+      /* Custom refined drop cap with Bitcoin accent */
       .drop-cap::first-letter {
         float: left;
         font-size: 4.8rem;
@@ -76,8 +81,30 @@
         padding-top: 0.4rem;
         padding-right: 0.6rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: #F7931A;
         font-family: "Libre Baskerville", serif;
+      }
+
+      .btc-underline {
+        position: relative;
+        text-decoration: none;
+      }
+      .btc-underline::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #F7931A;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .btc-underline:hover::after {
+        transform: scaleX(1);
+      }
+      .btc-link:hover {
+        color: #F7931A;
       }
     </style>
 </head>
@@ -153,31 +180,31 @@
             id: 'exp1', 
             role: 'Open-Source Developer', 
             organization: 'Independent / Community', 
-            period: '2010 — Present', 
-            description: 'Dedicated to the open-source ethos for over two decades. Contributing to foundational libraries, protocols and projects that power the decentralized web. Expert in maintaining long-term community-driven projects and navigating the complexities of public software infrastructure.' 
+            period: '2000 — Present', 
+            description: 'Dedicated to the open-source ethos for over two decades. Contributing to foundational libraries, protocols and projects that power the decentralized web. Focused on Bitcoin core infrastructure, peer-to-peer networking, and maintaining robust public software that prioritizes censorship resistance and technical excellence.' 
           },
           { 
             id: 'exp2', 
             role: 'Freelance Consultant & Contractor', 
-            organization: 'Several', 
+            organization: 'Global Architecture & Protocols', 
             period: '2000 — Present', 
-            description: 'Providing strategic architectural consulting and high-performance systems engineering for various international clients in several sectors and businesses.' 
+            description: 'Providing strategic architectural consulting and high-performance systems engineering for international clients. Specializing in protocol design, security auditing for distributed systems, and implementing cryptographic primitives in performance-critical environments.' 
           },
         ];
 
         const RESEARCH_INTERESTS = [
-          { title: 'Bitcoin Infrastructure', description: 'Researching core protocol improvements and the development of foundational developer tooling.' },
-          { title: 'Constrained Computation', description: 'Exploring how 8-bit architectural limits intersect with the design of modern distributed protocols.' },
-          { title: 'Mathematical Semantics', description: 'Formal foundations of programming languages with a focus on verifiable safety and correctness.' }
+          { title: 'Bitcoin Infrastructure', description: 'Developing core tools and protocol improvements to strengthen the foundational layers of decentralized money.' },
+          { title: 'Constraint-Driven Computation', description: 'Mathematical exploration of the limits of computation in 8-bit and other highly restricted architectural environments.' },
+          { title: 'Decidable Semantics', description: 'Applying formal foundations to ensure verifiable safety and correctness in distributed programming languages.' }
         ];
 
         // --- COMPONENTS ---
 
         const Section = ({ title, children, id }) => (
           <section id={id} className="mb-20">
-            <h2 className="text-2xl font-bold tracking-tight sc border-b border-ink/10 pb-1 mb-8 flex items-center">
+            <h2 className="text-2xl font-bold tracking-tight sc border-b border-btc/20 pb-1 mb-8 flex items-center">
               <span className="mr-4 text-ink uppercase tracking-widest text-base">{title}</span>
-              <div className="flex-grow h-[1px] bg-ink/10"></div>
+              <div className="flex-grow h-[1px] bg-btc/20"></div>
             </h2>
             <div className="pl-0 md:pl-6">{children}</div>
           </section>
@@ -186,7 +213,7 @@
         const ChatAssistant = () => {
           const [isOpen, setIsOpen] = React.useState(false);
           const [input, setInput] = React.useState('');
-          const [messages, setMessages] = React.useState([{ role: 'assistant', content: 'Welcome to Chris G.\'s research portal. How can I assist you with questions regarding distributed systems or blockchain protocols?' }]);
+          const [messages, setMessages] = React.useState([{ role: 'assistant', content: 'Welcome to Chris G.\'s research portal. How can I assist you with questions regarding Bitcoin protocols or distributed systems?' }]);
           const [isLoading, setIsLoading] = React.useState(false);
           const endRef = React.useRef(null);
 
@@ -209,7 +236,7 @@
                   parts: [{ 
                     text: `Answer as Chris G.'s AI assistant. Chris is an expert in Programming Languages, Mathematics, Cryptography, Computation with restricted resources (like 8-bit computers), Distributed Protocols, and Blockchain Systems. 
                 
-                His work is defined by over 20 years of open-source development and strategic freelance consultancy. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
+                His work is defined by over 24 years of open-source development and strategic freelance consultancy since 2000. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
 
                 Current User Query: ${userMsg}` 
                   }] 
@@ -225,15 +252,15 @@
           return (
             <div className="fixed bottom-8 right-8 z-50">
               {!isOpen ? (
-                <button onClick={() => setIsOpen(true)} className="bg-ink text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 group border border-white/20">
-                  <span className="sc text-xs font-bold tracking-widest hidden group-hover:inline ml-2">Research AI</span>
+                <button onClick={() => setIsOpen(true)} className="bg-btc text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 group border border-white/20">
+                  <span className="sc text-xs font-bold tracking-widest hidden group-hover:inline ml-2">Researcher AI</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
                 </button>
               ) : (
-                <div className="bg-white border border-ink/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
-                  <div className="bg-ink text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold tracking-widest">
+                <div className="bg-white border border-btc/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
+                  <div className="bg-btc text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold tracking-widest">
                     Research Assistant 
                     <button onClick={() => setIsOpen(false)}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -241,18 +268,18 @@
                       </svg>
                     </button>
                   </div>
-                  <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm no-scrollbar">
+                  <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm no-scrollbar bg-[#fdfdfd]">
                     {messages.map((m, i) => (
                       <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`p-2 rounded ${m.role === 'user' ? 'bg-ink text-white' : 'bg-gray-100 italic border-l-2 border-ink'}`}>{m.content}</div>
+                        <div className={`p-2 rounded shadow-sm ${m.role === 'user' ? 'bg-btc text-white' : 'bg-white italic border-l-2 border-btc'}`}>{m.content}</div>
                       </div>
                     ))}
-                    {isLoading && <div className="text-muted italic text-xs animate-pulse">Consulting records...</div>}
+                    {isLoading && <div className="text-btc italic text-xs animate-pulse">Scanning records...</div>}
                     <div ref={endRef} />
                   </div>
-                  <form onSubmit={handleSubmit} className="p-3 border-t flex gap-2">
-                    <input value={input} onChange={e => setInput(e.target.value)} placeholder="Ask about research..." className="flex-grow border rounded px-3 py-1 text-sm focus:outline-none" />
-                    <button className="bg-ink text-white px-3 py-1 rounded sc text-xs font-bold">Send</button>
+                  <form onSubmit={handleSubmit} className="p-3 border-t border-btc/10 flex gap-2">
+                    <input value={input} onChange={e => setInput(e.target.value)} placeholder="Query research data..." className="flex-grow border border-btc/20 rounded px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-btc" />
+                    <button className="bg-btc text-white px-3 py-1 rounded sc text-xs font-bold hover:bg-btc-muted transition-colors">Send</button>
                   </form>
                 </div>
               )}
@@ -271,11 +298,11 @@
           if (postId && post) {
             return (
               <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 animate-in fade-in duration-500">
-                <button onClick={() => setPostId(null)} className="mb-12 flex items-center gap-2 text-base sc font-bold hover:text-muted transition-colors">
+                <button onClick={() => setPostId(null)} className="mb-12 flex items-center gap-2 text-base sc font-bold text-btc hover:text-btc-muted transition-colors">
                   ← Return to Home
                 </button>
                 <article className="max-w-3xl mx-auto">
-                  <header className="mb-12">
+                  <header className="mb-12 border-l-4 border-btc pl-6">
                     <div className="text-base font-mono text-muted mb-4 uppercase">{post.date} — {post.category}</div>
                     <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">{post.title}</h1>
                   </header>
@@ -291,18 +318,18 @@
               <header className="mb-24 text-center md:text-left">
                 <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight">Chris G.</h1>
                 <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight">
-                  Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and Blockchain Systems
+                  Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and <span className="text-btc font-bold not-italic">Blockchain Systems</span>
                 </div>
                 <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
-                  <a href="#" className="hover:underline">GitHub</a> 
-                  <a href="#" className="hover:underline">LinkedIn</a>
+                  <a href="#" className="btc-underline btc-link">GitHub</a> 
+                  <a href="#" className="btc-underline btc-link">LinkedIn</a>
                   <span className="text-muted font-mono font-normal">hey@imchris.me</span>
                 </div>
               </header>
 
               <Section title="Overview">
                 <p className="text-2xl leading-relaxed drop-cap">
-                  I am currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. My research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
+                  I am currently dedicated to advancing the <span className="text-btc font-bold">Bitcoin ecosystem</span> through the development of foundational tools and improvements to the core protocol. My research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
                 </p>
               </Section>
 
@@ -311,11 +338,11 @@
                   {BLOG_POSTS.slice(0, 2).map(p => (
                     <article key={p.id} onClick={() => setPostId(p.id)} className="group cursor-pointer">
                       <div className="flex justify-between items-baseline mb-4">
-                        <h3 className="text-2xl font-bold group-hover:underline">{p.title}</h3>
+                        <h3 className="text-2xl font-bold group-hover:text-btc transition-colors">{p.title}</h3>
                         <span className="font-mono text-muted text-sm">{p.date}</span>
                       </div>
                       <p className="text-xl text-ink/80 mb-4">{p.summary}</p>
-                      <div className="text-base font-bold sc group-hover:underline">read →</div>
+                      <div className="text-base font-bold sc group-hover:text-btc group-hover:translate-x-1 transition-all">read analysis →</div>
                     </article>
                   ))}
                 </div>
@@ -324,8 +351,8 @@
               <Section title="Notes Repository">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left table-fixed min-w-[600px]">
-                    <thead className="border-b border-ink/20">
-                      <tr className="sc text-sm text-muted">
+                    <thead className="border-b border-btc/20">
+                      <tr className="sc text-sm text-btc font-bold">
                         <th className="py-4 w-1/4 md:w-1/5 pr-4">Date</th>
                         <th className="py-4 w-1/2">Title</th>
                         <th className="py-4 w-1/4 hidden md:table-cell pl-4">Category</th>
@@ -333,9 +360,9 @@
                     </thead>
                     <tbody>
                       {BLOG_POSTS.map(p => (
-                        <tr key={p.id} onClick={() => setPostId(p.id)} className="border-b border-ink/5 hover:bg-gray-50 cursor-pointer transition-colors">
+                        <tr key={p.id} onClick={() => setPostId(p.id)} className="border-b border-ink/5 hover:bg-btc-light transition-colors cursor-pointer">
                           <td className="py-5 font-mono text-sm text-muted whitespace-nowrap pr-4">{p.date}</td>
-                          <td className="py-5 font-bold text-lg leading-snug">{p.title}</td>
+                          <td className="py-5 font-bold text-lg leading-snug group-hover:text-btc">{p.title}</td>
                           <td className="py-5 hidden md:table-cell sc text-sm opacity-50 whitespace-nowrap pl-4">{p.category}</td>
                         </tr>
                       ))}
@@ -347,8 +374,8 @@
               <Section title="Topics of interest">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                   {RESEARCH_INTERESTS.map((ri, i) => (
-                    <div key={i}>
-                      <h4 className="font-bold text-xl sc mb-2">{ri.title}</h4>
+                    <div key={i} className="hover:bg-btc-light/30 p-4 -m-4 rounded transition-colors group">
+                      <h4 className="font-bold text-xl sc mb-2 group-hover:text-btc">{ri.title}</h4>
                       <p className="text-base text-muted">{ri.description}</p>
                     </div>
                   ))}
@@ -358,7 +385,7 @@
               <Section title="Professional Context">
                 <div className="space-y-12">
                   {EXPERIENCE.map(e => (
-                    <div key={e.id} className="pl-6 border-l border-ink/10">
+                    <div key={e.id} className="pl-6 border-l-2 border-btc/20 hover:border-btc transition-colors">
                       <h4 className="font-bold text-xl">{e.role} — {e.organization}</h4>
                       <div className="font-mono text-sm text-muted mb-2">{e.period}</div>
                       <p className="text-lg text-muted">{e.description}</p>
@@ -367,7 +394,7 @@
                 </div>
               </Section>
 
-              <footer className="mt-24 pt-8 border-t border-ink/10 text-center text-sm text-muted italic">
+              <footer className="mt-24 pt-8 border-t border-btc/10 text-center text-sm text-muted italic">
                 Updated @ Jan 2026
               </footer>
               <ChatAssistant />
