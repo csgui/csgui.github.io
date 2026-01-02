@@ -187,7 +187,7 @@
             id: 'exp2', 
             role: 'Freelance Consultant & Contractor', 
             organization: 'Several', 
-            period: '2000 — Present', 
+            period: '2010 — Present', 
             description: 'Providing software development and architectural consulting for international clients, contributing hands-on to the design, implementation, and evolution of complex software systems. My work spans backend development, distributed systems, and platform architecture, helping teams solve hard technical problems and deliver scalable, maintainable solutions.' 
           },
         ];
@@ -270,7 +270,7 @@
                   parts: [{ 
                     text: `Answer as Chris G.'s AI assistant. Chris is an expert in Programming Languages, Mathematics, Cryptography, Computation with restricted resources (like 8-bit computers), Distributed Protocols, and Blockchain Systems. 
                 
-                His work is defined by over 24 years of open-source development and strategic freelance consultancy since 2000. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
+                His work is defined by over 24 years of open-source development and strategic freelance consultancy since 2010. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
 
                 Current User Query: ${userMsg}` 
                   }] 
@@ -352,12 +352,18 @@
           return (
             <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
               <header className="mb-16 text-center md:text-left">
-                <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 tracking-tight">
-                  <button onClick={() => setIsAboutOpen(true)} className="hover:text-btc transition-colors text-left focus:outline-none">
-                    Chris G.
-                  </button>
-                </h1>
-                <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight">
+                <div className="mb-6 tracking-tight relative">
+                  <span className="font-serif italic font-normal text-3xl md:text-4xl block mb-2 text-muted">Hi,</span>
+                  <h1 className="text-4xl md:text-7xl font-display font-bold leading-none">
+                    I'm <button 
+                      onClick={() => setIsAboutOpen(true)} 
+                      className="underline decoration-btc decoration-[6px] underline-offset-8 hover:text-btc focus:outline-none transition-colors"
+                    >
+                      Chris
+                    </button>
+                  </h1>
+                </div>
+                <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight max-w-2xl">
                   Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and Blockchain Systems
                 </div>
                 <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
