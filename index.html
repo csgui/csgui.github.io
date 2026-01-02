@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chris G.</title>
+    <title>Chris G. - Academic Researcher</title>
     
     <!-- Fonts: EB Garamond for body, Libre Baskerville for headers, JetBrains Mono for technical bits -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,8 @@
 {
   "imports": {
     "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "react": "https://esm.sh/react@^19.2.3",
+    "react": "https://esm.sh/react@^18.2.0",
+    "react-dom": "https://esm.sh/react-dom@^18.2.0",
     "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
@@ -85,6 +86,8 @@
 
     <script type="text/babel" data-type="module">
         import { GoogleGenAI } from "@google/genai";
+        import React from 'react';
+        import ReactDOM from 'react-dom';
 
         // --- DATA ---
         const LOREM_IPSUM = `
@@ -133,29 +136,52 @@
             summary: 'How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.',
             content: LOREM_IPSUM,
             tags: ['Consensus', 'BFT', 'Distributed Systems']
+          },
+          {
+            id: 'post5',
+            title: 'Merkle Tree Optimizations for Light Clients',
+            date: 'September 2021',
+            category: 'Data Structures',
+            summary: 'Reducing the proof size for state inclusion in massive distributed ledgers.',
+            content: LOREM_IPSUM,
+            tags: ['Merkle', 'Light Clients', 'Cryptography']
           }
         ];
 
         const EXPERIENCE = [
-          { id: 'exp1', role: 'Senior Research Scientist', organization: 'Institute for Distributed Protocol Research', period: '2020 — Present', description: 'Leading the research team focused on Bitcoin Layer 2 scaling solutions and privacy-preserving protocols.' },
-          { id: 'exp2', role: 'Principal Software Architect', organization: 'Web3 Foundation', period: '2016 — 2020', description: 'Designed core consensus mechanisms and developed high-performance P2P networking layers.' }
-        ];
-
-        const PROJECTS = [
-          { id: 'proj1', name: 'Clarity-WASM Compiler', description: 'A compiler toolchain for generating efficient WebAssembly from the Clarity programming language.', tags: ['Rust', 'Compiler', 'WASM'], link: '#' },
-          { id: 'proj2', name: 'Lightning-Haskell', description: 'Formal implementation of the Lightning Network protocol in Haskell.', tags: ['Haskell', 'Formal Methods', 'Bitcoin'], link: '#' }
+          { 
+            id: 'exp1', 
+            role: 'Open-Source Developer', 
+            organization: 'Independent / Community', 
+            period: '2000 — Present', 
+            description: 'Dedicated to the open-source ethos for over two decades. Contributing to foundational libraries, peer-to-peer protocols, and cryptographic primitives that power the decentralized web. Expert in maintaining long-term community-driven projects and navigating the complexities of public software infrastructure.' 
+          },
+          { 
+            id: 'exp2', 
+            role: 'Freelance Consultant & Contractor', 
+            organization: 'Global Systems Architecture', 
+            period: '2000 — Present', 
+            description: 'Providing strategic architectural consulting and high-performance systems engineering for various international clients in the blockchain and fintech sectors. Specializing in protocol design, security audits, and the optimization of distributed ledger technologies.' 
+          },
+          {
+            id: 'exp3',
+            role: 'Graduate Research Assistant',
+            organization: 'MIT Distributed Systems Lab',
+            period: '2012 — 2016',
+            description: 'Conducted doctoral research on fault-tolerant consensus in large-scale decentralized networks.'
+          }
         ];
 
         const RESEARCH_INTERESTS = [
-          { title: 'Consensus Algorithms', description: 'Exploring BFT in asynchronous networks and Nakamoto consensus variants.' },
-          { title: 'Bitcoin Layer 2', description: 'Scaling solutions including Lightning, Sidechains, and sovereign rollups.' },
-          { title: 'Formal Methods', description: 'Applying symbolic execution to smart contract safety.' }
+          { title: 'Bitcoin Infrastructure', description: 'Researching core protocol improvements and the development of foundational developer tooling.' },
+          { title: 'Constrained Computation', description: 'Exploring how 8-bit architectural limits intersect with the design of modern distributed protocols.' },
+          { title: 'Mathematical Semantics', description: 'Formal foundations of programming languages with a focus on verifiable safety and correctness.' }
         ];
 
         // --- COMPONENTS ---
 
-        const Section = ({ title, children }) => (
-          <section className="mb-20">
+        const Section = ({ title, children, id }) => (
+          <section id={id} className="mb-20">
             <h2 className="text-2xl font-bold tracking-tight sc border-b border-ink/10 pb-1 mb-8 flex items-center">
               <span className="mr-4 text-ink uppercase tracking-widest text-base">{title}</span>
               <div className="flex-grow h-[1px] bg-ink/10"></div>
@@ -167,7 +193,7 @@
         const ChatAssistant = () => {
           const [isOpen, setIsOpen] = React.useState(false);
           const [input, setInput] = React.useState('');
-          const [messages, setMessages] = React.useState([{ role: 'assistant', content: 'Welcome to Dr. Sterling\'s research portal. How can I assist you today?' }]);
+          const [messages, setMessages] = React.useState([{ role: 'assistant', content: 'Welcome to Chris G.\'s research portal. How can I assist you with questions regarding distributed systems or blockchain protocols?' }]);
           const [isLoading, setIsLoading] = React.useState(false);
           const endRef = React.useRef(null);
 
@@ -182,10 +208,19 @@
             setIsLoading(true);
 
             try {
-              const ai = new GoogleGenAI({ apiKey: "REPLACE_WITH_YOUR_KEY" }); 
+              const ai = new GoogleGenAI({ apiKey: process.env.API_KEY }); 
               const model = ai.models.generateContent({
                 model: "gemini-3-flash-preview",
-                contents: [{ role: "user", parts: [{ text: `Answer as Dr. Sterling's AI: ${userMsg}` }] }]
+                contents: [{ 
+                  role: "user", 
+                  parts: [{ 
+                    text: `Answer as Chris G.'s AI assistant. Chris is an expert in Programming Languages, Mathematics, Cryptography, Computation with restricted resources (like 8-bit computers), Distributed Protocols, and Blockchain Systems. 
+                
+                His work is defined by over 20 years of open-source development and strategic freelance consultancy. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
+
+                Current User Query: ${userMsg}` 
+                  }] 
+                }]
               });
               const res = await model;
               setMessages(prev => [...prev, { role: 'assistant', content: res.text }]);
@@ -197,25 +232,34 @@
           return (
             <div className="fixed bottom-8 right-8 z-50">
               {!isOpen ? (
-                <button onClick={() => setIsOpen(true)} className="bg-ink text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform">
+                <button onClick={() => setIsOpen(true)} className="bg-ink text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 group border border-white/20">
+                  <span className="sc text-xs font-bold tracking-widest hidden group-hover:inline ml-2">Research AI</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
                 </button>
               ) : (
                 <div className="bg-white border border-ink/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
-                  <div className="bg-ink text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold">Research Assistant <button onClick={() => setIsOpen(false)}>×</button></div>
-                  <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm">
+                  <div className="bg-ink text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold tracking-widest">
+                    Research Assistant 
+                    <button onClick={() => setIsOpen(false)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm no-scrollbar">
                     {messages.map((m, i) => (
                       <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`p-2 rounded ${m.role === 'user' ? 'bg-ink text-white' : 'bg-gray-100 italic'}`}>{m.content}</div>
+                        <div className={`p-2 rounded ${m.role === 'user' ? 'bg-ink text-white' : 'bg-gray-100 italic border-l-2 border-ink'}`}>{m.content}</div>
                       </div>
                     ))}
+                    {isLoading && <div className="text-muted italic text-xs animate-pulse">Consulting records...</div>}
                     <div ref={endRef} />
                   </div>
                   <form onSubmit={handleSubmit} className="p-3 border-t flex gap-2">
                     <input value={input} onChange={e => setInput(e.target.value)} placeholder="Ask about research..." className="flex-grow border rounded px-3 py-1 text-sm focus:outline-none" />
-                    <button className="bg-ink text-white px-3 py-1 rounded sc text-xs">Send</button>
+                    <button className="bg-ink text-white px-3 py-1 rounded sc text-xs font-bold">Send</button>
                   </form>
                 </div>
               )}
@@ -227,10 +271,14 @@
           const [postId, setPostId] = React.useState(null);
           const post = BLOG_POSTS.find(p => p.id === postId);
 
+          React.useEffect(() => {
+            if (postId) window.scrollTo(0, 0);
+          }, [postId]);
+
           if (postId && post) {
             return (
               <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 animate-in fade-in duration-500">
-                <button onClick={() => setPostId(null)} className="mb-12 flex items-center gap-2 text-base sc font-bold hover:text-muted">
+                <button onClick={() => setPostId(null)} className="mb-12 flex items-center gap-2 text-base sc font-bold hover:text-muted transition-colors">
                   ← Return to Home
                 </button>
                 <article className="max-w-3xl mx-auto">
@@ -249,56 +297,61 @@
             <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
               <header className="mb-24 text-center md:text-left">
                 <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight">Chris G.</h1>
-                <div className="text-xl md:text-2xl text-muted italic mb-8">Interests include programming language design, compilers, cryptography, low-resource computation, distributed protocols and blockchain systems</div>
+                <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight">
+                  Programming Languages, Mathematics, Cryptography, Computation with restricted resources (e.g., 8-bit computers), Distributed Protocols, and Blockchain Systems
+                </div>
                 <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
-                  <a href="#">GitHub</a> <a href="#">Scholar</a> <a href="#">LinkedIn</a>
+                  <a href="#" className="hover:underline">GitHub</a> 
+                  <a href="#" className="hover:underline">LinkedIn</a>
                   <span className="text-muted font-mono font-normal">hey@imchris.me</span>
                 </div>
               </header>
 
               <Section title="Overview">
                 <p className="text-2xl leading-relaxed drop-cap">
-                  My interests span programming language design, cryptography, and computation under resource constraints, particularly in the context of distributed protocols and blockchain systems.
+                  I am currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. My research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
                 </p>
               </Section>
 
-              <Section title="Recent Research Posts">
+              <Section title="recent notes">
                 <div className="space-y-16">
                   {BLOG_POSTS.slice(0, 2).map(p => (
                     <article key={p.id} onClick={() => setPostId(p.id)} className="group cursor-pointer">
                       <div className="flex justify-between items-baseline mb-4">
-                        <h3 className="text-3xl font-bold group-hover:underline">{p.title}</h3>
+                        <h3 className="text-2xl font-bold group-hover:underline">{p.title}</h3>
                         <span className="font-mono text-muted text-sm">{p.date}</span>
                       </div>
                       <p className="text-xl text-ink/80 mb-4">{p.summary}</p>
-                      <div className="text-base font-bold sc group-hover:underline">Read technical notes →</div>
+                      <div className="text-base font-bold sc group-hover:underline">read →</div>
                     </article>
                   ))}
                 </div>
               </Section>
 
-              <Section title="Post Repository">
-                <table className="w-full text-left">
-                  <thead className="border-b border-ink/20">
-                    <tr className="sc text-sm text-muted">
-                      <th className="py-4">Date</th>
-                      <th className="py-4">Title</th>
-                      <th className="py-4 hidden md:table-cell">Category</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {BLOG_POSTS.map(p => (
-                      <tr key={p.id} onClick={() => setPostId(p.id)} className="border-b border-ink/5 hover:bg-gray-50 cursor-pointer">
-                        <td className="py-5 font-mono text-sm text-muted">{p.date}</td>
-                        <td className="py-5 font-bold text-xl">{p.title}</td>
-                        <td className="py-5 hidden md:table-cell sc text-sm opacity-50">{p.category}</td>
+              <Section title="Notes Repository">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left table-fixed min-w-[600px]">
+                    <thead className="border-b border-ink/20">
+                      <tr className="sc text-sm text-muted">
+                        <th className="py-4 w-1/4 md:w-1/5 pr-4">Date</th>
+                        <th className="py-4 w-1/2">Title</th>
+                        <th className="py-4 w-1/4 hidden md:table-cell pl-4">Category</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {BLOG_POSTS.map(p => (
+                        <tr key={p.id} onClick={() => setPostId(p.id)} className="border-b border-ink/5 hover:bg-gray-50 cursor-pointer transition-colors">
+                          <td className="py-5 font-mono text-sm text-muted whitespace-nowrap pr-4">{p.date}</td>
+                          <td className="py-5 font-bold text-lg leading-snug">{p.title}</td>
+                          <td className="py-5 hidden md:table-cell sc text-sm opacity-50 whitespace-nowrap pl-4">{p.category}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </Section>
 
-              <Section title="Research Themes">
+              <Section title="Topics of interest">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                   {RESEARCH_INTERESTS.map((ri, i) => (
                     <div key={i}>
@@ -309,7 +362,7 @@
                 </div>
               </Section>
 
-              <Section title="Context">
+              <Section title="Professional Context">
                 <div className="space-y-12">
                   {EXPERIENCE.map(e => (
                     <div key={e.id} className="pl-6 border-l border-ink/10">
@@ -322,7 +375,7 @@
               </Section>
 
               <footer className="mt-24 pt-8 border-t border-ink/10 text-center text-sm text-muted italic">
-                Set in EB Garamond & Libre Baskerville. Compiled October 2024.
+                Updated @ Jan 2026
               </footer>
               <ChatAssistant />
             </div>
