@@ -3,193 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senior Software Engineer - Web3/L2</title>
+    <title>Chris G.</title>
+    
+    <!-- Fonts: EB Garamond for body, Libre Baskerville for headers, JetBrains Mono for technical bits -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for Layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React, ReactDOM, Babel, and Google GenAI SDK -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"EB Garamond"', 'serif'],
+              display: ['"Libre Baskerville"', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              paper: '#ffffff',
+              ink: '#1a1a1a',
+              muted: '#666666',
+            }
+          }
+        }
+      }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      body {
+        background-color: #fdfdfd;
+        color: #1a1a1a;
+        -webkit-font-smoothing: antialiased;
+        font-size: 1.25rem; /* Base text size (20px) */
+        line-height: 1.6;
+      }
+      .sc { font-variant: small-caps; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      /* Blog Content Styles */
+      .blog-content h2 { font-size: 2.25rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1.5rem; font-family: "Libre Baskerville", serif; }
+      .blog-content h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; font-variant: small-caps; }
+      .blog-content p { margin-bottom: 1.75rem; font-size: 1.25rem; }
+      .blog-content blockquote { border-left: 3px solid #1a1a1a; padding-left: 2rem; font-style: italic; margin: 2.5rem 0; color: #666; font-size: 1.35rem; }
+      
+      ::selection { background-color: #e5e7eb; }
 
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #fafafa;
-        }
-
-        .header {
-            margin-bottom: 4rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
-        .section {
-            margin-bottom: 3rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .timeline {
-            border-left: 2px solid #ddd;
-            padding-left: 2rem;
-            margin-left: 1rem;
-        }
-
-        .timeline-item {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -2.4rem;
-            top: 0.5rem;
-            width: 0.8rem;
-            height: 0.8rem;
-            background: #fff;
-            border: 2px solid #666;
-            border-radius: 50%;
-        }
-
-        .timeline-item.highlight::before {
-            background: #666;
-        }
-
-        .year {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .expertise-card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .contact {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .contact a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact a:hover {
-            color: #000;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .expertise-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+      /* Custom refined drop cap */
+      .drop-cap::first-letter {
+        float: left;
+        font-size: 4.8rem;
+        line-height: 0.8;
+        padding-top: 0.4rem;
+        padding-right: 0.6rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        font-family: "Libre Baskerville", serif;
+      }
     </style>
 </head>
-<body>
-    <header class="header">
-        <h1>Software Engineer</h1>
-        <div class="subtitle">Systems Programming & Web3</div>
-        <div class="contact">
-            <a href="https://github.com/csgui">GitHub</a>
-            <a href="https://linkedin.com/in/csgui">LinkedIn</a>
-            <a href="https://x.com/csgui">Twitter</a>
-        </div>
-    </header>
+<body class="font-serif">
+    <div id="root"></div>
 
-    <main>
-        <section class="section">
-            <h2>Career Overview</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="year">2000s - Present</div>
-                    <div>Software Engineering & Architecture</div>
-                    <p>Over two decades of experience building enterprise-scale systems and leading development teams.</p>
-                </div>
-                <div class="timeline-item highlight">
-                    <div class="year">2020 - Present</div>
-                    <div>Web3 & Bitcoin Layers 2</div>
-                    <p>Focused on blockchain technology, specializing in Bitcoin Layer 2 solutions and decentralized systems.</p>
-                </div>
-            </div>
-        </section>
+    <script type="text/babel" data-type="module">
+        import { GoogleGenAI } from "@google/genai";
 
-        <section class="section">
-            <h2>Current Focus</h2>
-            <div class="expertise-grid">
-                <div class="expertise-card">
-                    <h3>Layer 2 Solutions</h3>
-                    <p>Building scalable Bitcoin Layer 2 protocols and infrastructure</p>
-                </div>
-                <div class="expertise-card">
-                    <h3>Web3 Development</h3>
-                    <p>Smart contracts and decentralized application architecture</p>
-                </div>
-                <div class="expertise-card">
-                    <h3>System Design</h3>
-                    <p>High-performance distributed systems and blockchain networks</p>
-                </div>
-            </div>
-        </section>
+        // --- DATA ---
+        const LOREM_IPSUM = `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h3>1. Introduction</h3>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h3>2. Methodology</h3>
+        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+        <blockquote>"The consensus protocol serves as the heartbeat of the distributed ledger, pulsing with cryptographic certainty."</blockquote>
+        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+        `;
 
-        <section class="section">
-            <h2>Core Expertise</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div>Traditional Systems</div>
-                    <p>Enterprise architecture, distributed systems, high-performance computing</p>
+        const BLOG_POSTS = [
+          {
+            id: 'post1',
+            title: 'Formal Verification of Bitcoin Script Logic via Symbolic Execution',
+            date: 'March 2024',
+            category: 'Formal Methods',
+            summary: 'A deep dive into using symbolic execution to ensure the correctness of complex smart contracts on the Bitcoin base layer.',
+            content: `<h2>Abstract</h2><p>This post explores the application of symbolic execution engines to the Bitcoin Scripting language. By treating opcodes as mathematical transformations over a symbolic stack, we can prove properties about script paths that were previously only testable via exhaustive simulation.</p>` + LOREM_IPSUM,
+            tags: ['Bitcoin', 'Verification', 'Symbolic Execution']
+          },
+          {
+            id: 'post2',
+            title: 'The Rollup Dilemma: Optimistic vs. ZK in the Bitcoin L2 Ecosystem',
+            date: 'November 2023',
+            category: 'L2 Scaling',
+            summary: 'Analyzing why Bitcoin Layer 2 solutions face unique challenges compared to Ethereum-based rollups.',
+            content: `<h2>Scaling the Sovereign</h2><p>Bitcoin's limited expressivity on-chain makes the validation of zero-knowledge proofs a significant challenge.</p>` + LOREM_IPSUM,
+            tags: ['L2', 'Rollups', 'Scalability']
+          },
+          {
+            id: 'post3',
+            title: 'From Clarity to WASM: Building a Decidable Compiler',
+            date: 'August 2022',
+            category: 'Compilers',
+            summary: 'Technological hurdles in mapping the Stacks smart contract language to high-performance WebAssembly.',
+            content: `<h2>Decidability in Production</h2><p>Clarity is a non-Turing complete language. Compiling it to WASM requires careful handling of stack limits and gas metering.</p>` + LOREM_IPSUM,
+            tags: ['WASM', 'Compiler', 'Stacks']
+          },
+          {
+            id: 'post4',
+            title: 'Asynchronous BFT: The Next Frontier for Distributed Consensus',
+            date: 'January 2022',
+            category: 'Distributed Systems',
+            summary: 'How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.',
+            content: LOREM_IPSUM,
+            tags: ['Consensus', 'BFT', 'Distributed Systems']
+          }
+        ];
+
+        const EXPERIENCE = [
+          { id: 'exp1', role: 'Senior Research Scientist', organization: 'Institute for Distributed Protocol Research', period: '2020 — Present', description: 'Leading the research team focused on Bitcoin Layer 2 scaling solutions and privacy-preserving protocols.' },
+          { id: 'exp2', role: 'Principal Software Architect', organization: 'Web3 Foundation', period: '2016 — 2020', description: 'Designed core consensus mechanisms and developed high-performance P2P networking layers.' }
+        ];
+
+        const PROJECTS = [
+          { id: 'proj1', name: 'Clarity-WASM Compiler', description: 'A compiler toolchain for generating efficient WebAssembly from the Clarity programming language.', tags: ['Rust', 'Compiler', 'WASM'], link: '#' },
+          { id: 'proj2', name: 'Lightning-Haskell', description: 'Formal implementation of the Lightning Network protocol in Haskell.', tags: ['Haskell', 'Formal Methods', 'Bitcoin'], link: '#' }
+        ];
+
+        const RESEARCH_INTERESTS = [
+          { title: 'Consensus Algorithms', description: 'Exploring BFT in asynchronous networks and Nakamoto consensus variants.' },
+          { title: 'Bitcoin Layer 2', description: 'Scaling solutions including Lightning, Sidechains, and sovereign rollups.' },
+          { title: 'Formal Methods', description: 'Applying symbolic execution to smart contract safety.' }
+        ];
+
+        // --- COMPONENTS ---
+
+        const Section = ({ title, children }) => (
+          <section className="mb-20">
+            <h2 className="text-2xl font-bold tracking-tight sc border-b border-ink/10 pb-1 mb-8 flex items-center">
+              <span className="mr-4 text-ink uppercase tracking-widest text-base">{title}</span>
+              <div className="flex-grow h-[1px] bg-ink/10"></div>
+            </h2>
+            <div className="pl-0 md:pl-6">{children}</div>
+          </section>
+        );
+
+        const ChatAssistant = () => {
+          const [isOpen, setIsOpen] = React.useState(false);
+          const [input, setInput] = React.useState('');
+          const [messages, setMessages] = React.useState([{ role: 'assistant', content: 'Welcome to Dr. Sterling\'s research portal. How can I assist you today?' }]);
+          const [isLoading, setIsLoading] = React.useState(false);
+          const endRef = React.useRef(null);
+
+          React.useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+
+          const handleSubmit = async (e) => {
+            e.preventDefault();
+            if (!input.trim() || isLoading) return;
+            const userMsg = input.trim();
+            setInput('');
+            setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+            setIsLoading(true);
+
+            try {
+              const ai = new GoogleGenAI({ apiKey: "REPLACE_WITH_YOUR_KEY" }); 
+              const model = ai.models.generateContent({
+                model: "gemini-3-flash-preview",
+                contents: [{ role: "user", parts: [{ text: `Answer as Dr. Sterling's AI: ${userMsg}` }] }]
+              });
+              const res = await model;
+              setMessages(prev => [...prev, { role: 'assistant', content: res.text }]);
+            } catch {
+              setMessages(prev => [...prev, { role: 'assistant', content: "Connection error. Please ensure API key is configured." }]);
+            } finally { setIsLoading(false); }
+          };
+
+          return (
+            <div className="fixed bottom-8 right-8 z-50">
+              {!isOpen ? (
+                <button onClick={() => setIsOpen(true)} className="bg-ink text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                  </svg>
+                </button>
+              ) : (
+                <div className="bg-white border border-ink/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
+                  <div className="bg-ink text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold">Research Assistant <button onClick={() => setIsOpen(false)}>×</button></div>
+                  <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm">
+                    {messages.map((m, i) => (
+                      <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`p-2 rounded ${m.role === 'user' ? 'bg-ink text-white' : 'bg-gray-100 italic'}`}>{m.content}</div>
+                      </div>
+                    ))}
+                    <div ref={endRef} />
+                  </div>
+                  <form onSubmit={handleSubmit} className="p-3 border-t flex gap-2">
+                    <input value={input} onChange={e => setInput(e.target.value)} placeholder="Ask about research..." className="flex-grow border rounded px-3 py-1 text-sm focus:outline-none" />
+                    <button className="bg-ink text-white px-3 py-1 rounded sc text-xs">Send</button>
+                  </form>
                 </div>
-                <div class="timeline-item">
-                    <div>Blockchain Technology</div>
-                    <p>Bitcoin protocol, Layer 2 scaling solutions, cross-chain bridges</p>
-                </div>
-                <div class="timeline-item">
-                    <div>Recent Projects</div>
-                    <p>Compiler for generating WebAssembly from Clarity programming language (Stacks Blockchain).</p>
-                </div>
+              )}
             </div>
-        </section>
-    </main>
+          );
+        };
+
+        const App = () => {
+          const [postId, setPostId] = React.useState(null);
+          const post = BLOG_POSTS.find(p => p.id === postId);
+
+          if (postId && post) {
+            return (
+              <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 animate-in fade-in duration-500">
+                <button onClick={() => setPostId(null)} className="mb-12 flex items-center gap-2 text-base sc font-bold hover:text-muted">
+                  ← Return to Home
+                </button>
+                <article className="max-w-3xl mx-auto">
+                  <header className="mb-12">
+                    <div className="text-base font-mono text-muted mb-4 uppercase">{post.date} — {post.category}</div>
+                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">{post.title}</h1>
+                  </header>
+                  <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+                </article>
+                <ChatAssistant />
+              </div>
+            );
+          }
+
+          return (
+            <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
+              <header className="mb-24 text-center md:text-left">
+                <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight">Dr. Alex Sterling</h1>
+                <div className="text-xl md:text-2xl text-muted italic mb-8">Senior Research Scientist, Distributed Protocols & Blockchain Systems</div>
+                <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
+                  <a href="#">GitHub</a> <a href="#">Scholar</a> <a href="#">LinkedIn</a>
+                  <span className="text-muted font-mono font-normal">alex@distributed.edu</span>
+                </div>
+              </header>
+
+              <Section title="Overview">
+                <p className="text-2xl leading-relaxed drop-cap">
+                  My research lies at the intersection of distributed systems, cryptography, and compiler design. Currently, I am focused on scaling the Bitcoin ecosystem through Layer 2 protocols and investigation of formal verification techniques for decentralized architectures.
+                </p>
+              </Section>
+
+              <Section title="Recent Research Posts">
+                <div className="space-y-16">
+                  {BLOG_POSTS.slice(0, 2).map(p => (
+                    <article key={p.id} onClick={() => setPostId(p.id)} className="group cursor-pointer">
+                      <div className="flex justify-between items-baseline mb-4">
+                        <h3 className="text-3xl font-bold group-hover:underline">{p.title}</h3>
+                        <span className="font-mono text-muted text-sm">{p.date}</span>
+                      </div>
+                      <p className="text-xl text-ink/80 mb-4">{p.summary}</p>
+                      <div className="text-base font-bold sc group-hover:underline">Read technical notes →</div>
+                    </article>
+                  ))}
+                </div>
+              </Section>
+
+              <Section title="Post Repository">
+                <table className="w-full text-left">
+                  <thead className="border-b border-ink/20">
+                    <tr className="sc text-sm text-muted">
+                      <th className="py-4">Date</th>
+                      <th className="py-4">Title</th>
+                      <th className="py-4 hidden md:table-cell">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {BLOG_POSTS.map(p => (
+                      <tr key={p.id} onClick={() => setPostId(p.id)} className="border-b border-ink/5 hover:bg-gray-50 cursor-pointer">
+                        <td className="py-5 font-mono text-sm text-muted">{p.date}</td>
+                        <td className="py-5 font-bold text-xl">{p.title}</td>
+                        <td className="py-5 hidden md:table-cell sc text-sm opacity-50">{p.category}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Section>
+
+              <Section title="Research Themes">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                  {RESEARCH_INTERESTS.map((ri, i) => (
+                    <div key={i}>
+                      <h4 className="font-bold text-xl sc mb-2">{ri.title}</h4>
+                      <p className="text-base text-muted">{ri.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+
+              <Section title="Context">
+                <div className="space-y-12">
+                  {EXPERIENCE.map(e => (
+                    <div key={e.id} className="pl-6 border-l border-ink/10">
+                      <h4 className="font-bold text-xl">{e.role} — {e.organization}</h4>
+                      <div className="font-mono text-sm text-muted mb-2">{e.period}</div>
+                      <p className="text-lg text-muted">{e.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+
+              <footer className="mt-24 pt-8 border-t border-ink/10 text-center text-sm text-muted italic">
+                Set in EB Garamond & Libre Baskerville. Compiled October 2024.
+              </footer>
+              <ChatAssistant />
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
-
