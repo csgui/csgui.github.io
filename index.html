@@ -304,7 +304,7 @@
                 <article className="max-w-3xl mx-auto">
                   <header className="mb-12 border-l-4 border-btc pl-6">
                     <div className="text-base font-mono text-muted mb-4 uppercase">{post.date} — {post.category}</div>
-                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">{post.title}</h1>
+                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">{post.title}</h1>
                   </header>
                   <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
                 </article>
@@ -315,15 +315,15 @@
 
           return (
             <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
-              <header className="mb-24 text-center md:text-left">
-                <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight">Chris G.</h1>
+              <header className="mb-16 text-center md:text-left">
+                <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 tracking-tight">Chris G.</h1>
                 <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight">
                   Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and <span className="text-btc font-bold not-italic">Blockchain Systems</span>
                 </div>
                 <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
                   <a href="#" className="btc-underline btc-link">GitHub</a> 
                   <a href="#" className="btc-underline btc-link">LinkedIn</a>
-                  <span className="text-muted font-mono font-normal">hey@imchris.me</span>
+                  <a href="mailto:hey@imchris.me" className="btc-underline btc-link text-muted font-mono font-normal">hey@imchris.me</a>
                 </div>
               </header>
 
@@ -395,7 +395,7 @@
               </Section>
 
               <footer className="mt-24 pt-8 border-t border-btc/10 text-center text-sm text-muted italic">
-                Updated @ Jan 2026
+                Updated @ Jan 2026. Set in academic Garamond with Bitcoin accents.
               </footer>
               <ChatAssistant />
             </div>
