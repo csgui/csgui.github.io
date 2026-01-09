@@ -1,123 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chris G. - Academic Researcher</title>
-    
-    <!-- Fonts: EB Garamond for body, Libre Baskerville for headers, JetBrains Mono for technical bits -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS for Layout -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- React, ReactDOM, Babel, and Google GenAI SDK -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chris G. - Academic Researcher</title>
 
-    <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "react": "https://esm.sh/react@^18.2.0",
-    "react-dom": "https://esm.sh/react-dom@^18.2.0",
-    "react/": "https://esm.sh/react@^19.2.3/"
-  }
-}
-</script>
+        <!-- Fonts: EB Garamond for body, Libre Baskerville for headers, JetBrains Mono for technical bits -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['"EB Garamond"', 'serif'],
-              display: ['"Libre Baskerville"', 'serif'],
-              mono: ['"JetBrains Mono"', 'monospace'],
-            },
-            colors: {
-              paper: '#ffffff',
-              ink: '#1a1a1a',
-              muted: '#666666',
-              btc: {
-                DEFAULT: '#F7931A',
-                light: '#FFF8F0',
-                muted: '#E58A18',
-              }
+        <!-- Tailwind CSS for Layout -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- React, ReactDOM, Babel, and Google GenAI SDK -->
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="importmap">
+            {
+                "imports": {
+                    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+                    "react": "https://esm.sh/react@^18.2.0",
+                    "react-dom": "https://esm.sh/react-dom@^18.2.0",
+                    "react/": "https://esm.sh/react@^19.2.3/"
+                }
             }
-          }
-        }
-      }
-    </script>
+        </script>
 
-    <style>
-      body {
-        background-color: #fdfdfd;
-        color: #1a1a1a;
-        -webkit-font-smoothing: antialiased;
-        font-size: 1.25rem; /* Base text size (20px) */
-        line-height: 1.6;
-      }
-      .sc { font-variant: small-caps; }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      
-      /* Blog Content Styles */
-      .blog-content h2 { font-size: 2.25rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1.5rem; font-family: "Libre Baskerville", serif; }
-      .blog-content h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; font-variant: small-caps; }
-      .blog-content p { margin-bottom: 1.75rem; font-size: 1.25rem; }
-      .blog-content blockquote { border-left: 4px solid #F7931A; padding-left: 2rem; font-style: italic; margin: 2.5rem 0; color: #666; font-size: 1.35rem; background-color: #FFF8F0; padding-top: 1rem; padding-bottom: 1rem; }
-      
-      ::selection { background-color: #F7931A; color: #fff; }
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            serif: ['"EB Garamond"', "serif"],
+                            display: ['"Libre Baskerville"', "serif"],
+                            mono: ['"JetBrains Mono"', "monospace"],
+                        },
+                        colors: {
+                            paper: "#ffffff",
+                            ink: "#1a1a1a",
+                            muted: "#666666",
+                            btc: {
+                                DEFAULT: "#F7931A",
+                                light: "#FFF8F0",
+                                muted: "#E58A18",
+                            },
+                        },
+                    },
+                },
+            };
+        </script>
 
-      /* Custom refined drop cap with Bitcoin accent */
-      .drop-cap::first-letter {
-        float: left;
-        font-size: 4.8rem;
-        line-height: 0.8;
-        padding-top: 0.4rem;
-        padding-right: 0.6rem;
-        font-weight: 700;
-        color: #F7931A;
-        font-family: "Libre Baskerville", serif;
-      }
+        <style>
+            body {
+                background-color: #fdfdfd;
+                color: #1a1a1a;
+                -webkit-font-smoothing: antialiased;
+                font-size: 1.25rem; /* Base text size (20px) */
+                line-height: 1.6;
+            }
+            .sc {
+                font-variant: small-caps;
+            }
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
 
-      .btc-underline {
-        position: relative;
-        text-decoration: none;
-      }
-      .btc-underline::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #F7931A;
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-      .btc-underline:hover::after {
-        transform: scaleX(1);
-      }
-      .btc-link:hover {
-        color: #F7931A;
-      }
-    </style>
-</head>
-<body class="font-serif">
-    <div id="root"></div>
+            /* Blog Content Styles */
+            .blog-content h2 {
+                font-size: 2.25rem;
+                font-weight: 700;
+                margin-top: 2.5rem;
+                margin-bottom: 1.5rem;
+                font-family: "Libre Baskerville", serif;
+            }
+            .blog-content h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+                font-variant: small-caps;
+            }
+            .blog-content p {
+                margin-bottom: 1.75rem;
+                font-size: 1.25rem;
+            }
+            .blog-content blockquote {
+                border-left: 4px solid #f7931a;
+                padding-left: 2rem;
+                font-style: italic;
+                margin: 2.5rem 0;
+                color: #666;
+                font-size: 1.35rem;
+                background-color: #fff8f0;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
 
-    <script type="text/babel" data-type="module">
-        import { GoogleGenAI } from "@google/genai";
-        import React, { useState, useEffect, useRef } from 'react';
-        import ReactDOM from 'react-dom';
+            ::selection {
+                background-color: #f7931a;
+                color: #fff;
+            }
 
-        // --- DATA ---
-        const LOREM_IPSUM = `
+            /* Custom refined drop cap with Bitcoin accent */
+            .drop-cap::first-letter {
+                float: left;
+                font-size: 4.8rem;
+                line-height: 0.8;
+                padding-top: 0.4rem;
+                padding-right: 0.6rem;
+                font-weight: 700;
+                color: #f7931a;
+                font-family: "Libre Baskerville", serif;
+            }
+
+            .btc-underline {
+                position: relative;
+                text-decoration: none;
+            }
+            .btc-underline::after {
+                content: "";
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: #f7931a;
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+            .btc-underline:hover::after {
+                transform: scaleX(1);
+            }
+            .btc-link:hover {
+                color: #f7931a;
+            }
+        </style>
+    </head>
+    <body class="font-serif">
+        <div id="root"></div>
+
+        <script type="text/babel" data-type="module">
+            import { GoogleGenAI } from "@google/genai";
+            import React, { useState, useEffect, useRef } from "react";
+            import ReactDOM from "react-dom";
+
+            // --- DATA ---
+            const LOREM_IPSUM = `
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <h3>1. Introduction</h3>
         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -127,329 +165,585 @@
         <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
         `;
 
-        const BLOG_POSTS = [
-          {
-            id: 'post1',
-            title: 'Formal Verification of Bitcoin Script Logic via Symbolic Execution',
-            date: 'March 2024',
-            category: 'Formal Methods',
-            summary: 'A deep dive into using symbolic execution to ensure the correctness of complex smart contracts on the Bitcoin base layer.',
-            content: `<h2>Abstract</h2><p>This post explores the application of symbolic execution engines to the Bitcoin Scripting language. By treating opcodes as mathematical transformations over a symbolic stack, we can prove properties about script paths that were previously only testable via exhaustive simulation.</p>` + LOREM_IPSUM,
-            tags: ['Bitcoin', 'Verification', 'Symbolic Execution']
-          },
-          {
-            id: 'post2',
-            title: 'The Rollup Dilemma: Optimistic vs. ZK in the Bitcoin L2 Ecosystem',
-            date: 'November 2023',
-            category: 'L2 Scaling',
-            summary: 'Analyzing why Bitcoin Layer 2 solutions face unique challenges compared to Ethereum-based rollups.',
-            content: `<h2>Scaling the Sovereign</h2><p>Bitcoin's limited expressivity on-chain makes the validation of zero-knowledge proofs a significant challenge.</p>` + LOREM_IPSUM,
-            tags: ['L2', 'Rollups', 'Scalability']
-          },
-          {
-            id: 'post3',
-            title: 'From Clarity to WASM: Building a Decidable Compiler',
-            date: 'August 2022',
-            category: 'Compilers',
-            summary: 'Technological hurdles in mapping the Stacks smart contract language to high-performance WebAssembly.',
-            content: `<h2>Decidability in Production</h2><p>Clarity is a non-Turing complete language. Compiling it to WASM requires careful handling of stack limits and gas metering.</p>` + LOREM_IPSUM,
-            tags: ['WASM', 'Compiler', 'Stacks']
-          },
-          {
-            id: 'post4',
-            title: 'Asynchronous BFT: The Next Frontier for Distributed Consensus',
-            date: 'January 2022',
-            category: 'Distributed Systems',
-            summary: 'How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.',
-            content: LOREM_IPSUM,
-            tags: ['Consensus', 'BFT', 'Distributed Systems']
-          },
-          {
-            id: 'post5',
-            title: 'Merkle Tree Optimizations for Light Clients',
-            date: 'September 2021',
-            category: 'Data Structures',
-            summary: 'Reducing the proof size for state inclusion in massive distributed ledgers.',
-            content: LOREM_IPSUM,
-            tags: ['Merkle', 'Light Clients', 'Cryptography']
-          }
-        ];
+            const POST1_CONTENT = `
+          Bitcoin transaction fees are much more than a simple payment attached to a transaction. They are a critical market signal that determines which transactions are confirmed first. Miners naturally prioritize transactions that maximize their revenue, which usually means selecting those with the highest fees per byte. For users, this creates a constant balancing act: they want their transactions confirmed quickly without overpaying.
 
-        const EXPERIENCE = [
-          { 
-            id: 'exp1', 
-            role: 'Open-Source Developer', 
-            organization: 'Independent / Community', 
-            period: '2000 — Present', 
-            description: 'Dedicated to the open-source ethos for over two decades. Contributing to foundational libraries, protocols and projects that power the decentralized web. Focused on Bitcoin core infrastructure, peer-to-peer networking, and maintaining robust public software that prioritizes censorship resistance and technical excellence.' 
-          },
-          { 
-            id: 'exp2', 
-            role: 'Freelance Consultant & Contractor', 
-            organization: 'Several', 
-            period: '2010 — Present', 
-            description: 'Providing software development and architectural consulting for international clients, contributing hands-on to the design, implementation, and evolution of complex software systems. My work spans backend development, distributed systems, and platform architecture, helping teams solve hard technical problems and deliver scalable, maintainable solutions.' 
-          },
-        ];
+          At first glance, fee estimation might seem deterministic. A wallet queries a Bitcoin node, receives a suggested fee, and assumes that paying this amount guarantees inclusion in the next block. However, this is a simplification that hides a deeper truth. Fee estimation in Bitcoin is fundamentally probabilistic, and treating it as deterministic ignores the divergence between the user’s local node and the miner’s view of the network. Each node maintains its own “local view” of the mempool, and the transactions it observes may differ from what miners will actually include in blocks.
 
-        const RESEARCH_INTERESTS = [
-          { title: 'Bitcoin Infrastructure', description: 'Developing core tools and protocol improvements to strengthen the foundational layers of decentralized money.' },
-          { title: 'Elliptical Curve Cryptography', description: 'Researching advanced cryptographic signatures and efficient implementation of zero-knowledge primitives in decentralized protocols.' },
-          { title: 'Compilers and WebAssembly', description: 'Architecting compiler toolchains that map high-level language semantics to performant and secure WebAssembly modules.' }
-        ];
+          One reason fee estimation is probabilistic is the dynamic nature of the mempool. Transactions arrive at unpredictable times, with varying sizes and fee rates. A fee that would have been sufficient a minute ago may no longer suffice because higher-fee transactions have entered the mempool. Miner heterogeneity compounds the uncertainty. Not all miners follow the same policies or see the same set of transactions. Some may prioritize transactions received through private channels or pools, while others include packages of dependent transactions according to strategies like Child Pays for Parent. These differences mean that a node’s local mempool may not reflect the miner’s actual selection process.
 
-        // --- COMPONENTS ---
+          Timing uncertainty further complicates matters. Blocks are discovered roughly every ten minutes, but this follows a Poisson process, not a fixed schedule. Even a high-fee transaction is not guaranteed inclusion in the next block because block discovery is stochastic and independent. Transaction dependencies add another layer of complexity. If a transaction relies on an unconfirmed parent, miners must consider the fee rate of the entire package, not just the individual transaction. Network and policy differences between nodes, including relay rules, connection quality, and capacity limits, also affect what a node sees versus what is likely to be mined.
 
-        const Section = ({ title, children, id }) => (
-          <section id={id} className="mb-20">
-            <h2 className="text-2xl font-bold tracking-tight sc border-b border-btc/20 pb-1 mb-8 flex items-center">
-              <span className="mr-4 text-ink uppercase tracking-widest text-base">{title}</span>
-              <div className="flex-grow h-[1px] bg-btc/20"></div>
-            </h2>
-            <div className="pl-0 md:pl-6">{children}</div>
-          </section>
-        );
+          Given these uncertainties, relying solely on deterministic fee estimates is inherently risky. Current tools like Bitcoin Core’s estimatesmartfee attempt to provide guidance by analyzing historical block data and mempool snapshots, but they treat probabilistic outcomes as exact predictions. This can lead users to overpay or experience delays without understanding the underlying risk.
 
-        const AboutModal = ({ isOpen, onClose }) => {
-          if (!isOpen) return null;
+          A promising approach is to complement traditional fee estimation with a probabilistic safety layer. This layer does not aim to replace existing algorithms but instead provides a confidence measure alongside each estimate. For instance, it could indicate that a suggested fee of 40 sat/vB carries only a 60 percent likelihood of confirmation within the next block, accounting for mempool volatility, miner behavior, and transaction dependencies. By combining real-time mempool monitoring with historical block analysis and statistical modeling, such a framework can quantify the uncertainty inherent in fee estimation and highlight situations where assumptions may be unreliable.
 
-          useEffect(() => {
-            const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
-            window.addEventListener('keydown', handleEsc);
-            return () => window.removeEventListener('keydown', handleEsc);
-          }, [onClose]);
+          Introducing this probabilistic perspective represents a significant conceptual advancement for the Bitcoin ecosystem. By explicitly acknowledging and measuring uncertainty, it moves users and service providers beyond blind reliance on deterministic numbers. This approach enhances transparency, improves decision-making, and provides actionable insights into the fee market dynamics, benefiting wallets, exchanges, and miners alike. By treating fee estimates not just as static numbers but as informed predictions with quantifiable confidence, the network can operate more efficiently, reliably, and intelligently.
+        `;
 
-          return (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-ink/30 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}>
-              <div 
-                className="bg-white max-w-2xl w-full p-8 md:p-12 border-t-8 border-btc shadow-2xl relative animate-in zoom-in-95 duration-300" 
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button onClick={onClose} className="absolute top-4 right-4 text-muted hover:text-btc transition-colors">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                <div className="text-xl leading-relaxed text-ink/90 space-y-6 pt-4">
-                  <p>
-                    I am a software engineer with over 20 years of experience coding, architecting, and delivering distributed systems, SaaS applications, and high-performance platforms. Since 2020, my work has been deeply focused on Web3, Bitcoin, and blockchain protocols—specifically implementing decentralized systems, smart contract platforms, blockchain indexing pipelines, and developer APIs.
-                  </p>
-                  <p>
-                    I have a strong interest in protocol-level design, compilers, programming language design, and the backend infrastructure underlying decentralized networks. With a track record of building scalable, secure systems across telecom, finance, healthcare, and Bitcoin-anchored ecosystems, I combine technical expertise with systems thinking and a commitment to open-source contributions and effective remote collaboration.
-                  </p>
-                </div>
-                <div className="mt-10 flex justify-end">
-                  <button onClick={onClose} className="bg-ink text-white px-6 py-2 rounded sc font-bold hover:bg-btc transition-colors">Close</button>
-                </div>
-              </div>
-            </div>
-          );
-        };
+            const BLOG_POSTS = [
+                {
+                    id: "post1",
+                    title: "Understanding Bitcoin Fee Estimation: Embracing its Probabilistic Nature",
+                    date: "March 2024",
+                    category: "Bitcoin",
+                    summary:
+                        "This post explores why Bitcoin transaction fees are inherently uncertain and introduces the concept of a probabilistic safety layer to provide confidence in fee estimates.",
+                    content: POST1_CONTENT,
+                    tags: ["Bitcoin"],
+                },
+                {
+                    id: "post2",
+                    title: "The Rollup Dilemma: Optimistic vs. ZK in the Bitcoin L2 Ecosystem",
+                    date: "November 2023",
+                    category: "L2 Scaling",
+                    summary:
+                        "Analyzing why Bitcoin Layer 2 solutions face unique challenges compared to Ethereum-based rollups.",
+                    content:
+                        `<h2>Scaling the Sovereign</h2><p>Bitcoin's limited expressivity on-chain makes the validation of zero-knowledge proofs a significant challenge.</p>` +
+                        LOREM_IPSUM,
+                    tags: ["L2", "Rollups", "Scalability"],
+                },
+                {
+                    id: "post3",
+                    title: "From Clarity to WASM: Building a Decidable Compiler",
+                    date: "August 2022",
+                    category: "Compilers",
+                    summary:
+                        "Technological hurdles in mapping the Stacks smart contract language to high-performance WebAssembly.",
+                    content:
+                        `<h2>Decidability in Production</h2><p>Clarity is a non-Turing complete language. Compiling it to WASM requires careful handling of stack limits and gas metering.</p>` +
+                        LOREM_IPSUM,
+                    tags: ["WASM", "Compiler", "Stacks"],
+                },
+                {
+                    id: "post4",
+                    title: "Asynchronous BFT: The Next Frontier for Distributed Consensus",
+                    date: "January 2022",
+                    category: "Distributed Systems",
+                    summary:
+                        "How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.",
+                    content: LOREM_IPSUM,
+                    tags: ["Consensus", "BFT", "Distributed Systems"],
+                },
+                {
+                    id: "post5",
+                    title: "Merkle Tree Optimizations for Light Clients",
+                    date: "September 2021",
+                    category: "Data Structures",
+                    summary:
+                        "Reducing the proof size for state inclusion in massive distributed ledgers.",
+                    content: LOREM_IPSUM,
+                    tags: ["Merkle", "Light Clients", "Cryptography"],
+                },
+            ];
 
-        const ChatAssistant = () => {
-          const [isOpen, setIsOpen] = useState(false);
-          const [input, setInput] = useState('');
-          const [messages, setMessages] = useState([{ role: 'assistant', content: 'Welcome to Chris G.\'s research portal. How can I assist you with questions regarding Bitcoin protocols or distributed systems?' }]);
-          const [isLoading, setIsLoading] = useState(false);
-          const endRef = useRef(null);
+            const EXPERIENCE = [
+                {
+                    id: "exp1",
+                    role: "Open-Source Developer",
+                    organization: "Independent / Community",
+                    period: "2000 — Present",
+                    description:
+                        "Dedicated to the open-source ethos for over two decades. Contributing to foundational libraries, protocols and projects that power the decentralized web. Focused on Bitcoin core infrastructure, peer-to-peer networking, and maintaining robust public software that prioritizes censorship resistance and technical excellence.",
+                },
+                {
+                    id: "exp2",
+                    role: "Freelance Consultant & Contractor",
+                    organization: "Several",
+                    period: "2010 — Present",
+                    description:
+                        "Providing software development and architectural consulting for international clients, contributing hands-on to the design, implementation, and evolution of complex software systems. My work spans backend development, distributed systems, and platform architecture, helping teams solve hard technical problems and deliver scalable, maintainable solutions.",
+                },
+            ];
 
-          useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+            const RESEARCH_INTERESTS = [
+                {
+                    title: "Bitcoin Infrastructure",
+                    description:
+                        "Developing core tools and protocol improvements to strengthen the foundational layers of decentralized money.",
+                },
+                {
+                    title: "Elliptical Curve Cryptography",
+                    description:
+                        "Researching advanced cryptographic signatures and efficient implementation of zero-knowledge primitives in decentralized protocols.",
+                },
+                {
+                    title: "Compilers and WebAssembly",
+                    description:
+                        "Architecting compiler toolchains that map high-level language semantics to performant and secure WebAssembly modules.",
+                },
+            ];
 
-          const handleSubmit = async (e) => {
-            e.preventDefault();
-            if (!input.trim() || isLoading) return;
-            const userMsg = input.trim();
-            setInput('');
-            setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-            setIsLoading(true);
+            // --- COMPONENTS ---
 
-            try {
-              const ai = new GoogleGenAI({ apiKey: process.env.API_KEY }); 
-              const model = ai.models.generateContent({
-                model: "gemini-3-flash-preview",
-                contents: [{ 
-                  role: "user", 
-                  parts: [{ 
-                    text: `Answer as Chris G.'s AI assistant. Chris is an expert in Programming Languages, Mathematics, Cryptography, Computation with restricted resources (like 8-bit computers), Distributed Protocols, and Blockchain Systems. 
-                
+            const Section = ({ title, children, id }) => (
+                <section id={id} className="mb-20">
+                    <h2 className="text-2xl font-bold tracking-tight sc border-b border-btc/20 pb-1 mb-8 flex items-center">
+                        <span className="mr-4 text-ink uppercase tracking-widest text-base">
+                            {title}
+                        </span>
+                        <div className="flex-grow h-[1px] bg-btc/20"></div>
+                    </h2>
+                    <div className="pl-0 md:pl-6">{children}</div>
+                </section>
+            );
+
+            const AboutModal = ({ isOpen, onClose }) => {
+                if (!isOpen) return null;
+
+                useEffect(() => {
+                    const handleEsc = (e) => {
+                        if (e.key === "Escape") onClose();
+                    };
+                    window.addEventListener("keydown", handleEsc);
+                    return () =>
+                        window.removeEventListener("keydown", handleEsc);
+                }, [onClose]);
+
+                return (
+                    <div
+                        className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-ink/30 backdrop-blur-sm animate-in fade-in duration-300"
+                        onClick={onClose}
+                    >
+                        <div
+                            className="bg-white max-w-2xl w-full p-8 md:p-12 border-t-8 border-btc shadow-2xl relative animate-in zoom-in-95 duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                onClick={onClose}
+                                className="absolute top-4 right-4 text-muted hover:text-btc transition-colors"
+                            >
+                                <svg
+                                    className="w-6 h-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    ></path>
+                                </svg>
+                            </button>
+                            <div className="text-xl leading-relaxed text-ink/90 space-y-6 pt-4">
+                                <p>
+                                    I am a software engineer with over 20 years
+                                    of experience coding, architecting, and
+                                    delivering distributed systems, SaaS
+                                    applications, and high-performance
+                                    platforms. Since 2020, my work has been
+                                    deeply focused on Web3, Bitcoin, and
+                                    blockchain protocols—specifically
+                                    implementing decentralized systems, smart
+                                    contract platforms, blockchain indexing
+                                    pipelines, and developer APIs.
+                                </p>
+                                <p>
+                                    I have a strong interest in protocol-level
+                                    design, compilers, programming language
+                                    design, and the backend infrastructure
+                                    underlying decentralized networks. With a
+                                    track record of building scalable, secure
+                                    systems across telecom, finance, healthcare,
+                                    and Bitcoin-anchored ecosystems, I combine
+                                    technical expertise with systems thinking
+                                    and a commitment to open-source
+                                    contributions and effective remote
+                                    collaboration.
+                                </p>
+                            </div>
+                            <div className="mt-10 flex justify-end">
+                                <button
+                                    onClick={onClose}
+                                    className="bg-ink text-white px-6 py-2 rounded sc font-bold hover:bg-btc transition-colors"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            const ChatAssistant = () => {
+                const [isOpen, setIsOpen] = useState(false);
+                const [input, setInput] = useState("");
+                const [messages, setMessages] = useState([
+                    {
+                        role: "assistant",
+                        content:
+                            "Welcome to Chris G.'s research portal. How can I assist you with questions regarding Bitcoin protocols or distributed systems?",
+                    },
+                ]);
+                const [isLoading, setIsLoading] = useState(false);
+                const endRef = useRef(null);
+
+                useEffect(() => {
+                    endRef.current?.scrollIntoView({ behavior: "smooth" });
+                }, [messages]);
+
+                const handleSubmit = async (e) => {
+                    e.preventDefault();
+                    if (!input.trim() || isLoading) return;
+                    const userMsg = input.trim();
+                    setInput("");
+                    setMessages((prev) => [
+                        ...prev,
+                        { role: "user", content: userMsg },
+                    ]);
+                    setIsLoading(true);
+
+                    try {
+                        const ai = new GoogleGenAI({
+                            apiKey: process.env.API_KEY,
+                        });
+                        const model = ai.models.generateContent({
+                            model: "gemini-3-flash-preview",
+                            contents: [
+                                {
+                                    role: "user",
+                                    parts: [
+                                        {
+                                            text: `Answer as Chris G.'s AI assistant. Chris is an expert in Programming Languages, Mathematics, Cryptography, Computation with restricted resources (like 8-bit computers), Distributed Protocols, and Blockchain Systems.
+
                 His work is defined by over 24 years of open-source development and strategic freelance consultancy since 2010. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
 
-                Current User Query: ${userMsg}` 
-                  }] 
-                }]
-              });
-              const res = await model;
-              setMessages(prev => [...prev, { role: 'assistant', content: res.text }]);
-            } catch {
-              setMessages(prev => [...prev, { role: 'assistant', content: "Connection error. Please ensure API key is configured." }]);
-            } finally { setIsLoading(false); }
-          };
+                Current User Query: ${userMsg}`,
+                                        },
+                                    ],
+                                },
+                            ],
+                        });
+                        const res = await model;
+                        setMessages((prev) => [
+                            ...prev,
+                            { role: "assistant", content: res.text },
+                        ]);
+                    } catch {
+                        setMessages((prev) => [
+                            ...prev,
+                            {
+                                role: "assistant",
+                                content:
+                                    "Connection error. Please ensure API key is configured.",
+                            },
+                        ]);
+                    } finally {
+                        setIsLoading(false);
+                    }
+                };
 
-          return (
-            <div className="fixed bottom-8 right-8 z-50">
-              {!isOpen ? (
-                <button onClick={() => setIsOpen(true)} className="bg-btc text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 group border border-white/20">
-                  <span className="sc text-xs font-bold tracking-widest hidden group-hover:inline ml-2">Researcher AI</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                  </svg>
-                </button>
-              ) : (
-                <div className="bg-white border border-btc/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
-                  <div className="bg-btc text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold tracking-widest">
-                    Research Assistant 
-                    <button onClick={() => setIsOpen(false)}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm no-scrollbar bg-[#fdfdfd]">
-                    {messages.map((m, i) => (
-                      <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`p-2 rounded shadow-sm ${m.role === 'user' ? 'bg-btc text-white' : 'bg-white italic border-l-2 border-btc'}`}>{m.content}</div>
-                      </div>
-                    ))}
-                    {isLoading && <div className="text-btc italic text-xs animate-pulse">Scanning records...</div>}
-                    <div ref={endRef} />
-                  </div>
-                  <form onSubmit={handleSubmit} className="p-3 border-t border-btc/10 flex gap-2">
-                    <input value={input} onChange={e => setInput(e.target.value)} placeholder="Query research data..." className="flex-grow border border-btc/20 rounded px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-btc" />
-                    <button className="bg-btc text-white px-3 py-1 rounded sc text-xs font-bold hover:bg-btc-muted transition-colors">Send</button>
-                  </form>
-                </div>
-              )}
-            </div>
-          );
-        };
-
-        const App = () => {
-          const [postId, setPostId] = useState(null);
-          const [isAboutOpen, setIsAboutOpen] = useState(false);
-          const post = BLOG_POSTS.find(p => p.id === postId);
-
-          useEffect(() => {
-            if (postId) window.scrollTo(0, 0);
-          }, [postId]);
-
-          if (postId && post) {
-            return (
-              <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 animate-in fade-in duration-500">
-                <button onClick={() => setPostId(null)} className="mb-12 flex items-center gap-2 text-base sc font-bold text-btc hover:text-btc-muted transition-colors">
-                  ← Return to Home
-                </button>
-                <article className="max-w-3xl mx-auto">
-                  <header className="mb-12 border-l-4 border-btc pl-6">
-                    <div className="text-base font-mono text-muted mb-4 uppercase">{post.date} — {post.category}</div>
-                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">{post.title}</h1>
-                  </header>
-                  <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
-                </article>
-                <ChatAssistant />
-                <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
-              </div>
-            );
-          }
-
-          return (
-            <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
-              <header className="mb-16 text-center md:text-left">
-                <div className="mb-6 tracking-tight relative">
-                  <span className="font-serif italic font-normal text-3xl md:text-4xl block mb-2 text-muted">Hi,</span>
-                  <h1 className="text-4xl md:text-7xl font-display font-bold leading-none">
-                    I'm <button 
-                      onClick={() => setIsAboutOpen(true)} 
-                      className="underline decoration-btc decoration-[6px] underline-offset-8 hover:text-btc focus:outline-none transition-colors"
-                    >
-                      Chris
-                    </button>
-                  </h1>
-                </div>
-                <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight max-w-2xl">
-                  Programming Languages, Mathematics, Cryptography, Retrocomputing, Distributed Protocols and Blockchain Systems
-                </div>
-                <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
-                  <a href="https://github.com/csgui" target="_blank" className="btc-underline btc-link">Github</a> 
-                  <a href="mailto:hey@imchris.me" className="btc-underline btc-link text-muted font-mono font-normal">hey@imchris.me</a>
-                </div>
-              </header>
-
-              <Section title="Overview">
-                <p className="text-2xl leading-relaxed drop-cap">
-                  I am currently dedicated to advancing the <span className="text-btc font-bold">Bitcoin ecosystem</span> through the development of foundational tools and improvements to the core protocol. My research interests are rooted in the mathematical foundations of programming languages and cryptography, alongside an interest in retrocomputing, including emulators and historical computer architectures, which I view as essential to a deep understanding of computer science.
-                </p>
-              </Section>
-
-              <Section title="recent notes">
-                <div className="space-y-16">
-                  {BLOG_POSTS.slice(0, 2).map(p => (
-                    <article key={p.id} onClick={() => setPostId(p.id)} className="group cursor-pointer">
-                      <div className="flex justify-between items-baseline mb-4">
-                        <h3 className="text-2xl font-bold group-hover:text-btc transition-colors">{p.title}</h3>
-                        <span className="font-mono text-muted text-sm">{p.date}</span>
-                      </div>
-                      <p className="text-xl text-ink/80 mb-4">{p.summary}</p>
-                      <div className="text-base font-bold sc group-hover:text-btc group-hover:translate-x-1 transition-all">read notes →</div>
-                    </article>
-                  ))}
-                </div>
-              </Section>
-
-              <Section title="Notes Repository">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left table-fixed min-w-[600px]">
-                    <thead className="border-b border-btc/20">
-                      <tr className="sc text-sm text-btc font-bold">
-                        <th className="py-4 w-1/4 md:w-1/5 pr-4">Date</th>
-                        <th className="py-4 w-1/2">Title</th>
-                        <th className="py-4 w-1/4 hidden md:table-cell pl-4">Category</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {BLOG_POSTS.map(p => (
-                        <tr key={p.id} onClick={() => setPostId(p.id)} className="border-b border-ink/5 hover:bg-btc-light transition-colors cursor-pointer">
-                          <td className="py-5 font-mono text-sm text-muted whitespace-nowrap pr-4">{p.date}</td>
-                          <td className="py-5 font-bold text-lg leading-snug group-hover:text-btc">{p.title}</td>
-                          <td className="py-5 hidden md:table-cell sc text-sm opacity-50 whitespace-nowrap pl-4">{p.category}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Section>
-
-              <Section title="Topics of interest">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                  {RESEARCH_INTERESTS.map((ri, i) => (
-                    <div key={i} className="hover:bg-btc-light/30 p-4 -m-4 rounded transition-colors group">
-                      <h4 className="font-bold text-xl sc mb-2 group-hover:text-btc">{ri.title}</h4>
-                      <p className="text-base text-muted">{ri.description}</p>
+                return (
+                    <div className="fixed bottom-8 right-8 z-50">
+                        {!isOpen ? (
+                            <button
+                                onClick={() => setIsOpen(true)}
+                                className="bg-btc text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 group border border-white/20"
+                            >
+                                <span className="sc text-xs font-bold tracking-widest hidden group-hover:inline ml-2">
+                                    Researcher AI
+                                </span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={1.5}
+                                        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                                    />
+                                </svg>
+                            </button>
+                        ) : (
+                            <div className="bg-white border border-btc/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
+                                <div className="bg-btc text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold tracking-widest">
+                                    Research Assistant
+                                    <button onClick={() => setIsOpen(false)}>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm no-scrollbar bg-[#fdfdfd]">
+                                    {messages.map((m, i) => (
+                                        <div
+                                            key={i}
+                                            className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+                                        >
+                                            <div
+                                                className={`p-2 rounded shadow-sm ${m.role === "user" ? "bg-btc text-white" : "bg-white italic border-l-2 border-btc"}`}
+                                            >
+                                                {m.content}
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {isLoading && (
+                                        <div className="text-btc italic text-xs animate-pulse">
+                                            Scanning records...
+                                        </div>
+                                    )}
+                                    <div ref={endRef} />
+                                </div>
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className="p-3 border-t border-btc/10 flex gap-2"
+                                >
+                                    <input
+                                        value={input}
+                                        onChange={(e) =>
+                                            setInput(e.target.value)
+                                        }
+                                        placeholder="Query research data..."
+                                        className="flex-grow border border-btc/20 rounded px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-btc"
+                                    />
+                                    <button className="bg-btc text-white px-3 py-1 rounded sc text-xs font-bold hover:bg-btc-muted transition-colors">
+                                        Send
+                                    </button>
+                                </form>
+                            </div>
+                        )}
                     </div>
-                  ))}
-                </div>
-              </Section>
+                );
+            };
 
-              <Section title="Professional Context">
-                <div className="space-y-12">
-                  {EXPERIENCE.map(e => (
-                    <div key={e.id} className="pl-6 border-l-2 border-btc/20 hover:border-btc transition-colors">
-                      <h4 className="font-bold text-xl">{e.role} — {e.organization}</h4>
-                      <div className="font-mono text-sm text-muted mb-2">{e.period}</div>
-                      <p className="text-lg text-muted">{e.description}</p>
+            const App = () => {
+                const [postId, setPostId] = useState(null);
+                const [isAboutOpen, setIsAboutOpen] = useState(false);
+                const post = BLOG_POSTS.find((p) => p.id === postId);
+
+                useEffect(() => {
+                    if (postId) window.scrollTo(0, 0);
+                }, [postId]);
+
+                if (postId && post) {
+                    return (
+                        <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 animate-in fade-in duration-500">
+                            <button
+                                onClick={() => setPostId(null)}
+                                className="mb-12 flex items-center gap-2 text-base sc font-bold text-btc hover:text-btc-muted transition-colors"
+                            >
+                                ← Return to Home
+                            </button>
+                            <article className="max-w-3xl mx-auto">
+                                <header className="mb-12 border-l-4 border-btc pl-6">
+                                    <div className="text-base font-mono text-muted mb-4 uppercase">
+                                        {post.date} — {post.category}
+                                    </div>
+                                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
+                                        {post.title}
+                                    </h1>
+                                </header>
+                                <div
+                                    className="blog-content"
+                                    dangerouslySetInnerHTML={{
+                                        __html: post.content,
+                                    }}
+                                />
+                            </article>
+                            <ChatAssistant />
+                            <AboutModal
+                                isOpen={isAboutOpen}
+                                onClose={() => setIsAboutOpen(false)}
+                            />
+                        </div>
+                    );
+                }
+
+                return (
+                    <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
+                        <header className="mb-16 text-center md:text-left">
+                            <div className="mb-6 tracking-tight relative">
+                                <span className="font-serif italic font-normal text-3xl md:text-4xl block mb-2 text-muted">
+                                    Hi,
+                                </span>
+                                <h1 className="text-4xl md:text-7xl font-display font-bold leading-none">
+                                    I'm{" "}
+                                    <button
+                                        onClick={() => setIsAboutOpen(true)}
+                                        className="underline decoration-btc decoration-[6px] underline-offset-8 hover:text-btc focus:outline-none transition-colors"
+                                    >
+                                        Chris
+                                    </button>
+                                </h1>
+                            </div>
+                            <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight max-w-2xl">
+                                Programming Languages, Mathematics,
+                                Cryptography, Retrocomputing, Distributed
+                                Protocols and Blockchain Systems
+                            </div>
+                            <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
+                                <a
+                                    href="https://github.com/csgui"
+                                    target="_blank"
+                                    className="btc-underline btc-link"
+                                >
+                                    Github
+                                </a>
+                                <a
+                                    href="mailto:hey@imchris.me"
+                                    className="btc-underline btc-link text-muted font-mono font-normal"
+                                >
+                                    hey@imchris.me
+                                </a>
+                            </div>
+                        </header>
+
+                        <Section title="Overview">
+                            <p className="text-2xl leading-relaxed drop-cap">
+                                I am currently dedicated to advancing the{" "}
+                                <span className="text-btc font-bold">
+                                    Bitcoin ecosystem
+                                </span>{" "}
+                                through the development of foundational tools
+                                and improvements to the core protocol. My
+                                research interests are rooted in the
+                                mathematical foundations of programming
+                                languages and cryptography, alongside an
+                                interest in retrocomputing, including emulators
+                                and historical computer architectures, which I
+                                view as essential to a deep understanding of
+                                computer science.
+                            </p>
+                        </Section>
+
+                        <Section title="recent notes">
+                            <div className="space-y-16">
+                                {BLOG_POSTS.slice(0, 2).map((p) => (
+                                    <article
+                                        key={p.id}
+                                        onClick={() => setPostId(p.id)}
+                                        className="group cursor-pointer"
+                                    >
+                                        <div className="flex justify-between items-baseline mb-4">
+                                            <h3 className="text-2xl font-bold group-hover:text-btc transition-colors">
+                                                {p.title}
+                                            </h3>
+                                            <span className="font-mono text-muted text-sm">
+                                                {p.date}
+                                            </span>
+                                        </div>
+                                        <p className="text-xl text-ink/80 mb-4">
+                                            {p.summary}
+                                        </p>
+                                        <div className="text-base font-bold sc group-hover:text-btc group-hover:translate-x-1 transition-all">
+                                            read notes →
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <Section title="Notes Repository">
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left table-fixed min-w-[600px]">
+                                    <thead className="border-b border-btc/20">
+                                        <tr className="sc text-sm text-btc font-bold">
+                                            <th className="py-4 w-1/4 md:w-1/5 pr-4">
+                                                Date
+                                            </th>
+                                            <th className="py-4 w-1/2">
+                                                Title
+                                            </th>
+                                            <th className="py-4 w-1/4 hidden md:table-cell pl-4">
+                                                Category
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {BLOG_POSTS.map((p) => (
+                                            <tr
+                                                key={p.id}
+                                                onClick={() => setPostId(p.id)}
+                                                className="border-b border-ink/5 hover:bg-btc-light transition-colors cursor-pointer"
+                                            >
+                                                <td className="py-5 font-mono text-sm text-muted whitespace-nowrap pr-4">
+                                                    {p.date}
+                                                </td>
+                                                <td className="py-5 font-bold text-lg leading-snug group-hover:text-btc">
+                                                    {p.title}
+                                                </td>
+                                                <td className="py-5 hidden md:table-cell sc text-sm opacity-50 whitespace-nowrap pl-4">
+                                                    {p.category}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Section>
+
+                        <Section title="Topics of interest">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                                {RESEARCH_INTERESTS.map((ri, i) => (
+                                    <div
+                                        key={i}
+                                        className="hover:bg-btc-light/30 p-4 -m-4 rounded transition-colors group"
+                                    >
+                                        <h4 className="font-bold text-xl sc mb-2 group-hover:text-btc">
+                                            {ri.title}
+                                        </h4>
+                                        <p className="text-base text-muted">
+                                            {ri.description}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <Section title="Professional Context">
+                            <div className="space-y-12">
+                                {EXPERIENCE.map((e) => (
+                                    <div
+                                        key={e.id}
+                                        className="pl-6 border-l-2 border-btc/20 hover:border-btc transition-colors"
+                                    >
+                                        <h4 className="font-bold text-xl">
+                                            {e.role} — {e.organization}
+                                        </h4>
+                                        <div className="font-mono text-sm text-muted mb-2">
+                                            {e.period}
+                                        </div>
+                                        <p className="text-lg text-muted">
+                                            {e.description}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <footer className="mt-24 pt-8 border-t border-btc/10 text-center text-sm text-muted italic">
+                            Updated @ Jan 2026. Set in academic Garamond with
+                            Bitcoin accents.
+                        </footer>
+                        <ChatAssistant />
+                        <AboutModal
+                            isOpen={isAboutOpen}
+                            onClose={() => setIsAboutOpen(false)}
+                        />
                     </div>
-                  ))}
-                </div>
-              </Section>
+                );
+            };
 
-              <footer className="mt-24 pt-8 border-t border-btc/10 text-center text-sm text-muted italic">
-                Updated @ Jan 2026. Set in academic Garamond with Bitcoin accents.
-              </footer>
-              <ChatAssistant />
-              <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
-            </div>
-          );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(<App />);
+        </script>
+    </body>
 </html>
