@@ -3,13 +3,37 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Chris G. - Academic Researcher</title>
+        <title>Chris G. — Notes on Bitcoin, Cryptography & Compilers</title>
+        <meta
+            name="description"
+            content="Notes and research on Bitcoin protocol tooling, mempool dynamics, fee estimation, elliptic curve cryptography, compiler design, and WebAssembly."
+        />
+        <meta name="author" content="Chris G." />
+        <meta
+            property="og:title"
+            content="Chris G. — Notes on Bitcoin, Cryptography & Compilers"
+        />
+        <meta
+            property="og:description"
+            content="Notes and research on Bitcoin protocol tooling, fee estimation, elliptic curve cryptography, compiler design, and WebAssembly."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.imchris.me" />
+        <meta name="twitter:card" content="summary" />
+        <meta
+            name="twitter:title"
+            content="Chris G. — Notes on Bitcoin, Cryptography & Compilers"
+        />
+        <meta
+            name="twitter:description"
+            content="Notes and research on Bitcoin protocol tooling, fee estimation, elliptic curve cryptography, compiler design, and WebAssembly."
+        />
 
-        <!-- Fonts: EB Garamond for body, Libre Baskerville for headers, JetBrains Mono for technical bits -->
+        <!-- Fonts: Source Serif 4 for body, JetBrains Mono for code and UI -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:wght@400;500&display=swap"
             rel="stylesheet"
         />
 
@@ -24,7 +48,6 @@
         <script type="importmap">
             {
                 "imports": {
-                    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
                     "react": "https://esm.sh/react@^18.2.0",
                     "react-dom": "https://esm.sh/react-dom@^18.2.0",
                     "react/": "https://esm.sh/react@^19.2.3/"
@@ -37,7 +60,7 @@
                 theme: {
                     extend: {
                         fontFamily: {
-                            serif: ['"EB Garamond"', "serif"],
+                            serif: ['"Source Serif 4"', "serif"],
                             display: ['"Libre Baskerville"', "serif"],
                             mono: ['"JetBrains Mono"', "monospace"],
                         },
@@ -56,347 +79,91 @@
             };
         </script>
 
-        <style>
-            body {
-                background-color: #fdfdfd;
-                color: #1a1a1a;
-                -webkit-font-smoothing: antialiased;
-                font-size: 1.25rem; /* Base text size (20px) */
-                line-height: 1.6;
-            }
-            .sc {
-                font-variant: small-caps;
-            }
-            .no-scrollbar::-webkit-scrollbar {
-                display: none;
-            }
-            .no-scrollbar {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-
-            /* Blog Content Styles */
-            .blog-content h2 {
-                font-size: 2.25rem;
-                font-weight: 700;
-                margin-top: 2.5rem;
-                margin-bottom: 1.5rem;
-                font-family: "Libre Baskerville", serif;
-            }
-            .blog-content h3 {
-                font-size: 1.5rem;
-                font-weight: 700;
-                margin-top: 2rem;
-                margin-bottom: 1rem;
-                font-variant: small-caps;
-            }
-            .blog-content p {
-                margin-bottom: 1.75rem;
-                font-size: 1.25rem;
-            }
-            .blog-content blockquote {
-                border-left: 4px solid #f7931a;
-                padding-left: 2rem;
-                font-style: italic;
-                margin: 2.5rem 0;
-                color: #666;
-                font-size: 1.35rem;
-                background-color: #fff8f0;
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-            }
-
-            ::selection {
-                background-color: #f7931a;
-                color: #fff;
-            }
-
-            /* Custom refined drop cap with Bitcoin accent */
-            .drop-cap::first-letter {
-                float: left;
-                font-size: 4.8rem;
-                line-height: 0.8;
-                padding-top: 0.4rem;
-                padding-right: 0.6rem;
-                font-weight: 700;
-                color: #f7931a;
-                font-family: "Libre Baskerville", serif;
-            }
-
-            .btc-underline {
-                position: relative;
-                text-decoration: none;
-            }
-            .btc-underline::after {
-                content: "";
-                position: absolute;
-                bottom: -2px;
-                left: 0;
-                width: 100%;
-                height: 1px;
-                background-color: #f7931a;
-                transform: scaleX(0);
-                transition: transform 0.3s ease;
-            }
-            .btc-underline:hover::after {
-                transform: scaleX(1);
-            }
-            .btc-link:hover {
-                color: #f7931a;
-            }
-        </style>
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body class="font-serif">
         <div id="root"></div>
 
+        <script src="notes/note1.js"></script>
+        <script src="notes/note2.js"></script>
+        <script src="notes/note3.js"></script>
+        <script src="notes/note4.js"></script>
+        <script src="notes/note5.js"></script>
+        <script src="notes/note6.js"></script>
         <script type="text/babel" data-type="module">
-            import { GoogleGenAI } from "@google/genai";
             import React, { useState, useEffect, useRef } from "react";
             import ReactDOM from "react-dom";
 
-            // --- DATA ---
-            const LOREM_IPSUM = `
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <h3>1. Introduction</h3>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <h3>2. Methodology</h3>
-        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
-        <blockquote>"The consensus protocol serves as the heartbeat of the distributed ledger, pulsing with cryptographic certainty."</blockquote>
-        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
-        `;
-
-            const POST6_CONTENT = `
-              <h2>Executive Summary</h2>
-              <p>This research proposes to investigate and develop probabilistic safety mechanisms for Bitcoin fee estimation, addressing fundamental limitations in current mempool-based approaches. By combining empirical validation techniques with statistical modeling, this work aims to create a fee estimation framework that explicitly quantifies uncertainty and detects when estimation assumptions fail. The research will be conducted within the context of <strong>Floresta</strong>, an open-source Bitcoin full node implementation, with support from the Bitcoin Dev Launchpad (BDL) program sponsored by Vinteum.</p>
-
-              <h2>Introduction and Motivation</h2>
-              <h3>The Bitcoin Fee Market Problem</h3>
-              <p>Bitcoin's limited block space creates a competitive market where users must attach transaction fees to compete for inclusion in blocks. Accurate fee estimation is critical: overestimation wastes money, while underestimation causes transaction delays. Current approaches rely on analyzing a node's local mempool to predict miner behavior, but these methods fail silently when their underlying assumptions are violated.</p>
-
-              <h3>Research Gap</h3>
-              <p>Existing fee estimation systems, including Bitcoin Core's implementation, treat estimation as a deterministic calculation that produces single-value recommendations. These systems lack mechanisms to: (1) Detect when the node's view of pending transactions diverges from miners' views, (2) Quantify the reliability of fee estimates under varying network conditions, (3) Provide users with actionable uncertainty metrics, and (4) Adapt to systematic failures in estimation accuracy.</p>
-              <p>Recent empirical work by <strong>Abubakar Sadiq Ismail</strong> has identified specific failure modes and proposed validation checks, but a comprehensive framework integrating these safety mechanisms with probabilistic reasoning remains unexplored.</p>
-
-              <h3>Research Objectives</h3>
-              <p>This thesis aims to: (1) <strong>Develop a confidence layer</strong> implementing outcome-based validation of fee estimation assumptions, (2) <strong>Design statistical methods</strong> for quantifying estimate reliability and expressing uncertainty, (3) <strong>Create an integrated framework</strong> combining safety checks with probabilistic inference, (4) <strong>Implement and validate</strong> the framework within Floresta, a production Bitcoin node, and (5) <strong>Empirically evaluate</strong> the system's accuracy, robustness, and user experience benefits.</p>
-
-              <h2>Background and Literature Review</h2>
-              <h3>Bitcoin Transaction Fee Mechanics</h3>
-              <p>Transaction fees in Bitcoin represent the price of block space, expressed in satoshis per virtual byte (sat/vB). Miners construct blocks by selecting transactions that maximize fee revenue subject to a weight constraint of approximately 4 million weight units. Users attach fees to signal their willingness to pay for timely confirmation.</p>
-              <p>The fee market exhibits several characteristics relevant to estimation: <strong>Non-stationarity</strong> (fee rates fluctuate based on demand and network congestion), <strong>Strategic behavior</strong> (users may wait for lower fees or employ fee bumping techniques), <strong>Asymmetric information</strong> (miners may receive transactions through private channels), and <strong>Dependency structures</strong> (child transactions depend on unconfirmed parent transactions).</p>
-
-              <h3>Current Fee Estimation Approaches</h3>
-              <p><strong>Bitcoin Core's Estimator</strong> employs a historical bucket-based approach that tracks confirmation times for transactions across different fee rate ranges. It is stable across mempool fluctuations and accounts for historical patterns, but is reactive rather than predictive, requires extended observation periods, does not detect mempool divergence, and provides no confidence metrics.</p>
-              <p>The <strong>Mempool Percentile Method</strong> examines the current mempool state and constructs a hypothetical block template using a greedy algorithm. It is responsive to current conditions with an intuitive economic interpretation, but assumes perfect mempool synchronization, is sensitive to local network conditions, provides only point estimates, and has a single-block horizon only.</p>
-
-              <h3>Mempool Divergence and Policy Heterogeneity</h3>
-              <p>Recent empirical studies have documented systematic divergence between node mempools and miner behavior. <strong>Connectivity effects</strong> cause poorly connected nodes to miss high-fee transactions that propagate through well-connected miner nodes. <strong>Policy differences</strong> lead miners to reject transactions based on minimum absolute fee requirements, script type restrictions, transaction complexity limits, or proprietary scoring mechanisms. <strong>Private transaction submission</strong> allows mining pools to accept direct submissions, bypassing P2P relay entirely—studies estimate 5-15% of block space is filled by such transactions.</p>
-
-              <h3>Abubakar Sadiq Ismail's Empirical Work</h3>
-              <p>Ismail's studies on Delving Bitcoin propose a confidence layer that validates fee estimation assumptions through outcome-based checks: (1) <strong>Mempool coverage analysis</strong> measuring what percentage of mined transactions were present in the node's mempool, (2) <strong>High-priority transaction tracking</strong> monitoring whether transactions expected to confirm actually do, (3) <strong>Repeated failure detection</strong> identifying systematic divergence through pattern analysis, and (4) <strong>Historical alignment validation</strong> using past accuracy as evidence of current reliability.</p>
-
-              <h2>Research Questions</h2>
-              <p><strong>RQ1: Validation and Detection</strong> — How can we reliably detect when mempool-based fee estimation assumptions are violated? What observable metrics indicate mempool divergence? How can we distinguish transient noise from systematic failures?</p>
-              <p><strong>RQ2: Uncertainty Quantification</strong> — How can we quantify and communicate the reliability of fee estimates? What probabilistic models appropriately capture fee market dynamics? How can confidence intervals be computed efficiently?</p>
-              <p><strong>RQ3: Integration Architecture</strong> — How should confidence validation and statistical estimation be integrated? Should confidence checks gate all estimation or adjust outputs? How should multiple confidence signals be aggregated?</p>
-              <p><strong>RQ4: Empirical Performance</strong> — Does the probabilistic safety layer improve fee estimation in practice? How does accuracy compare to existing approaches? What are the computational performance characteristics?</p>
-
-              <h2>Proposed Methodology</h2>
-              <h3>Research Design</h3>
-              <p>This thesis employs a <strong>design science research</strong> methodology, involving: (1) Problem identification and motivation, (2) Objectives definition, (3) Design and development, (4) Demonstration, (5) Evaluation, and (6) Communication.</p>
-
-              <h3>System Design and Implementation</h3>
-              <p>The proposed system consists of three integrated layers:</p>
-              <p><strong>Layer 1: Confidence Validation</strong> implements Ismail's outcome-based checks including mempool coverage tracking, high-priority transaction confirmation monitoring, failure threshold detection with confidence decay, historical alignment scoring, and transaction pattern reputation system.</p>
-              <p><strong>Layer 2: Statistical Estimation</strong> provides probabilistic reasoning through fee rate distribution analysis, confirmation time modeling, mempool volatility detection, confidence interval computation, and Bayesian belief updating.</p>
-              <p><strong>Layer 3: Integration API</strong> exposes a unified interface with fee rate recommendations with confidence scores, probability distributions over confirmation times, warning signals for unreliable conditions, and multi-target estimation.</p>
-
-              <h3>Implementation Platform</h3>
-              <p><strong>Floresta Bitcoin Node</strong> serves as the implementation platform due to its modern Rust codebase, active development community, Utreexo architecture providing unique research context, and existing academic relationships.</p>
-              <p>Prerequisites include implementing <code>getblocktemplate</code> RPC method, enhancing mempool with historical tracking, adding block template generation capabilities, and creating statistical analysis infrastructure.</p>
-
-              <h3>Evaluation Methodology</h3>
-              <p><strong>Accuracy Metrics</strong> include Mean Absolute Percentage Error (MAPE), Root Mean Square Error (RMSE), calibration of confidence intervals, overpayment rate, and underpayment rate.</p>
-              <p><strong>Robustness Metrics</strong> include true positive rate for identifying unreliable conditions, false positive rate, mean time to detection, and recovery time after resolution.</p>
-              <p><strong>Comparative Baselines</strong> include Bitcoin Core estimatesmartfee, Mempool.space API, simple mempool percentile, and an oracle estimator using perfect information.</p>
-
-              <h2>Expected Contributions</h2>
-              <h3>Theoretical Contributions</h3>
-              <p>(1) <strong>Formalization of fee estimation as probabilistic inference</strong> with a mathematical framework for mempool-based prediction under uncertainty, (2) <strong>Confidence layer design principles</strong> providing general methodology for validating distributed system assumptions, and (3) <strong>Uncertainty quantification techniques</strong> with statistical methods adapted to cryptocurrency fee markets.</p>
-
-              <h3>Practical Contributions</h3>
-              <p>(1) <strong>Production-ready implementation in Floresta</strong> as an open-source reference implementation, (2) <strong>Empirical analysis of Bitcoin fee market dynamics</strong> quantifying mempool divergence frequency and magnitude, and (3) <strong>Evaluation of user experience benefits</strong> with evidence for whether uncertainty information improves decision-making.</p>
-
-              <h3>Broader Impact</h3>
-              <p><strong>Improved Bitcoin user experience</strong> through reduction in overpayment and confirmation delays, better tools for Lightning Network channel management, and enhanced trust through transparent confidence metrics. <strong>Advancement of cryptocurrency infrastructure</strong> with techniques applicable to other blockchain systems and a framework for other probabilistic prediction problems in decentralized networks.</p>
-
-              <h2>Work Plan and Timeline</h2>
-              <p><strong>Phase 1 (Months 1-3): Foundation and Literature</strong> — Complete literature review, analyze existing implementations, establish theoretical framework, set up development environment.</p>
-              <p><strong>Phase 2 (Months 4-6): Confidence Layer Implementation</strong> — Implement getblocktemplate in Floresta, develop block template generation, implement Ismail's sanity checks, create confidence scoring system.</p>
-              <p><strong>Phase 3 (Months 7-9): Statistical Analysis Components</strong> — Implement fee rate distribution tracking, develop confirmation time models, create volatility detection mechanisms, build Bayesian update framework.</p>
-              <p><strong>Phase 4 (Months 10-12): Integration and Testing</strong> — Integrate confidence layer with statistical estimator, design and implement unified API, deploy test nodes on mainnet.</p>
-              <p><strong>Phase 5 (Months 13-15): Evaluation and Analysis</strong> — Execute comprehensive backtesting, perform comparative evaluation, analyze results, conduct user study if applicable.</p>
-              <p><strong>Phase 6 (Months 16-18): Refinement and Documentation</strong> — Incorporate feedback, optimize implementation, complete thesis writing, prepare defense presentation.</p>
-
-              <h2>Risk Analysis and Mitigation</h2>
-              <p><strong>Technical Risks:</strong> Floresta mempool implementation may be insufficient (mitigated by contributing upstream improvements); historical data may be incomplete (mitigated by early data collection pipeline); performance overhead may be unacceptable (mitigated by continuous profiling).</p>
-              <p><strong>Research Risks:</strong> Confidence layer may not significantly improve accuracy (focus on characterizing failure modes remains valuable); comparison with baselines may show no clear winner (detailed contextual performance analysis is still a contribution).</p>
-
-              <h2>Conclusion</h2>
-              <p>Bitcoin fee estimation represents a challenging problem at the intersection of distributed systems, applied statistics, and economic mechanism design. Current approaches fail silently when their assumptions are violated, leaving users without information about estimate reliability.</p>
-              <p>This research proposes a comprehensive probabilistic safety layer that explicitly validates estimation assumptions and quantifies uncertainty. By combining Abubakar Sadiq Ismail's confidence checks with statistical modeling techniques, the work aims to create fee estimation systems that are more honest, more robust, and more useful.</p>
-              <p>The research offers significant theoretical contributions in formalizing probabilistic prediction under information asymmetry, practical contributions in open-source implementation, and empirical contributions in characterizing Bitcoin fee market dynamics. Implementation within Floresta ensures real-world validation and broad dissemination.</p>
-              <blockquote>"Treating fee estimates as informed predictions with quantifiable confidence allows the network to operate more efficiently, reliably, and intelligently."</blockquote>
-
-              <h2>References</h2>
-              <p>[1] Ismail, Abubakar Sadiq. "Empirical Studies of Bitcoin Fee Markets." Delving Bitcoin, 2024.</p>
-              <p>[2] Bitcoin Core. "Fee Estimation Algorithm Documentation." Bitcoin Core Project, 2024.</p>
-              <p>[3] Antonopoulos, Andreas M., and David A. Harding. <em>Mastering Bitcoin</em>, 3rd ed. O'Reilly Media, 2023.</p>
-              <p>[4] Easley, David, Maureen O'Hara, and Soumya Basu. "From Mining to Markets: The Evolution of Bitcoin Transaction Fees." <em>Journal of Financial Economics</em>, vol. 134, no. 1, 2019.</p>
-              <p>[5] Floresta Project. "Floresta: A Utreexo-powered Bitcoin Full Node." GitHub, 2024.</p>
-              <p>[6] Nakamoto, Satoshi. "Bitcoin: A Peer-to-Peer Electronic Cash System." 2008.</p>
-        `;
-
-            const POST1_CONTENT = `
-              <h2>Bitcoin Transaction Fees: More Than Just a Payment</h2>
-              <p>Bitcoin transaction fees are much more than a simple payment attached to a transaction. They are a <strong>critical market signal</strong> that determines which transactions are confirmed first. Miners naturally prioritize transactions that maximize their revenue, usually selecting those with the <strong>highest fees per byte</strong>. For users, this creates a constant balancing act: they want their transactions confirmed quickly without overpaying.</p>
-
-              <h2>The Probabilistic Nature of Fee Estimation</h2>
-              <p>At first glance, fee estimation might seem deterministic. A wallet queries a Bitcoin node, receives a suggested fee, and assumes that paying this amount guarantees inclusion in the next block. However, this hides a deeper truth. Fee estimation in Bitcoin is <strong>fundamentally probabilistic</strong>. Each node maintains its own “local view” of the mempool, and the transactions it observes may differ from what miners actually include in blocks.</p>
-
-              <h2>Why Fee Estimation is Uncertain</h2>
-              <p>The dynamic nature of the mempool is a major source of uncertainty. Transactions arrive at unpredictable times, with varying sizes and fee rates. A fee that would have been sufficient a minute ago may no longer suffice because higher-fee transactions have entered the mempool. Miner heterogeneity compounds the issue. Not all miners follow the same policies or see the same set of transactions. Some may prioritize transactions from private channels or pools, while others include dependent transaction packages according to strategies like <strong>Child Pays for Parent</strong>. This means a node’s mempool may not reflect the miner’s actual selection process.</p>
-
-              <h2>Timing and Dependencies Add Complexity</h2>
-              <p>Block discovery occurs roughly every ten minutes but follows a <strong>Poisson process</strong>, not a fixed schedule. Even a high-fee transaction is not guaranteed inclusion in the next block. Transaction dependencies add another layer of complexity. If a transaction relies on an unconfirmed parent, miners must consider the <strong>fee rate of the entire package</strong>, not just the individual transaction. Network and policy differences between nodes, including relay rules, connection quality, and capacity limits, further affect what a node sees versus what is likely to be mined.</p>
-
-              <h2>Limitations of Current Tools</h2>
-              <p>Relying solely on deterministic fee estimates is inherently risky. Tools like Bitcoin Core’s <code>estimatesmartfee</code> provide guidance by analyzing historical block data and mempool snapshots, but they treat probabilistic outcomes as exact predictions. This can lead users to <strong>overpay</strong> or experience <strong>delays</strong> without understanding the underlying risk.</p>
-
-              <h2>A Probabilistic Safety Layer</h2>
-              <p>A promising approach is to complement traditional fee estimation with a <strong>probabilistic safety layer</strong>. This layer does not replace existing algorithms but provides a <strong>confidence measure</strong> alongside each estimate. For example, it could indicate that a suggested fee of 40 sat/vB carries only a 60% likelihood of confirmation within the next block, accounting for mempool volatility, miner behavior, and transaction dependencies. By combining real-time mempool monitoring with historical block analysis and statistical modeling, this framework can quantify uncertainty and highlight situations where assumptions may be unreliable.</p>
-
-              <h2>Why This Matters for the Bitcoin Ecosystem</h2>
-              <p>Introducing a probabilistic perspective represents a significant conceptual advancement. By explicitly acknowledging and measuring uncertainty, users and service providers can move beyond blind reliance on deterministic numbers. This approach enhances <strong>transparency</strong>, improves <strong>decision-making</strong>, and provides actionable insights into fee market dynamics, benefiting wallets, exchanges, and miners alike. Treating fee estimates as informed predictions with <strong>quantifiable confidence</strong> allows the network to operate more efficiently, reliably, and intelligently.</p>
-        `;
+            // --- DATA (note content loaded from notes/*.js) ---
 
             const BLOG_POSTS = [
                 {
-                    id: "post6",
+                    id: "note6",
                     title: "Probabilistic Safety Layers for Mempool-Based Bitcoin Fee Estimation",
                     date: "January 2026",
                     category: "Research Proposal",
                     summary:
                         "A Master's thesis proposal investigating probabilistic safety mechanisms for Bitcoin fee estimation, combining empirical validation with statistical modeling to quantify uncertainty in mempool-based approaches.",
-                    content: POST6_CONTENT,
-                    tags: ["Bitcoin", "Fee Estimation", "Research"],
+                    content: NOTE6_CONTENT,
+                    tags: ["Bitcoin", "Research Proposal"],
                 },
                 {
-                    id: "post1",
+                    id: "note5",
+                    title: "Merkle Tree Optimizations for Light Clients",
+                    date: "October 2025",
+                    category: "Data Structures",
+                    summary:
+                        "Reducing the proof size for state inclusion in massive distributed ledgers.",
+                    content: NOTE5_CONTENT,
+                    tags: ["Cryptography", "Bitcoin"],
+                    draft: true,
+                },
+                {
+                    id: "note4",
+                    title: "Asynchronous BFT: The Next Frontier for Distributed Consensus",
+                    date: "June 2025",
+                    category: "Distributed Systems",
+                    summary:
+                        "How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.",
+                    content: NOTE4_CONTENT,
+                    tags: ["Cryptography"],
+                    draft: true,
+                },
+                {
+                    id: "note3",
+                    title: "From Clarity to WASM: Building a Decidable Compiler",
+                    date: "February 2025",
+                    category: "Compilers",
+                    summary:
+                        "Technological hurdles in mapping the Stacks smart contract language to high-performance WebAssembly.",
+                    content: NOTE3_CONTENT,
+                    tags: ["Compilers", "Programming Languages"],
+                    draft: true,
+                },
+                {
+                    id: "note2",
+                    title: "The Rollup Dilemma: Optimistic vs. ZK in the Bitcoin L2 Ecosystem",
+                    date: "September 2024",
+                    category: "L2 Scaling",
+                    summary:
+                        "Analyzing why Bitcoin Layer 2 solutions face unique challenges compared to Ethereum-based rollups.",
+                    content: NOTE2_CONTENT,
+                    tags: ["Bitcoin", "Cryptography"],
+                    draft: true,
+                },
+                {
+                    id: "note1",
                     title: "Understanding Bitcoin Fee Estimation: Embracing its Probabilistic Nature",
                     date: "March 2024",
                     category: "Bitcoin",
                     summary:
-                        "This post explores why Bitcoin transaction fees are inherently uncertain and introduces the concept of a probabilistic safety layer to provide confidence in fee estimates.",
-                    content: POST1_CONTENT,
+                        "Exploring why Bitcoin transaction fees are inherently uncertain and introducing the concept of a probabilistic safety layer to provide confidence in fee estimates.",
+                    content: NOTE1_CONTENT,
                     tags: ["Bitcoin"],
-                },
-                {
-                    id: "post2",
-                    title: "The Rollup Dilemma: Optimistic vs. ZK in the Bitcoin L2 Ecosystem",
-                    date: "November 2023",
-                    category: "L2 Scaling",
-                    summary:
-                        "Analyzing why Bitcoin Layer 2 solutions face unique challenges compared to Ethereum-based rollups.",
-                    content:
-                        `<h2>Scaling the Sovereign</h2><p>Bitcoin's limited expressivity on-chain makes the validation of zero-knowledge proofs a significant challenge.</p>` +
-                        LOREM_IPSUM,
-                    tags: ["L2", "Rollups", "Scalability"],
-                },
-                {
-                    id: "post3",
-                    title: "From Clarity to WASM: Building a Decidable Compiler",
-                    date: "August 2022",
-                    category: "Compilers",
-                    summary:
-                        "Technological hurdles in mapping the Stacks smart contract language to high-performance WebAssembly.",
-                    content:
-                        `<h2>Decidability in Production</h2><p>Clarity is a non-Turing complete language. Compiling it to WASM requires careful handling of stack limits and gas metering.</p>` +
-                        LOREM_IPSUM,
-                    tags: ["WASM", "Compiler", "Stacks"],
-                },
-                {
-                    id: "post4",
-                    title: "Asynchronous BFT: The Next Frontier for Distributed Consensus",
-                    date: "January 2022",
-                    category: "Distributed Systems",
-                    summary:
-                        "How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.",
-                    content: LOREM_IPSUM,
-                    tags: ["Consensus", "BFT", "Distributed Systems"],
-                },
-                {
-                    id: "post5",
-                    title: "Merkle Tree Optimizations for Light Clients",
-                    date: "September 2021",
-                    category: "Data Structures",
-                    summary:
-                        "Reducing the proof size for state inclusion in massive distributed ledgers.",
-                    content: LOREM_IPSUM,
-                    tags: ["Merkle", "Light Clients", "Cryptography"],
-                },
-            ];
-
-            const EXPERIENCE = [
-                {
-                    id: "exp1",
-                    role: "Open-Source Developer",
-                    organization: "Independent / Community",
-                    period: "2000 — Present",
-                    description:
-                        "Dedicated to the open-source ethos for over two decades. Contributing to foundational libraries, protocols and projects that power the decentralized web. Focused on Bitcoin core infrastructure, peer-to-peer networking, and maintaining robust public software that prioritizes censorship resistance and technical excellence.",
-                },
-                {
-                    id: "exp2",
-                    role: "Freelance Consultant & Contractor",
-                    organization: "Several",
-                    period: "2010 — Present",
-                    description:
-                        "Providing software development and architectural consulting for international clients, contributing hands-on to the design, implementation, and evolution of complex software systems. My work spans backend development, distributed systems, and platform architecture, helping teams solve hard technical problems and deliver scalable, maintainable solutions.",
-                },
-            ];
-
-            const RESEARCH_INTERESTS = [
-                {
-                    title: "Bitcoin Infrastructure",
-                    description:
-                        "Developing core tools and protocol improvements to strengthen the foundational layers of decentralized money.",
-                },
-                {
-                    title: "Elliptical Curve Cryptography",
-                    description:
-                        "Researching advanced cryptographic signatures and efficient implementation of zero-knowledge primitives in decentralized protocols.",
-                },
-                {
-                    title: "Compilers and WebAssembly",
-                    description:
-                        "Architecting compiler toolchains that map high-level language semantics to performant and secure WebAssembly modules.",
                 },
             ];
 
             // --- COMPONENTS ---
-
-            const Section = ({ title, children, id }) => (
-                <section id={id} className="mb-20">
-                    <h2 className="text-2xl font-bold tracking-tight sc border-b border-btc/20 pb-1 mb-8 flex items-center">
-                        <span className="mr-4 text-ink uppercase tracking-widest text-base">
-                            {title}
-                        </span>
-                        <div className="flex-grow h-[1px] bg-btc/20"></div>
-                    </h2>
-                    <div className="pl-0 md:pl-6">{children}</div>
-                </section>
-            );
 
             const AboutModal = ({ isOpen, onClose }) => {
                 if (!isOpen) return null;
@@ -416,58 +183,50 @@
                         onClick={onClose}
                     >
                         <div
-                            className="bg-white max-w-2xl w-full p-8 md:p-12 border-t-8 border-btc shadow-2xl relative animate-in zoom-in-95 duration-300"
+                            className="bg-white max-w-2xl w-full p-8 md:p-12 border-t-2 border-btc shadow-lg rounded relative"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <button
-                                onClick={onClose}
-                                className="absolute top-4 right-4 text-muted hover:text-btc transition-colors"
-                            >
-                                <svg
-                                    className="w-6 h-6"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    ></path>
-                                </svg>
-                            </button>
-                            <div className="text-xl leading-relaxed text-ink/90 space-y-6 pt-4">
+                            <h3 className="text-sm font-mono uppercase tracking-widest text-btc mb-8">
+                                About
+                            </h3>
+                            <div className="text-base leading-relaxed text-ink/70 space-y-4 text-justify">
                                 <p>
-                                    I am a software engineer with over 20 years
-                                    of experience coding, architecting, and
-                                    delivering distributed systems, SaaS
-                                    applications, and high-performance
-                                    platforms. Since 2020, my work has been
-                                    deeply focused on Web3, Bitcoin, and
-                                    blockchain protocols—specifically
-                                    implementing decentralized systems, smart
-                                    contract platforms, blockchain indexing
-                                    pipelines, and developer APIs.
+                                    Software engineer, 20+ years building
+                                    distributed systems and backend
+                                    infrastructure. Since 2020 focused on
+                                    Bitcoin: working on protocols tooling and
+                                    node implementations.
                                 </p>
                                 <p>
-                                    I have a strong interest in protocol-level
-                                    design, compilers, programming language
-                                    design, and the backend infrastructure
-                                    underlying decentralized networks. With a
-                                    track record of building scalable, secure
-                                    systems across telecom, finance, healthcare,
-                                    and Bitcoin-anchored ecosystems, I combine
-                                    technical expertise with systems thinking
-                                    and a commitment to open-source
-                                    contributions and effective remote
-                                    collaboration.
+                                    Currently researching mempool dynamics,
+                                    covenants and fee estimation.
+                                </p>
+                                <p>
+                                    Interested in elliptic curve cryptography,
+                                    compiler design, WebAssembly and the
+                                    low-level infrastructure that makes
+                                    decentralized networks work.
                                 </p>
                             </div>
-                            <div className="mt-10 flex justify-end">
+                            <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
+                                <div className="flex gap-4 text-sm font-mono text-muted">
+                                    <a
+                                        href="https://github.com/csgui"
+                                        target="_blank"
+                                        className="hover:text-btc transition-colors"
+                                    >
+                                        github
+                                    </a>
+                                    <a
+                                        href="mailto:hey@imchris.me"
+                                        className="hover:text-btc transition-colors"
+                                    >
+                                        email
+                                    </a>
+                                </div>
                                 <button
                                     onClick={onClose}
-                                    className="bg-ink text-white px-6 py-2 rounded sc font-bold hover:bg-btc transition-colors"
+                                    className="text-sm font-mono text-muted hover:text-btc transition-colors"
                                 >
                                     Close
                                 </button>
@@ -477,188 +236,176 @@
                 );
             };
 
-            const ChatAssistant = () => {
-                const [isOpen, setIsOpen] = useState(false);
-                const [input, setInput] = useState("");
-                const [messages, setMessages] = useState([
-                    {
-                        role: "assistant",
-                        content:
-                            "Welcome to Chris G.'s research portal. How can I assist you with questions regarding Bitcoin protocols or distributed systems?",
-                    },
-                ]);
-                const [isLoading, setIsLoading] = useState(false);
-                const endRef = useRef(null);
-
+            const ReadingProgress = () => {
+                const [width, setWidth] = useState(0);
                 useEffect(() => {
-                    endRef.current?.scrollIntoView({ behavior: "smooth" });
-                }, [messages]);
-
-                const handleSubmit = async (e) => {
-                    e.preventDefault();
-                    if (!input.trim() || isLoading) return;
-                    const userMsg = input.trim();
-                    setInput("");
-                    setMessages((prev) => [
-                        ...prev,
-                        { role: "user", content: userMsg },
-                    ]);
-                    setIsLoading(true);
-
-                    try {
-                        const ai = new GoogleGenAI({
-                            apiKey: process.env.API_KEY,
-                        });
-                        const model = ai.models.generateContent({
-                            model: "gemini-3-flash-preview",
-                            contents: [
-                                {
-                                    role: "user",
-                                    parts: [
-                                        {
-                                            text: `Answer as Chris G.'s AI assistant. Chris is an expert in Programming Languages, Mathematics, Cryptography, Computation with restricted resources (like 8-bit computers), Distributed Protocols, and Blockchain Systems.
-
-                His work is defined by over 24 years of open-source development and strategic freelance consultancy since 2010. He is currently dedicated to advancing the Bitcoin ecosystem through the development of foundational tools and improvements to the core protocol. His research interests remain rooted in the mathematical foundations of programming languages and cryptography, with a focus on the limits of computation in restricted environments and how 8-bit architectural constraints intersect with modern distributed systems.
-
-                Current User Query: ${userMsg}`,
-                                        },
-                                    ],
-                                },
-                            ],
-                        });
-                        const res = await model;
-                        setMessages((prev) => [
-                            ...prev,
-                            { role: "assistant", content: res.text },
-                        ]);
-                    } catch {
-                        setMessages((prev) => [
-                            ...prev,
-                            {
-                                role: "assistant",
-                                content:
-                                    "Connection error. Please ensure API key is configured.",
-                            },
-                        ]);
-                    } finally {
-                        setIsLoading(false);
-                    }
-                };
-
+                    const onScroll = () => {
+                        const scrollTop = window.scrollY;
+                        const docHeight =
+                            document.documentElement.scrollHeight -
+                            window.innerHeight;
+                        setWidth(
+                            docHeight > 0 ? (scrollTop / docHeight) * 100 : 0,
+                        );
+                    };
+                    window.addEventListener("scroll", onScroll, {
+                        passive: true,
+                    });
+                    return () => window.removeEventListener("scroll", onScroll);
+                }, []);
                 return (
-                    <div className="fixed bottom-8 right-8 z-50">
-                        {!isOpen ? (
+                    <div
+                        className="reading-progress"
+                        style={{ width: `${width}%` }}
+                    />
+                );
+            };
+
+            const SiteHeader = ({ onAboutClick }) => (
+                <header className="max-w-3xl mx-auto px-6 pt-12 pb-8 md:pt-16 md:pb-10">
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <div>
                             <button
-                                onClick={() => setIsOpen(true)}
-                                className="bg-btc text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 group border border-white/20"
+                                onClick={onAboutClick}
+                                className="text-3xl font-bold hover:text-btc transition-colors focus:outline-none"
                             >
-                                <span className="sc text-xs font-bold tracking-widest hidden group-hover:inline ml-2">
-                                    Researcher AI
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={1.5}
-                                        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                                    />
-                                </svg>
+                                Chris G.
                             </button>
-                        ) : (
-                            <div className="bg-white border border-btc/20 shadow-2xl w-[350px] md:w-[400px] h-[500px] flex flex-col rounded-lg overflow-hidden animate-in slide-in-from-bottom-5">
-                                <div className="bg-btc text-white px-4 py-3 flex justify-between items-center sc text-xs font-bold tracking-widest">
-                                    Research Assistant
-                                    <button onClick={() => setIsOpen(false)}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-4 w-4"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M6 18L18 6M6 6l12 12"
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div className="flex-grow overflow-y-auto p-4 space-y-4 text-sm no-scrollbar bg-[#fdfdfd]">
-                                    {messages.map((m, i) => (
-                                        <div
-                                            key={i}
-                                            className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-                                        >
-                                            <div
-                                                className={`p-2 rounded shadow-sm ${m.role === "user" ? "bg-btc text-white" : "bg-white italic border-l-2 border-btc"}`}
-                                            >
-                                                {m.content}
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {isLoading && (
-                                        <div className="text-btc italic text-xs animate-pulse">
-                                            Scanning records...
-                                        </div>
-                                    )}
-                                    <div ref={endRef} />
-                                </div>
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className="p-3 border-t border-btc/10 flex gap-2"
-                                >
-                                    <input
-                                        value={input}
-                                        onChange={(e) =>
-                                            setInput(e.target.value)
-                                        }
-                                        placeholder="Query research data..."
-                                        className="flex-grow border border-btc/20 rounded px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-btc"
-                                    />
-                                    <button className="bg-btc text-white px-3 py-1 rounded sc text-xs font-bold hover:bg-btc-muted transition-colors">
-                                        Send
-                                    </button>
-                                </form>
-                            </div>
-                        )}
+                            <p className="text-base text-muted mt-1">
+                                Notes on Bitcoin, cryptography and the tools I
+                                build around them.
+                            </p>
+                        </div>
+                        <nav className="flex gap-5 text-sm font-mono text-muted">
+                            <a
+                                href="https://github.com/csgui"
+                                target="_blank"
+                                className="hover:text-btc transition-colors"
+                            >
+                                github
+                            </a>
+                            <a
+                                href="mailto:hey@imchris.me"
+                                className="hover:text-btc transition-colors"
+                            >
+                                email
+                            </a>
+                        </nav>
                     </div>
+                    <div className="mt-6 h-px bg-ink/10"></div>
+                </header>
+            );
+
+            const FILTER_TAGS = [
+                "Bitcoin",
+                "Research Proposal",
+                "Compilers",
+                "Programming Languages",
+                "Cryptography",
+                "WIP",
+            ];
+
+            const matchesFilter = (post, filter) => {
+                const f = filter.toLowerCase();
+                if (post.category.toLowerCase() === f) return true;
+                if (!post.tags) return false;
+                return post.tags.some(
+                    (t) =>
+                        t.toLowerCase().includes(f) ||
+                        f.includes(t.toLowerCase()),
                 );
             };
 
             const App = () => {
-                const [postId, setPostId] = useState(null);
+                const [postId, setPostId] = useState(() => {
+                    const hash = window.location.hash.slice(1);
+                    return hash && BLOG_POSTS.find((p) => p.id === hash)
+                        ? hash
+                        : null;
+                });
                 const [isAboutOpen, setIsAboutOpen] = useState(false);
+                const [activeTag, setActiveTag] = useState(null);
                 const post = BLOG_POSTS.find((p) => p.id === postId);
+                const filteredPosts =
+                    activeTag === "WIP"
+                        ? BLOG_POSTS.filter((p) => p.draft)
+                        : activeTag
+                          ? BLOG_POSTS.filter(
+                                (p) => !p.draft && matchesFilter(p, activeTag),
+                            )
+                          : BLOG_POSTS.filter((p) => !p.draft);
+
+                const navigateTo = (id) => {
+                    if (id) {
+                        window.history.pushState({ postId: id }, "", `#${id}`);
+                    } else {
+                        window.history.pushState(
+                            { postId: null },
+                            "",
+                            window.location.pathname,
+                        );
+                    }
+                    setPostId(id);
+                };
+
+                useEffect(() => {
+                    const onPopState = (e) => {
+                        const id = e.state?.postId || null;
+                        setPostId(id);
+                    };
+                    window.addEventListener("popstate", onPopState);
+                    return () =>
+                        window.removeEventListener("popstate", onPopState);
+                }, []);
 
                 useEffect(() => {
                     if (postId) window.scrollTo(0, 0);
                 }, [postId]);
 
-                if (postId && post) {
+                if (postId && post && !post.draft) {
                     return (
-                        <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 animate-in fade-in duration-500">
-                            <button
-                                onClick={() => setPostId(null)}
-                                className="mb-12 flex items-center gap-2 text-base sc font-bold text-btc hover:text-btc-muted transition-colors"
-                            >
-                                ← Return to Home
-                            </button>
-                            <article className="max-w-3xl mx-auto">
-                                <header className="mb-12 border-l-4 border-btc pl-6">
-                                    <div className="text-base font-mono text-muted mb-4 uppercase">
-                                        {post.date} — {post.category}
+                        <div>
+                            <ReadingProgress />
+                            <SiteHeader
+                                onAboutClick={() => setIsAboutOpen(true)}
+                            />
+
+                            <main className="max-w-3xl mx-auto px-6">
+                                <button
+                                    onClick={() => navigateTo(null)}
+                                    className="text-sm font-mono font-bold text-btc hover:text-btc-muted transition-colors group mb-8"
+                                >
+                                    <span className="inline-block transition-transform group-hover:-translate-x-1">
+                                        ←
+                                    </span>{" "}
+                                    Back to notes
+                                </button>
+
+                                <header className="mb-8">
+                                    <div className="flex flex-wrap items-center gap-2 text-sm font-mono text-muted mb-3">
+                                        <span>{post.date}</span>
+                                        <span className="text-ink/20">·</span>
+                                        <span>{post.category}</span>
                                     </div>
-                                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
+                                    <h1 className="text-2xl md:text-3xl font-bold mb-4 leading-snug">
                                         {post.title}
                                     </h1>
+                                    <p className="text-base text-ink/60 leading-relaxed mb-4">
+                                        {post.summary}
+                                    </p>
+                                    {post.tags && (
+                                        <div className="flex flex-wrap gap-1.5 mb-6">
+                                            {post.tags.map((tag) => (
+                                                <span
+                                                    key={tag}
+                                                    className="text-xs font-mono px-2 py-0.5 bg-ink/5 text-muted/70 rounded"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <div className="h-px bg-ink/10"></div>
                                 </header>
                                 <div
                                     className="blog-content"
@@ -666,8 +413,71 @@
                                         __html: post.content,
                                     }}
                                 />
-                            </article>
-                            <ChatAssistant />
+                                {(() => {
+                                    const activeNotes = BLOG_POSTS.filter(
+                                        (p) => !p.draft,
+                                    );
+                                    const currentIdx = activeNotes.findIndex(
+                                        (p) => p.id === post.id,
+                                    );
+                                    const prevPost =
+                                        currentIdx < activeNotes.length - 1
+                                            ? activeNotes[currentIdx + 1]
+                                            : null;
+                                    const nextPost =
+                                        currentIdx > 0
+                                            ? activeNotes[currentIdx - 1]
+                                            : null;
+                                    return (
+                                        <nav className="mt-16 pt-8 border-t border-ink/10 flex justify-between gap-8">
+                                            <div className="flex-1">
+                                                {prevPost && (
+                                                    <button
+                                                        onClick={() =>
+                                                            navigateTo(
+                                                                prevPost.id,
+                                                            )
+                                                        }
+                                                        className="text-left group"
+                                                    >
+                                                        <span className="text-sm font-mono text-btc font-bold block mb-1">
+                                                            <span className="inline-block transition-transform group-hover:-translate-x-1 text-lg">
+                                                                ←
+                                                            </span>{" "}
+                                                            Older
+                                                        </span>
+                                                        <span className="text-base font-bold group-hover:text-btc transition-colors">
+                                                            {prevPost.title}
+                                                        </span>
+                                                    </button>
+                                                )}
+                                            </div>
+                                            <div className="flex-1 text-right">
+                                                {nextPost && (
+                                                    <button
+                                                        onClick={() =>
+                                                            navigateTo(
+                                                                nextPost.id,
+                                                            )
+                                                        }
+                                                        className="text-right group"
+                                                    >
+                                                        <span className="text-sm font-mono text-btc font-bold block mb-1">
+                                                            Newer{" "}
+                                                            <span className="inline-block transition-transform group-hover:translate-x-1 text-lg">
+                                                                →
+                                                            </span>
+                                                        </span>
+                                                        <span className="text-base font-bold group-hover:text-btc transition-colors">
+                                                            {nextPost.title}
+                                                        </span>
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </nav>
+                                    );
+                                })()}
+                            </main>
                             <AboutModal
                                 isOpen={isAboutOpen}
                                 onClose={() => setIsAboutOpen(false)}
@@ -677,172 +487,103 @@
                 }
 
                 return (
-                    <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
-                        <header className="mb-16 text-center md:text-left">
-                            <div className="mb-6 tracking-tight relative">
-                                <span className="font-serif italic font-normal text-3xl md:text-4xl block mb-2 text-muted">
-                                    Hi,
-                                </span>
-                                <h1 className="text-4xl md:text-7xl font-display font-bold leading-none">
-                                    I'm{" "}
+                    <div>
+                        <SiteHeader onAboutClick={() => setIsAboutOpen(true)} />
+
+                        <main className="max-w-3xl mx-auto px-6">
+                            <div className="flex flex-wrap gap-2 mb-8">
+                                <button
+                                    onClick={() => setActiveTag(null)}
+                                    className={`text-sm font-mono px-3 py-1 rounded transition-colors ${
+                                        activeTag === null
+                                            ? "bg-btc text-white font-bold"
+                                            : "bg-ink/5 text-muted hover:text-btc"
+                                    }`}
+                                >
+                                    All
+                                </button>
+                                {FILTER_TAGS.map((tag) => (
                                     <button
-                                        onClick={() => setIsAboutOpen(true)}
-                                        className="underline decoration-btc decoration-[6px] underline-offset-8 hover:text-btc focus:outline-none transition-colors"
+                                        key={tag}
+                                        onClick={() =>
+                                            setActiveTag(
+                                                activeTag === tag ? null : tag,
+                                            )
+                                        }
+                                        className={`text-sm font-mono px-3 py-1 rounded transition-colors ${
+                                            activeTag === tag
+                                                ? "bg-btc text-white font-bold"
+                                                : "bg-ink/5 text-muted hover:text-btc"
+                                        }`}
                                     >
-                                        Chris
+                                        {tag}
                                     </button>
-                                </h1>
+                                ))}
                             </div>
-                            <div className="text-xl md:text-2xl text-muted italic mb-8 leading-tight max-w-2xl">
-                                Programming Languages, Mathematics,
-                                Cryptography, Retrocomputing, Distributed
-                                Protocols and Blockchain Systems
-                            </div>
-                            <div className="flex flex-wrap gap-8 text-base sc font-bold text-ink">
-                                <a
-                                    href="https://github.com/csgui"
-                                    target="_blank"
-                                    className="btc-underline btc-link"
-                                >
-                                    Github
-                                </a>
-                                <a
-                                    href="mailto:hey@imchris.me"
-                                    className="btc-underline btc-link text-muted font-mono font-normal"
-                                >
-                                    hey@imchris.me
-                                </a>
-                            </div>
-                        </header>
-
-                        <Section title="Overview">
-                            <p className="text-2xl leading-relaxed drop-cap">
-                                I am currently dedicated to advancing the{" "}
-                                <span className="text-btc font-bold">
-                                    Bitcoin ecosystem
-                                </span>{" "}
-                                through the development of foundational tools
-                                and improvements to the core protocol. My
-                                research interests are rooted in the
-                                mathematical foundations of programming
-                                languages and cryptography, alongside an
-                                interest in retrocomputing, including emulators
-                                and historical computer architectures, which I
-                                view as essential to a deep understanding of
-                                computer science.
-                            </p>
-                        </Section>
-
-                        <Section title="recent notes">
-                            <div className="space-y-16">
-                                {BLOG_POSTS.slice(0, 2).map((p) => (
+                            <div className="divide-y divide-ink/5">
+                                {filteredPosts.map((p) => (
                                     <article
                                         key={p.id}
-                                        onClick={() => setPostId(p.id)}
-                                        className="group cursor-pointer"
+                                        onClick={() =>
+                                            !p.draft && navigateTo(p.id)
+                                        }
+                                        className={`py-6 first:pt-0 ${p.draft ? "opacity-40" : "group cursor-pointer"}`}
                                     >
-                                        <div className="flex justify-between items-baseline mb-4">
-                                            <h3 className="text-2xl font-bold group-hover:text-btc transition-colors">
-                                                {p.title}
-                                            </h3>
-                                            <span className="font-mono text-muted text-sm">
-                                                {p.date}
+                                        <div className="flex flex-wrap items-center gap-2 text-sm font-mono text-muted mb-2">
+                                            <span>{p.date}</span>
+                                            <span className="text-ink/20">
+                                                ·
                                             </span>
+                                            <span>{p.category}</span>
+                                            {p.draft && (
+                                                <span className="text-xs font-mono px-2 py-0.5 bg-btc/10 text-btc rounded transition-all duration-300 hover:bg-btc hover:text-white hover:opacity-[2.5] cursor-default">
+                                                    Work in Progress
+                                                </span>
+                                            )}
                                         </div>
-                                        <p className="text-xl text-ink/80 mb-4">
+                                        <h3
+                                            className={`text-xl font-bold leading-snug mb-1.5 ${p.draft ? "" : "group-hover:text-btc transition-colors"}`}
+                                        >
+                                            {p.title}
+                                        </h3>
+                                        <p className="text-base text-ink/60 leading-relaxed mb-2">
                                             {p.summary}
                                         </p>
-                                        <div className="text-base font-bold sc group-hover:text-btc group-hover:translate-x-1 transition-all">
-                                            read notes →
-                                        </div>
+                                        {p.tags && (
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {p.tags.map((tag) => (
+                                                    <span
+                                                        key={tag}
+                                                        className="text-xs font-mono px-2 py-0.5 bg-ink/5 text-muted/70 rounded"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
                                     </article>
                                 ))}
                             </div>
-                        </Section>
+                        </main>
 
-                        <Section title="Notes Repository">
-                            <div className="overflow-x-auto">
-                                <table className="w-full text-left table-fixed min-w-[600px]">
-                                    <thead className="border-b border-btc/20">
-                                        <tr className="sc text-sm text-btc font-bold">
-                                            <th className="py-4 w-1/4 md:w-1/5 pr-4">
-                                                Date
-                                            </th>
-                                            <th className="py-4 w-1/2">
-                                                Title
-                                            </th>
-                                            <th className="py-4 w-1/4 hidden md:table-cell pl-4">
-                                                Category
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {BLOG_POSTS.map((p) => (
-                                            <tr
-                                                key={p.id}
-                                                onClick={() => setPostId(p.id)}
-                                                className="border-b border-ink/5 hover:bg-btc-light transition-colors cursor-pointer"
-                                            >
-                                                <td className="py-5 font-mono text-sm text-muted whitespace-nowrap pr-4">
-                                                    {p.date}
-                                                </td>
-                                                <td className="py-5 font-bold text-lg leading-snug group-hover:text-btc">
-                                                    {p.title}
-                                                </td>
-                                                <td className="py-5 hidden md:table-cell sc text-sm opacity-50 whitespace-nowrap pl-4">
-                                                    {p.category}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                        <footer className="max-w-3xl mx-auto px-6 mt-16 py-8 border-t border-ink/10">
+                            <div className="flex flex-col md:flex-row md:justify-between gap-6 text-sm text-muted">
+                                <div className="max-w-md">
+                                    <p className="leading-relaxed">
+                                        Exploring how Bitcoin works under the
+                                        hood: mempool dynamics, fee estimation
+                                        and protocol-level tooling. Also
+                                        interested in elliptic curve
+                                        cryptography, zero-knowledge proofs,
+                                        compiler design for languages and
+                                        WebAssembly as a compilation target.
+                                    </p>
+                                </div>
+                                <div className="text-sm font-mono text-btc md:text-right shrink-0">
+                                    Updated Jan 2026
+                                </div>
                             </div>
-                        </Section>
-
-                        <Section title="Topics of interest">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                                {RESEARCH_INTERESTS.map((ri, i) => (
-                                    <div
-                                        key={i}
-                                        className="hover:bg-btc-light/30 p-4 -m-4 rounded transition-colors group"
-                                    >
-                                        <h4 className="font-bold text-xl sc mb-2 group-hover:text-btc">
-                                            {ri.title}
-                                        </h4>
-                                        <p className="text-base text-muted">
-                                            {ri.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </Section>
-
-                        <Section title="Professional Context">
-                            <div className="space-y-12">
-                                {EXPERIENCE.map((e) => (
-                                    <div
-                                        key={e.id}
-                                        className="pl-6 border-l-2 border-btc/20 hover:border-btc transition-colors"
-                                    >
-                                        <h4 className="font-bold text-xl">
-                                            {e.role} — {e.organization}
-                                        </h4>
-                                        <div className="font-mono text-sm text-muted mb-2">
-                                            {e.period}
-                                        </div>
-                                        <p className="text-lg text-muted">
-                                            {e.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </Section>
-
-                        <footer className="mt-24 pt-8 border-t border-btc/10 text-center text-sm text-muted italic">
-                            Updated @ Jan 2026. Set in academic Garamond with
-                            Bitcoin accents.
                         </footer>
-                        <ChatAssistant />
                         <AboutModal
                             isOpen={isAboutOpen}
                             onClose={() => setIsAboutOpen(false)}
