@@ -90,6 +90,7 @@
         <script src="notes/note4.js"></script>
         <script src="notes/note5.js"></script>
         <script src="notes/note6.js"></script>
+        <script src="notes/note7.js"></script>
         <script type="text/babel" data-type="module">
             import React, { useState, useEffect, useRef } from "react";
             import ReactDOM from "react-dom";
@@ -98,14 +99,24 @@
 
             const BLOG_POSTS = [
                 {
+                    id: "note7",
+                    title: "Covenant Transactions and Mempool Dynamics",
+                    date: "February 2026",
+                    category: "R&D",
+                    summary:
+                        "How covenant-based transaction chains interact with mempool policy — ancestor limits, fee bumping failures, and what it means for wallet design.",
+                    content: NOTE7_CONTENT,
+                    tags: ["Bitcoin", "R&D"],
+                },
+                {
                     id: "note6",
                     title: "Probabilistic Safety Layers for Mempool-Based Bitcoin Fee Estimation",
                     date: "January 2026",
-                    category: "Research Proposal",
+                    category: "R&D",
                     summary:
                         "A Master's thesis proposal investigating probabilistic safety mechanisms for Bitcoin fee estimation, combining empirical validation with statistical modeling to quantify uncertainty in mempool-based approaches.",
                     content: NOTE6_CONTENT,
-                    tags: ["Bitcoin", "Research Proposal"],
+                    tags: ["Bitcoin", "R&D"],
                 },
                 {
                     id: "note5",
@@ -298,7 +309,7 @@
 
             const FILTER_TAGS = [
                 "Bitcoin",
-                "Research Proposal",
+                "R&D",
                 "Compilers",
                 "Programming Languages",
                 "Cryptography",
@@ -496,7 +507,7 @@
                                     onClick={() => setActiveTag(null)}
                                     className={`text-sm font-mono px-3 py-1 rounded transition-colors ${
                                         activeTag === null
-                                            ? "bg-btc text-white font-bold"
+                                            ? "bg-btc text-white"
                                             : "bg-ink/5 text-muted hover:text-btc"
                                     }`}
                                 >
@@ -512,7 +523,7 @@
                                         }
                                         className={`text-sm font-mono px-3 py-1 rounded transition-colors ${
                                             activeTag === tag
-                                                ? "bg-btc text-white font-bold"
+                                                ? "bg-btc text-white"
                                                 : "bg-ink/5 text-muted hover:text-btc"
                                         }`}
                                     >
@@ -564,26 +575,27 @@
                                     </article>
                                 ))}
                             </div>
-                        </main>
 
-                        <footer className="max-w-3xl mx-auto px-6 mt-16 py-8 border-t border-ink/10">
-                            <div className="flex flex-col md:flex-row md:justify-between gap-6 text-sm text-muted">
-                                <div className="max-w-md">
-                                    <p className="leading-relaxed">
-                                        Exploring how Bitcoin works under the
-                                        hood: mempool dynamics, fee estimation
-                                        and protocol-level tooling. Also
-                                        interested in elliptic curve
-                                        cryptography, zero-knowledge proofs,
-                                        compiler design for languages and
-                                        WebAssembly as a compilation target.
-                                    </p>
+                            <footer className="max-w-3xl mx-auto px-6 mt-16 py-8 border-t border-ink/10">
+                                <div className="flex flex-col md:flex-row md:justify-between gap-6 text-sm text-muted">
+                                    <div className="max-w-md">
+                                        <p className="leading-relaxed">
+                                            Exploring how Bitcoin works under
+                                            the hood: mempool dynamics, fee
+                                            estimation and protocol-level
+                                            tooling. Also interested in elliptic
+                                            curve cryptography, zero-knowledge
+                                            proofs, compiler design for
+                                            languages and WebAssembly as a
+                                            compilation target.
+                                        </p>
+                                    </div>
+                                    <div className="text-sm font-mono text-btc md:text-right shrink-0">
+                                        Updated Feb 2026
+                                    </div>
                                 </div>
-                                <div className="text-sm font-mono text-btc md:text-right shrink-0">
-                                    Updated Jan 2026
-                                </div>
-                            </div>
-                        </footer>
+                            </footer>
+                        </main>
                         <AboutModal
                             isOpen={isAboutOpen}
                             onClose={() => setIsAboutOpen(false)}
