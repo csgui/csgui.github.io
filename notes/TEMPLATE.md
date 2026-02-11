@@ -52,10 +52,10 @@ Add at the TOP of the `BLOG_POSTS` array in `index.html` (newest first):
     id: "noteN",
     title: "Note Title Here",
     date: "Month Year",           // e.g. "February 2026"
-    category: "Category",         // e.g. "Bitcoin", "Compilers", "Distributed Systems", "Data Structures", "L2 Scaling", "Research Proposal"
+    category: "Category",         // e.g. "Bitcoin", "R&D", "Compilers", "Distributed Systems", "Data Structures", "L2 Scaling"
     summary: "One or two sentences summarizing the note. Keep it under 200 characters.",
     content: NOTEN_CONTENT,
-    tags: ["Tag1", "Tag2"],       // From: Bitcoin, Research Proposal, Compilers, Programming Languages, Cryptography
+    tags: ["Tag1", "Tag2"],       // From: Bitcoin, R&D, Compilers, Programming Languages, Cryptography
     // draft: true,               // Uncomment to mark as Work in Progress (hidden by default, visible under WIP filter)
 },
 ```
@@ -76,7 +76,7 @@ Add at the TOP of the `BLOG_POSTS` array in `index.html` (newest first):
 
 These must match entries in `FILTER_TAGS` in index.html:
 - Bitcoin
-- Research Proposal
+- R&D
 - Compilers
 - Programming Languages
 - Cryptography
