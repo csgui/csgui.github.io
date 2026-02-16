@@ -89,6 +89,7 @@
         <script src="notes/note5.js"></script>
         <script src="notes/note6.js"></script>
         <script src="notes/note7.js"></script>
+        <script src="notes/note8.js"></script>
         <script type="text/babel" data-type="module">
             import React, { useState, useEffect, useRef } from "react";
             import ReactDOM from "react-dom";
@@ -96,6 +97,16 @@
             // --- DATA (note content loaded from notes/*.js) ---
 
             const BLOG_POSTS = [
+                {
+                    id: "note8",
+                    title: "Covenant Lab: A Comparative Evaluation Framework for Bitcoin Covenant Proposals",
+                    date: "February 2026",
+                    category: "R&D",
+                    summary:
+                        "A controlled experimentation framework for rigorous, reproducible comparative analysis of Bitcoin covenant proposals — measuring performance, safety, and mempool interaction differences across designs.",
+                    content: NOTE8_CONTENT,
+                    tags: ["Bitcoin", "R&D"],
+                },
                 {
                     id: "note7",
                     title: "Covenant Transactions and Mempool Dynamics",
