@@ -1,7 +1,7 @@
 const NOTE8_CONTENT = `
-<p>Covenant Lab is a controlled experimentation framework designed to enable rigorous, reproducible comparative analysis of Bitcoin covenant proposals under unified conditions. Operating on a regtest network, it abstracts covenant semantics across multiple implementations (BIP119 <code>OP_CHECKTEMPLATEVERIFY</code>, APO, CSFS+CAT, and others) while automating deterministic multi-node orchestration and behavioral measurement.</p>
+<p>Covenant Lab is a controlled experimentation framework designed to enable rigorous, reproducible comparative analysis of Bitcoin covenant proposals under unified conditions. Operating on a regtest network, it abstracts covenant semantics across multiple implementations (BIP119 <code>OP_CHECKTEMPLATEVERIFY</code>, APO, CSFS+CAT and others) while automating deterministic multi-node orchestration and behavioral measurement.</p>
 
-<p>The framework's primary purpose is to <strong>quantify performance, safety, and mempool interaction differences across covenant designs</strong> — enabling researchers to make evidence-based comparisons that would be prohibitively complex in isolated implementations.</p>
+<p>The framework's primary purpose is to <strong>quantify performance, safety and mempool interaction differences across covenant designs</strong>, enabling researchers to make evidence-based comparisons that would be prohibitively complex in isolated implementations.</p>
 
 <h2>Core Components</h2>
 
@@ -23,7 +23,7 @@ const NOTE8_CONTENT = `
 
 <h3>3. Scenario Scripting Engine</h3>
 <ul>
-<li>Transaction creation, broadcasting, block mining, and reorg simulation</li>
+<li>Transaction creation, broadcasting, block mining and reorg simulation</li>
 <li>Adversarial action sequences (double-spend attempts, mempool congestion, state conflicts)</li>
 <li>Deterministic timing and sequencing (no async randomness in scenario execution)</li>
 <li>Output: Complete execution traces (transaction timestamps, mempool residence time, validation latency, rejection reasons)</li>
@@ -42,7 +42,7 @@ const NOTE8_CONTENT = `
 <p><strong>Covenant Safety:</strong></p>
 <ul>
 <li>Reachable state enumeration in covenant spending path trees</li>
-<li>Detection of dead-end states, irreversible commitment paths, and unspendable outputs</li>
+<li>Detection of dead-end states, irreversible commitment paths and unspendable outputs</li>
 <li>Divergence from intended spending semantics under adversarial reorg scenarios</li>
 </ul>
 
@@ -80,14 +80,14 @@ const NOTE8_CONTENT = `
 <li>Real-world network simulation (no P2P propagation delays, bandwidth constraints, or real mempool competition)</li>
 <li>Wallet integration or end-user tooling</li>
 <li>Consensus layer robustness beyond regtest</li>
-<li>Stateless validation (Utreexo) integration — handled separately as a distinct measurement domain</li>
+<li>Stateless validation (Utreexo) integration, handled separately as a distinct measurement domain</li>
 </ul>
 
 <h3>Reproducibility Requirements</h3>
 <ul>
-<li>All random seeding, node configuration, and scenario scripts documented with version info</li>
+<li>All random seeding, node configuration and scenario scripts documented with version info</li>
 <li>Docker/Nix reproducible builds provided; hardware-agnostic execution guaranteed through bitwise-identical trace comparison</li>
-<li>Benchmark variance analysis: multiple runs report mean, std dev, and coefficient of variation</li>
+<li>Benchmark variance analysis: multiple runs report mean, std dev and coefficient of variation</li>
 <li>Source code version frozen for each experiment; configuration and results published alongside paper</li>
 </ul>
 
@@ -109,7 +109,7 @@ const NOTE8_CONTENT = `
 <li>Multi-stage covenant transactions create new mempool congestion patterns that differ from linear transaction chains</li>
 </ul>
 
-<p>By measuring mempool occupancy, validation latency, and reorg vulnerability across covenant types, researchers can identify designs that integrate smoothly with existing mempool logic vs. those requiring protocol-level changes.</p>
+<p>By measuring mempool occupancy, validation latency and reorg vulnerability across covenant types, researchers can identify designs that integrate smoothly with existing mempool logic vs. those requiring protocol-level changes.</p>
 
 <h3>Extension: Utreexo Integration (Planned)</h3>
 <p>Future work will measure covenant validation overhead under stateless validation (Utreexo):</p>
@@ -145,15 +145,15 @@ const NOTE8_CONTENT = `
 <h2>Validation and Rigor</h2>
 
 <ul>
-<li><strong>Methodology papers</strong>: Full specification of measurement approach, metric definitions, and fair comparison framework</li>
-<li><strong>Reproducible artifacts</strong>: All code, configurations, and raw data published; community re-runs validate results</li>
+<li><strong>Methodology papers</strong>: Full specification of measurement approach, metric definitions and fair comparison framework</li>
+<li><strong>Reproducible artifacts</strong>: All code, configurations and raw data published; community re-runs validate results</li>
 <li><strong>Sensitivity analysis</strong>: Vary node count, network topology, scenario parameters; report how results change</li>
 <li><strong>External validation</strong>: Encourage independent implementations of same benchmarks for cross-validation</li>
 </ul>
 
 <h2>Conclusion</h2>
 
-<p>Covenant Lab provides the infrastructure needed to move covenant research from isolated proposal evaluation to rigorous comparative science. By standardizing measurement, ensuring reproducibility, and abstracting away implementation details, it enables researchers to focus on fundamental questions: What tradeoffs do different covenant designs make? How do they interact with Bitcoin's mempool and validation architecture? Which designs are safest, most efficient, and most expressive for their intended use cases?</p>
+<p>Covenant Lab provides the infrastructure needed to move covenant research from isolated proposal evaluation to rigorous comparative science. By standardizing measurement, ensuring reproducibility and abstracting away implementation details, it enables researchers to focus on fundamental questions: What tradeoffs do different covenant designs make? How do they interact with Bitcoin's mempool and validation architecture? Which designs are safest, most efficient and most expressive for their intended use cases?</p>
 
-<p>The framework's value lies not in being a complete covenant testbed, but in being the minimal, rigorous, replicable tool needed to answer these specific comparative questions — suitable for publication in top-tier venues and adoption by the broader Bitcoin research community.</p>
+<p>The framework's value lies not in being a complete covenant testbed, but in being the minimal, rigorous, replicable tool needed to answer these specific comparative questions, suitable for publication in top-tier venues and adoption by the broader Bitcoin research community.</p>
 `;
