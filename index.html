@@ -196,89 +196,6 @@
 
             // --- COMPONENTS ---
 
-            const AboutModal = ({ isOpen, onClose, onAboutNavigate }) => {
-                if (!isOpen) return null;
-
-                useEffect(() => {
-                    const handleEsc = (e) => {
-                        if (e.key === "Escape") onClose();
-                    };
-                    window.addEventListener("keydown", handleEsc);
-                    return () =>
-                        window.removeEventListener("keydown", handleEsc);
-                }, [onClose]);
-
-                return (
-                    <div
-                        className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-ink/30 backdrop-blur-sm animate-in fade-in duration-300"
-                        onClick={onClose}
-                    >
-                        <div
-                            className="bg-white max-w-2xl w-full p-8 md:p-12 border-t-2 border-btc shadow-lg rounded relative"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <h3 className="text-sm font-mono uppercase tracking-widest text-btc mb-8">
-                                About
-                            </h3>
-                            <div className="text-base leading-relaxed text-ink/70 space-y-4 text-justify">
-                                <p>
-                                    Software engineer, 20+ years building
-                                    distributed systems and backend
-                                    infrastructure. Since 2020 focused on
-                                    Bitcoin: working on protocols tooling and
-                                    node implementations.
-                                </p>
-                                <p>
-                                    Currently researching mempool dynamics,
-                                    covenants and fee estimation.
-                                </p>
-                                <p>
-                                    Interested in elliptic curve cryptography,
-                                    compiler design, WebAssembly and the
-                                    low-level infrastructure that makes
-                                    decentralized networks work.
-                                </p>
-                            </div>
-                            <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
-                                <div className="flex gap-4 text-sm font-mono text-muted">
-                                    <a
-                                        href="https://github.com/csgui"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="hover:text-btc transition-colors"
-                                    >
-                                        github
-                                    </a>
-                                    <a
-                                        href="mailto:hey@imchris.me"
-                                        className="hover:text-btc transition-colors"
-                                    >
-                                        email
-                                    </a>
-                                    <a
-                                        href="#about"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            onClose();
-                                            onAboutNavigate();
-                                        }}
-                                        className="hover:text-btc transition-colors"
-                                    >
-                                        about
-                                    </a>
-                                </div>
-                                <button
-                                    onClick={onClose}
-                                    className="text-sm font-mono text-muted hover:text-btc transition-colors"
-                                >
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            };
-
             const ReadingProgress = () => {
                 const [width, setWidth] = useState(0);
                 useEffect(() => {
@@ -304,12 +221,12 @@
                 );
             };
 
-            const SiteHeader = ({ onAboutClick, onAboutNavigate }) => (
+            const SiteHeader = ({ onHomeClick, onAboutNavigate }) => (
                 <header className="max-w-3xl mx-auto px-6 pt-12 pb-8 md:pt-16 md:pb-10">
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                         <div>
                             <button
-                                onClick={onAboutClick}
+                                onClick={onHomeClick}
                                 className="text-3xl font-bold hover:text-btc transition-colors focus:outline-none"
                             >
                                 Chris G.
@@ -378,7 +295,6 @@
                         ? hash
                         : null;
                 });
-                const [isAboutOpen, setIsAboutOpen] = useState(false);
                 const [activeTag, setActiveTag] = useState(null);
                 const post = BLOG_POSTS.find((p) => p.id === postId);
                 const filteredPosts =
@@ -421,7 +337,7 @@
                     return (
                         <div>
                             <SiteHeader
-                                onAboutClick={() => setIsAboutOpen(true)}
+                                onHomeClick={() => navigateTo(null)}
                                 onAboutNavigate={() => navigateTo("about")}
                             />
 
@@ -463,11 +379,6 @@
                                     </p>
                                 </div>
                             </main>
-                            <AboutModal
-                                isOpen={isAboutOpen}
-                                onClose={() => setIsAboutOpen(false)}
-                                onAboutNavigate={() => navigateTo("about")}
-                            />
                         </div>
                     );
                 }
@@ -477,7 +388,7 @@
                         <div>
                             <ReadingProgress />
                             <SiteHeader
-                                onAboutClick={() => setIsAboutOpen(true)}
+                                onHomeClick={() => navigateTo(null)}
                                 onAboutNavigate={() => navigateTo("about")}
                             />
 
@@ -589,11 +500,6 @@
                                     );
                                 })()}
                             </main>
-                            <AboutModal
-                                isOpen={isAboutOpen}
-                                onClose={() => setIsAboutOpen(false)}
-                                onAboutNavigate={() => navigateTo("about")}
-                            />
                         </div>
                     );
                 }
@@ -601,7 +507,7 @@
                 return (
                     <div>
                         <SiteHeader
-                            onAboutClick={() => setIsAboutOpen(true)}
+                            onHomeClick={() => navigateTo(null)}
                             onAboutNavigate={() => navigateTo("about")}
                         />
 
@@ -700,11 +606,6 @@
                                 </div>
                             </footer>
                         </main>
-                        <AboutModal
-                            isOpen={isAboutOpen}
-                            onClose={() => setIsAboutOpen(false)}
-                            onAboutNavigate={() => navigateTo("about")}
-                        />
                     </div>
                 );
             };
