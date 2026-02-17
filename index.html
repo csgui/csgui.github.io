@@ -90,6 +90,7 @@
         <script src="notes/note6.js"></script>
         <script src="notes/note7.js"></script>
         <script src="notes/note8.js"></script>
+        <script src="notes/note9.js"></script>
         <script type="text/babel" data-type="module">
             import React, { useState, useEffect, useRef } from "react";
             import ReactDOM from "react-dom";
@@ -97,6 +98,16 @@
             // --- DATA (note content loaded from notes/*.js) ---
 
             const BLOG_POSTS = [
+                {
+                    id: "note9",
+                    title: "Light Client Block Query Optimization",
+                    date: "February 2026",
+                    category: "R&D",
+                    summary:
+                        "Exploring alternative sketch data structures to BIP-158 Compact Block Filters — reducing CPU overhead for light clients while maintaining privacy guarantees.",
+                    content: NOTE9_CONTENT,
+                    tags: ["Bitcoin", "R&D", "Cryptography"],
+                },
                 {
                     id: "note8",
                     title: "Covenant Lab: A Comparative Evaluation Framework for Bitcoin Covenant Proposals",
