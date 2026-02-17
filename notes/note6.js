@@ -16,7 +16,7 @@ const NOTE6_CONTENT = `
 <li>Design statistical methods for quantifying estimate reliability and expressing uncertainty</li>
 <li>Create an integrated framework combining safety checks with probabilistic inference</li>
 <li>Implement and validate the framework within Floresta, a production Bitcoin node</li>
-<li>Empirically evaluate the system's accuracy, robustness, and user experience benefits</li>
+<li>Empirically evaluate the system's accuracy, robustness and user experience benefits</li>
 </ol>
 
 <h2>How fees work today</h2>
@@ -32,7 +32,7 @@ const NOTE6_CONTENT = `
 
 <h3>Current estimation approaches</h3>
 <p>Bitcoin Core's estimator employs a historical bucket-based approach tracking confirmation times across fee rate ranges. It is stable across mempool fluctuations but reactive rather than predictive, requiring extended observation periods with no confidence metrics.</p>
-<p>The mempool percentile method examines the current mempool state and constructs a hypothetical block template using a greedy algorithm. It is responsive to current conditions but assumes perfect mempool synchronization, provides only point estimates, and has a single-block horizon.</p>
+<p>The mempool percentile method examines the current mempool state and constructs a hypothetical block template using a greedy algorithm. It is responsive to current conditions but assumes perfect mempool synchronization, provides only point estimates and has a single-block horizon.</p>
 
 <h3>Mempool divergence</h3>
 <p>Recent studies have documented systematic divergence between node mempools and miner behavior:</p>
@@ -43,12 +43,12 @@ const NOTE6_CONTENT = `
 </ul>
 
 <h3>Ismail's empirical work</h3>
-<p>Ismail's studies on Delving Bitcoin propose a confidence layer that validates fee estimation assumptions through outcome-based checks: mempool coverage analysis, high-priority transaction tracking, repeated failure detection through pattern analysis, and historical alignment validation using past accuracy as evidence of current reliability.</p>
+<p>Ismail's studies on Delving Bitcoin propose a confidence layer that validates fee estimation assumptions through outcome-based checks: mempool coverage analysis, high-priority transaction tracking, repeated failure detection through pattern analysis and historical alignment validation using past accuracy as evidence of current reliability.</p>
 
 <h2>Key questions</h2>
 <ul>
-<li><em>Validation and detection:</em> How can we reliably detect when mempool-based fee estimation assumptions are violated? What observable metrics indicate divergence, and how do we distinguish transient noise from systematic failures?</li>
-<li><em>Uncertainty quantification:</em> How can we quantify and communicate estimate reliability? What probabilistic models capture fee market dynamics, and how can confidence intervals be computed efficiently?</li>
+<li><em>Validation and detection:</em> How can we reliably detect when mempool-based fee estimation assumptions are violated? What observable metrics indicate divergence and how do we distinguish transient noise from systematic failures?</li>
+<li><em>Uncertainty quantification:</em> How can we quantify and communicate estimate reliability? What probabilistic models capture fee market dynamics and how can confidence intervals be computed efficiently?</li>
 <li><em>Integration:</em> How should confidence validation and statistical estimation be combined? Should checks gate all estimation or adjust outputs?</li>
 <li><em>Real-world performance:</em> Does the probabilistic safety layer improve fee estimation in practice? How does accuracy compare to existing approaches?</li>
 </ul>
@@ -56,15 +56,15 @@ const NOTE6_CONTENT = `
 <h2>The approach</h2>
 <h3>System architecture</h3>
 <p>The proposed system consists of three integrated layers:</p>
-<p><em>Layer 1 — Confidence validation.</em> Implements Ismail's outcome-based checks: mempool coverage tracking, high-priority transaction confirmation monitoring, failure threshold detection with confidence decay, historical alignment scoring, and a transaction pattern reputation system.</p>
-<p><em>Layer 2 — Statistical estimation.</em> Provides probabilistic reasoning through fee rate distribution analysis, confirmation time modeling, mempool volatility detection, confidence interval computation, and Bayesian belief updating.</p>
-<p><em>Layer 3 — Integration API.</em> Exposes a unified interface delivering fee rate recommendations with confidence scores, probability distributions over confirmation times, warning signals for unreliable conditions, and multi-target estimation.</p>
+<p><em>Layer 1 — Confidence validation.</em> Implements Ismail's outcome-based checks: mempool coverage tracking, high-priority transaction confirmation monitoring, failure threshold detection with confidence decay, historical alignment scoring and a transaction pattern reputation system.</p>
+<p><em>Layer 2 — Statistical estimation.</em> Provides probabilistic reasoning through fee rate distribution analysis, confirmation time modeling, mempool volatility detection, confidence interval computation and Bayesian belief updating.</p>
+<p><em>Layer 3 — Integration API.</em> Exposes a unified interface delivering fee rate recommendations with confidence scores, probability distributions over confirmation times, warning signals for unreliable conditions and multi-target estimation.</p>
 
 <h3>Why Floresta</h3>
-<p>Floresta serves as the implementation platform due to its modern Rust codebase, active development community, Utreexo architecture providing unique research context, and existing academic relationships. Prerequisites include implementing the <code>getblocktemplate</code> RPC method, enhancing the mempool with historical tracking, and creating statistical analysis infrastructure.</p>
+<p>Floresta serves as the implementation platform due to its modern Rust codebase, active development community, Utreexo architecture providing unique research context and existing academic relationships. Prerequisites include implementing the <code>getblocktemplate</code> RPC method, enhancing the mempool with historical tracking and creating statistical analysis infrastructure.</p>
 
 <h3>How we'll measure it</h3>
-<p>Accuracy will be measured via MAPE, RMSE, confidence interval calibration, and over/underpayment rates. Robustness metrics include true and false positive rates for identifying unreliable conditions, mean time to detection, and recovery time. Baselines for comparison: Bitcoin Core <code>estimatesmartfee</code>, Mempool.space API, simple mempool percentile, and an oracle estimator with perfect information.</p>
+<p>Accuracy will be measured via MAPE, RMSE, confidence interval calibration and over/underpayment rates. Robustness metrics include true and false positive rates for identifying unreliable conditions, mean time to detection and recovery time. Baselines for comparison: Bitcoin Core <code>estimatesmartfee</code>, Mempool.space API, simple mempool percentile and an oracle estimator with perfect information.</p>
 
 <h2>What this should produce</h2>
 <h3>On the theory side</h3>
@@ -74,7 +74,7 @@ const NOTE6_CONTENT = `
 <p>A production-ready open-source implementation in Floresta. Empirical analysis quantifying mempool divergence frequency and magnitude. Evidence for whether uncertainty information improves user decision-making.</p>
 
 <h3>Broader impact</h3>
-<p>For Bitcoin users: reduced overpayment and confirmation delays, better Lightning Network channel management tools, and enhanced trust through transparent confidence metrics. For the broader ecosystem: techniques applicable to other blockchains and a framework for probabilistic prediction in decentralized networks.</p>
+<p>For Bitcoin users: reduced overpayment and confirmation delays, better Lightning Network channel management tools and enhanced trust through transparent confidence metrics. For the broader ecosystem: techniques applicable to other blockchains and a framework for probabilistic prediction in decentralized networks.</p>
 
 <h2>Timeline</h2>
 <ol>
@@ -87,14 +87,12 @@ const NOTE6_CONTENT = `
 </ol>
 
 <h2>Risks and mitigations</h2>
-<p><em>Technical risks.</em> Floresta's mempool implementation may be insufficient — mitigated by contributing upstream improvements. Historical data may be incomplete — mitigated by early data collection. Performance overhead may be unacceptable — mitigated by continuous profiling.</p>
-<p><em>Research risks.</em> The confidence layer may not significantly improve accuracy — characterizing failure modes remains valuable regardless. Comparisons may show no clear winner — detailed contextual analysis is still a contribution.</p>
+<p><em>Technical risks.</em> Floresta's mempool implementation may be insufficient, mitigated by contributing upstream improvements. Historical data may be incomplete, mitigated by early data collection. Performance overhead may be unacceptable, mitigated by continuous profiling.</p>
+<p><em>Research risks.</em> The confidence layer may not significantly improve accuracy, but characterizing failure modes remains valuable regardless. Comparisons may show no clear winner, but detailed contextual analysis is still a contribution.</p>
 
 <h2>Wrapping up</h2>
-<p>Bitcoin fee estimation sits at the intersection of distributed systems, applied statistics, and economic mechanism design. Current approaches fail silently when assumptions are violated, leaving users without information about estimate reliability.</p>
-<p>This research proposes a probabilistic safety layer that validates estimation assumptions and quantifies uncertainty. By combining Ismail's confidence checks with statistical modeling, the goal is to produce fee estimation that is more honest, more robust, and more useful. Implementation within Floresta ensures real-world validation and broad dissemination.</p>
-<blockquote>"Treating fee estimates as informed predictions with quantifiable confidence allows the network to operate more efficiently, reliably, and intelligently."</blockquote>
-
+<p>Bitcoin fee estimation sits at the intersection of distributed systems, applied statistics and economic mechanism design. Current approaches fail silently when assumptions are violated, leaving users without information about estimate reliability.</p>
+<p>This research proposes a probabilistic safety layer that validates estimation assumptions and quantifies uncertainty. By combining Ismail's confidence checks with statistical modeling, the goal is to produce fee estimation that is more honest, more robust and more useful. Implementation within Floresta ensures real-world validation and broad dissemination.</p>
 <h2>References</h2>
 <ol>
 <li>Ismail, Abubakar Sadiq. "Empirical Studies of Bitcoin Fee Markets." Delving Bitcoin, 2024.</li>
