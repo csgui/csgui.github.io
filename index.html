@@ -1,627 +1,101 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Chris G. — Notes on Bitcoin, Cryptography & Compilers</title>
-        <meta
-            name="description"
-            content="Notes and research on Bitcoin protocol tooling, mempool dynamics, fee estimation, elliptic curve cryptography, compiler design, and WebAssembly."
-        />
-        <meta name="author" content="Chris G." />
-        <meta
-            property="og:title"
-            content="Chris G. — Notes on Bitcoin, Cryptography & Compilers"
-        />
-        <meta
-            property="og:description"
-            content="Notes and research on Bitcoin protocol tooling, fee estimation, elliptic curve cryptography, compiler design, and WebAssembly."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.imchris.me" />
-        <meta name="twitter:card" content="summary" />
-        <meta
-            name="twitter:title"
-            content="Chris G. — Notes on Bitcoin, Cryptography & Compilers"
-        />
-        <meta
-            name="twitter:description"
-            content="Notes and research on Bitcoin protocol tooling, fee estimation, elliptic curve cryptography, compiler design, and WebAssembly."
-        />
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Home &mdash; 0xPage</title>
 
-        <!-- Fonts: Source Serif 4 for body, JetBrains Mono for code and UI -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:wght@400;500&display=swap"
-            rel="stylesheet"
-        />
+<meta name="description" content="Home &mdash; 0xPage">
+<meta name="keywords" content="Home &mdash; 0xPage">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2any">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <!-- Tailwind CSS for Layout -->
-        <script src="https://cdn.tailwindcss.com"></script>
+<link href="#Top" rel="start" title="Top">
+<style type="text/css">
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+ul.mark-bullet {list-style-type: disc}
+</style>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
-        <!-- React, ReactDOM, Babel, and Google GenAI SDK -->
-        <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-        <script type="importmap">
-            {
-                "imports": {
-                    "react": "https://esm.sh/react@^18.2.0",
-                    "react-dom": "https://esm.sh/react-dom@^18.2.0"
-                }
-            }
-        </script>
+</head>
 
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            serif: ['"Source Serif 4"', "serif"],
-                            mono: ['"JetBrains Mono"', "monospace"],
-                        },
-                        colors: {
-                            paper: "#ffffff",
-                            ink: "#1a1a1a",
-                            muted: "#666666",
-                            btc: {
-                                DEFAULT: "#F7931A",
-                                light: "#FFF8F0",
-                                muted: "#E58A18",
-                            },
-                        },
-                    },
-                },
-            };
-        </script>
+<body>
 
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body class="font-serif">
-        <div id="root"></div>
+<div class="top-level-extent" id="Top">
+<h1 class="top" id="g_t0xPage"><span>0xPage<a class="copiable-link" href="#g_t0xPage"> &para;</a></span></h1>
 
-        <script src="notes/note1.js"></script>
-        <script src="notes/note2.js"></script>
-        <script src="notes/note3.js"></script>
-        <script src="notes/note4.js"></script>
-        <script src="notes/note5.js"></script>
-        <script src="notes/note6.js"></script>
-        <script src="notes/note7.js"></script>
-        <script src="notes/note8.js"></script>
-        <script src="notes/note9.js"></script>
-        <script type="text/babel" data-type="module">
-            import React, { useState, useEffect, useRef } from "react";
-            import ReactDOM from "react-dom";
+<nav class="site-nav">
+  [&thinsp;<a href="index.html">Home</a>&thinsp;|&thinsp;<a href="archive.html">Archive</a>&thinsp;|&thinsp;<a href="about.html">About</a>&thinsp;]
+</nav>
 
-            // --- DATA (note content loaded from notes/*.js) ---
+<ul class="mini-toc">
+<li><a href="#Home">Home</a></li>
+</ul>
+<div class="unnumbered-level-extent" id="Home">
+<h2 class="unnumbered"><span>Home<a class="copiable-link" href="#Home"> &para;</a></span></h2>
 
-            const BLOG_POSTS = [
-                {
-                    id: "note9",
-                    title: "Light Client Block Query Optimization",
-                    date: "February 2026",
-                    category: "R&D",
-                    summary:
-                        "Exploring alternative sketch data structures to BIP-158 Compact Block Filters — reducing CPU overhead for light clients while maintaining privacy guarantees.",
-                    content: NOTE9_CONTENT,
-                    tags: ["Bitcoin", "R&D", "Cryptography"],
-                },
-                {
-                    id: "note8",
-                    title: "Covenant Lab: A Comparative Evaluation Framework for Bitcoin Covenant Proposals",
-                    date: "February 2026",
-                    category: "R&D",
-                    summary:
-                        "A controlled experimentation framework for rigorous, reproducible comparative analysis of Bitcoin covenant proposals — measuring performance, safety, and mempool interaction differences across designs.",
-                    content: NOTE8_CONTENT,
-                    tags: ["Bitcoin", "R&D"],
-                },
-                {
-                    id: "note7",
-                    title: "Covenant Transactions and Mempool Dynamics",
-                    date: "February 2026",
-                    category: "R&D",
-                    summary:
-                        "How covenant-based transaction chains interact with mempool policy — ancestor limits, fee bumping failures, and what it means for wallet design.",
-                    content: NOTE7_CONTENT,
-                    tags: ["Bitcoin", "R&D"],
-                },
-                {
-                    id: "note6",
-                    title: "Probabilistic Safety Layers for Mempool-Based Bitcoin Fee Estimation",
-                    date: "January 2026",
-                    category: "R&D",
-                    summary:
-                        "A Master's thesis proposal investigating probabilistic safety mechanisms for Bitcoin fee estimation, combining empirical validation with statistical modeling to quantify uncertainty in mempool-based approaches.",
-                    content: NOTE6_CONTENT,
-                    tags: ["Bitcoin", "R&D"],
-                },
-                {
-                    id: "note5",
-                    title: "Merkle Tree Optimizations for Light Clients",
-                    date: "October 2025",
-                    category: "Data Structures",
-                    summary:
-                        "Reducing the proof size for state inclusion in massive distributed ledgers.",
-                    content: NOTE5_CONTENT,
-                    tags: ["Cryptography", "Bitcoin"],
-                    draft: true,
-                },
-                {
-                    id: "note4",
-                    title: "Asynchronous BFT: The Next Frontier for Distributed Consensus",
-                    date: "June 2025",
-                    category: "Distributed Systems",
-                    summary:
-                        "How modern BFT algorithms are moving towards fully asynchronous models for better fault tolerance.",
-                    content: NOTE4_CONTENT,
-                    tags: ["Cryptography"],
-                    draft: true,
-                },
-                {
-                    id: "note3",
-                    title: "From Clarity to WASM: Building a Decidable Compiler",
-                    date: "February 2025",
-                    category: "Compilers",
-                    summary:
-                        "Technological hurdles in mapping the Stacks smart contract language to high-performance WebAssembly.",
-                    content: NOTE3_CONTENT,
-                    tags: ["Compilers", "Programming Languages"],
-                    draft: true,
-                },
-                {
-                    id: "note2",
-                    title: "The Rollup Dilemma: Optimistic vs. ZK in the Bitcoin L2 Ecosystem",
-                    date: "September 2024",
-                    category: "L2 Scaling",
-                    summary:
-                        "Analyzing why Bitcoin Layer 2 solutions face unique challenges compared to Ethereum-based rollups.",
-                    content: NOTE2_CONTENT,
-                    tags: ["Bitcoin", "Cryptography"],
-                    draft: true,
-                },
-                {
-                    id: "note1",
-                    title: "Understanding Bitcoin Fee Estimation: Embracing its Probabilistic Nature",
-                    date: "March 2024",
-                    category: "Bitcoin",
-                    summary:
-                        "Exploring why Bitcoin transaction fees are inherently uncertain and introducing the concept of a probabilistic safety layer to provide confidence in fee estimates.",
-                    content: NOTE1_CONTENT,
-                    tags: ["Bitcoin"],
-                },
-            ];
+<p>Lisp, systems programming, retrocomputing and Bitcoin. Not in that specific order.
+</p>
+<ul class="mini-toc">
+<li><a href="#Now">Now</a></li>
+<li><a href="#Recent">Recent</a></li>
+</ul>
+<div class="unnumberedsec-level-extent" id="Now">
+<h3 class="unnumberedsec"><span>Now<a class="copiable-link" href="#Now"> &para;</a></span></h3>
 
-            // --- COMPONENTS ---
+<ul class="itemize mark-bullet">
+<li>Digging into cryptographic accumulators and its usage in the Bitcoin ecosystem, in particular Utreexo.
 
-            const ReadingProgress = () => {
-                const [width, setWidth] = useState(0);
-                useEffect(() => {
-                    const onScroll = () => {
-                        const scrollTop = window.scrollY;
-                        const docHeight =
-                            document.documentElement.scrollHeight -
-                            window.innerHeight;
-                        setWidth(
-                            docHeight > 0 ? (scrollTop / docHeight) * 100 : 0,
-                        );
-                    };
-                    window.addEventListener("scroll", onScroll, {
-                        passive: true,
-                    });
-                    return () => window.removeEventListener("scroll", onScroll);
-                }, []);
-                return (
-                    <div
-                        className="reading-progress"
-                        style={{ width: `${width}%` }}
-                    />
-                );
-            };
+</li><li>Returning to Guile Scheme as the primary language for personal projects and
+experiments.
 
-            const SiteHeader = ({ onHomeClick, onAboutNavigate }) => (
-                <header className="max-w-3xl mx-auto px-6 pt-12 pb-8 md:pt-16 md:pb-10">
-                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                        <div>
-                            <button
-                                onClick={onHomeClick}
-                                className="text-3xl font-bold hover:text-btc transition-colors focus:outline-none"
-                            >
-                                Chris G.
-                            </button>
-                            <p className="text-base text-muted mt-1">
-                                Notes on Bitcoin, cryptography and <br />
-                                programming languages. <br />
-                                Also things I am interested in building around
-                                them.
-                            </p>
-                        </div>
-                        <nav className="flex gap-5 text-sm font-mono text-muted">
-                            <a
-                                href="https://github.com/csgui"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-btc transition-colors"
-                            >
-                                github
-                            </a>
-                            <a
-                                href="https://x.com/csgui"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-btc transition-colors"
-                            >
-                                twitter
-                            </a>
-                            <a
-                                href="mailto:hey@imchris.me"
-                                className="hover:text-btc transition-colors"
-                            >
-                                email
-                            </a>
-                            <a
-                                href="#about"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onAboutNavigate();
-                                }}
-                                className="hover:text-btc transition-colors"
-                            >
-                                about
-                            </a>
-                        </nav>
-                    </div>
-                    <div className="mt-6 h-px bg-ink/10"></div>
-                </header>
-            );
+</li><li>Thinking through modularity and feature embeddability in Bitcoin node
+implementations.
 
-            const FILTER_TAGS = [
-                "Bitcoin",
-                "R&D",
-                "Compilers",
-                "Programming Languages",
-                "Cryptography",
-                "WIP",
-            ];
+</li><li>Banging my head against formal proofs and software validation using ACL2.
+</li></ul>
 
-            const matchesFilter = (post, filter) => {
-                const f = filter.toLowerCase();
-                if (post.category.toLowerCase() === f) return true;
-                if (!post.tags) return false;
-                return post.tags.some(
-                    (t) =>
-                        t.toLowerCase().includes(f) ||
-                        f.includes(t.toLowerCase()),
-                );
-            };
+</div>
+<div class="unnumberedsec-level-extent" id="Recent">
+<h3 class="unnumberedsec"><span>Recent<a class="copiable-link" href="#Recent"> &para;</a></span></h3>
 
-            const App = () => {
-                const [postId, setPostId] = useState(() => {
-                    const hash = window.location.hash.slice(1);
-                    if (hash === "about") return "about";
-                    return hash && BLOG_POSTS.find((p) => p.id === hash)
-                        ? hash
-                        : null;
-                });
-                const [activeTag, setActiveTag] = useState(null);
-                const post = BLOG_POSTS.find((p) => p.id === postId);
-                const filteredPosts =
-                    activeTag === "WIP"
-                        ? BLOG_POSTS.filter((p) => p.draft)
-                        : activeTag
-                          ? BLOG_POSTS.filter(
-                                (p) => !p.draft && matchesFilter(p, activeTag),
-                            )
-                          : BLOG_POSTS.filter((p) => !p.draft);
+<div class="post-list">
 
-                const navigateTo = (id) => {
-                    if (id) {
-                        window.history.pushState({ postId: id }, "", `#${id}`);
-                    } else {
-                        window.history.pushState(
-                            { postId: null },
-                            "",
-                            window.location.pathname,
-                        );
-                    }
-                    setPostId(id);
-                };
+<article class="post-card">
+<div class="post-meta">April 28, 2026</div>
+<h2 class="post-title"><a href="article-sicp.html">Why I Still Read SICP</a></h2>
+<p class="post-summary">Every few years I return to <em>Structure and Interpretation of
+Computer Programs</em>. Not for the refresher&mdash;the ideas are old friends&mdash;but
+because it remains the clearest account I know of what programming actually is.</p>
+<a class="read-more" href="article-sicp.html">Read more &rarr;</a>
+</article>
 
-                useEffect(() => {
-                    const onPopState = (e) => {
-                        const id = e.state?.postId || null;
-                        setPostId(id);
-                    };
-                    window.addEventListener("popstate", onPopState);
-                    return () =>
-                        window.removeEventListener("popstate", onPopState);
-                }, []);
+<article class="post-card">
+<div class="post-meta">April 24, 2026</div>
+<h2 class="post-title"><a href="article-texinfo.html">Publishing with Texinfo</a></h2>
+<p class="post-summary">The GNU documentation format turns out to be a decent
+blogging engine. One source file, one stylesheet, one Makefile rule&mdash;and
+the same source produces HTML, PDF and Info without touching the content.</p>
+<a class="read-more" href="article-texinfo.html">Read more &rarr;</a>
+</article>
 
-                useEffect(() => {
-                    if (postId) window.scrollTo(0, 0);
-                }, [postId]);
+</div>
 
-                if (postId === "about") {
-                    return (
-                        <div>
-                            <SiteHeader
-                                onHomeClick={() => navigateTo(null)}
-                                onAboutNavigate={() => navigateTo("about")}
-                            />
+<script src="js/highlight.min.js"></script>
+<script>
+document.querySelectorAll('pre.example-preformatted').forEach(function (el) {
+  hljs.highlightElement(el);
+});
+</script>
+</div>
+</div>
+</div>
 
-                            <main className="max-w-3xl mx-auto px-6">
-                                <button
-                                    onClick={() => navigateTo(null)}
-                                    className="text-sm font-mono font-bold text-btc hover:text-btc-muted transition-colors group mb-8"
-                                >
-                                    <span className="inline-block transition-transform group-hover:-translate-x-1">
-                                        ←
-                                    </span>{" "}
-                                    Back to notes
-                                </button>
 
-                                <header className="mb-8">
-                                    <h1 className="text-2xl md:text-3xl font-bold mb-4 leading-snug">
-                                        About
-                                    </h1>
-                                    <div className="h-px bg-ink/10"></div>
-                                </header>
-                                <div className="blog-content">
-                                    <p>
-                                        Software engineer, 20+ years building
-                                        distributed systems and backend
-                                        infrastructure. Since 2020 focused on
-                                        Bitcoin: working on protocols tooling
-                                        and node implementations.
-                                    </p>
-                                    <p>
-                                        Currently researching mempool dynamics,
-                                        covenants and fee estimation.
-                                    </p>
-                                    <p>
-                                        Interested in elliptic curve
-                                        cryptography, compiler design,
-                                        WebAssembly and the low-level
-                                        infrastructure that makes decentralized
-                                        networks work.
-                                    </p>
-                                </div>
-                            </main>
-                        </div>
-                    );
-                }
 
-                if (postId && post && !post.draft) {
-                    return (
-                        <div>
-                            <ReadingProgress />
-                            <SiteHeader
-                                onHomeClick={() => navigateTo(null)}
-                                onAboutNavigate={() => navigateTo("about")}
-                            />
-
-                            <main className="max-w-3xl mx-auto px-6">
-                                <button
-                                    onClick={() => navigateTo(null)}
-                                    className="text-sm font-mono font-bold text-btc hover:text-btc-muted transition-colors group mb-8"
-                                >
-                                    <span className="inline-block transition-transform group-hover:-translate-x-1">
-                                        ←
-                                    </span>{" "}
-                                    Back to notes
-                                </button>
-
-                                <header className="mb-8">
-                                    <div className="flex flex-wrap items-center gap-2 text-sm font-mono text-muted mb-3">
-                                        <span>{post.date}</span>
-                                        <span className="text-ink/20">·</span>
-                                        <span>{post.category}</span>
-                                    </div>
-                                    <h1 className="text-2xl md:text-3xl font-bold mb-4 leading-snug">
-                                        {post.title}
-                                    </h1>
-                                    <p className="text-base text-ink/60 leading-relaxed mb-4">
-                                        {post.summary}
-                                    </p>
-                                    {post.tags && (
-                                        <div className="flex flex-wrap gap-1.5 mb-6">
-                                            {post.tags.map((tag) => (
-                                                <span
-                                                    key={tag}
-                                                    className="text-xs font-mono px-2 py-0.5 bg-ink/5 text-muted/70 rounded"
-                                                >
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
-                                    <div className="h-px bg-ink/10"></div>
-                                </header>
-                                <div
-                                    className="blog-content"
-                                    dangerouslySetInnerHTML={{
-                                        __html: post.content,
-                                    }}
-                                />
-                                {(() => {
-                                    const activeNotes = BLOG_POSTS.filter(
-                                        (p) => !p.draft,
-                                    );
-                                    const currentIdx = activeNotes.findIndex(
-                                        (p) => p.id === post.id,
-                                    );
-                                    const prevPost =
-                                        currentIdx < activeNotes.length - 1
-                                            ? activeNotes[currentIdx + 1]
-                                            : null;
-                                    const nextPost =
-                                        currentIdx > 0
-                                            ? activeNotes[currentIdx - 1]
-                                            : null;
-                                    return (
-                                        <nav className="mt-16 pt-8 border-t border-ink/10 flex justify-between gap-8">
-                                            <div className="flex-1">
-                                                {prevPost && (
-                                                    <button
-                                                        onClick={() =>
-                                                            navigateTo(
-                                                                prevPost.id,
-                                                            )
-                                                        }
-                                                        className="text-left group"
-                                                    >
-                                                        <span className="text-sm font-mono text-btc font-bold block mb-1">
-                                                            <span className="inline-block transition-transform group-hover:-translate-x-1 text-lg">
-                                                                ←
-                                                            </span>{" "}
-                                                            Older
-                                                        </span>
-                                                        <span className="text-base font-bold group-hover:text-btc transition-colors">
-                                                            {prevPost.title}
-                                                        </span>
-                                                    </button>
-                                                )}
-                                            </div>
-                                            <div className="flex-1 text-right">
-                                                {nextPost && (
-                                                    <button
-                                                        onClick={() =>
-                                                            navigateTo(
-                                                                nextPost.id,
-                                                            )
-                                                        }
-                                                        className="text-right group"
-                                                    >
-                                                        <span className="text-sm font-mono text-btc font-bold block mb-1">
-                                                            Newer{" "}
-                                                            <span className="inline-block transition-transform group-hover:translate-x-1 text-lg">
-                                                                →
-                                                            </span>
-                                                        </span>
-                                                        <span className="text-base font-bold group-hover:text-btc transition-colors">
-                                                            {nextPost.title}
-                                                        </span>
-                                                    </button>
-                                                )}
-                                            </div>
-                                        </nav>
-                                    );
-                                })()}
-                            </main>
-                        </div>
-                    );
-                }
-
-                return (
-                    <div>
-                        <SiteHeader
-                            onHomeClick={() => navigateTo(null)}
-                            onAboutNavigate={() => navigateTo("about")}
-                        />
-
-                        <main className="max-w-3xl mx-auto px-6">
-                            <div className="flex flex-wrap gap-2 mb-8">
-                                <button
-                                    onClick={() => setActiveTag(null)}
-                                    className={`text-sm font-mono px-3 py-1 rounded transition-colors ${
-                                        activeTag === null
-                                            ? "bg-btc text-white"
-                                            : "bg-ink/5 text-muted hover:text-btc"
-                                    }`}
-                                >
-                                    All
-                                </button>
-                                {FILTER_TAGS.map((tag) => (
-                                    <button
-                                        key={tag}
-                                        onClick={() =>
-                                            setActiveTag(
-                                                activeTag === tag ? null : tag,
-                                            )
-                                        }
-                                        className={`text-sm font-mono px-3 py-1 rounded transition-colors ${
-                                            activeTag === tag
-                                                ? "bg-btc text-white"
-                                                : "bg-ink/5 text-muted hover:text-btc"
-                                        }`}
-                                    >
-                                        {tag}
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="divide-y divide-ink/5">
-                                {filteredPosts.map((p) => (
-                                    <article
-                                        key={p.id}
-                                        onClick={() =>
-                                            !p.draft && navigateTo(p.id)
-                                        }
-                                        className={`py-6 first:pt-0 ${p.draft ? "opacity-40" : "group cursor-pointer"}`}
-                                    >
-                                        <div className="flex flex-wrap items-center gap-2 text-sm font-mono text-muted mb-2">
-                                            <span>{p.date}</span>
-                                            <span className="text-ink/20">
-                                                ·
-                                            </span>
-                                            <span>{p.category}</span>
-                                            {p.draft && (
-                                                <span className="text-xs font-mono px-2 py-0.5 bg-btc/10 text-btc rounded transition-all duration-300 hover:bg-btc hover:text-white hover:opacity-100 cursor-default">
-                                                    Work in Progress
-                                                </span>
-                                            )}
-                                        </div>
-                                        <h3
-                                            className={`text-xl font-bold leading-snug mb-1.5 ${p.draft ? "" : "group-hover:text-btc transition-colors"}`}
-                                        >
-                                            {p.title}
-                                        </h3>
-                                        <p className="text-base text-ink/60 leading-relaxed mb-2">
-                                            {p.summary}
-                                        </p>
-                                        {p.tags && (
-                                            <div className="flex flex-wrap gap-1.5">
-                                                {p.tags.map((tag) => (
-                                                    <span
-                                                        key={tag}
-                                                        className="text-xs font-mono px-2 py-0.5 bg-ink/5 text-muted/70 rounded"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </article>
-                                ))}
-                            </div>
-
-                            <footer className="max-w-3xl mx-auto px-6 mt-16 py-8 border-t border-ink/10">
-                                <div className="flex flex-col md:flex-row md:justify-between gap-6 text-sm text-muted">
-                                    <div className="max-w-md">
-                                        <p className="leading-relaxed">
-                                            Exploring how Bitcoin works under
-                                            the hood: mempool dynamics, fee
-                                            estimation and protocol-level
-                                            tooling. Also interested in elliptic
-                                            curve cryptography, zero-knowledge
-                                            proofs, compiler design for
-                                            languages and WebAssembly as a
-                                            compilation target.
-                                        </p>
-                                    </div>
-                                    <div className="text-sm font-mono text-btc md:text-right shrink-0">
-                                        Updated Feb 2026
-                                    </div>
-                                </div>
-                            </footer>
-                        </main>
-                    </div>
-                );
-            };
-
-            const root = ReactDOM.createRoot(document.getElementById("root"));
-            root.render(<App />);
-        </script>
-    </body>
+</body>
 </html>

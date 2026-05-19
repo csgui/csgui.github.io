@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Why I Still Read SICP &mdash; 0xPage</title>
+
+<meta name="description" content="Why I Still Read SICP &mdash; 0xPage">
+<meta name="keywords" content="Why I Still Read SICP &mdash; 0xPage">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2any">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="#Top" rel="start" title="Top">
+<style type="text/css">
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+</style>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+</head>
+
+<body>
+
+<div class="top-level-extent" id="Top">
+<h1 class="top" id="g_t0xPage"><span>0xPage<a class="copiable-link" href="#g_t0xPage"> &para;</a></span></h1>
+
+<nav class="site-nav">
+  [&thinsp;<a href="index.html">Home</a>&thinsp;|&thinsp;<a href="archive.html">Archive</a>&thinsp;|&thinsp;<a href="about.html">About</a>&thinsp;]
+</nav>
+
+<div class="post-meta">April 28, 2026 &middot; <a href="article-sicp.pdf">PDF Version</a></div>
+
+
+<ul class="mini-toc">
+<li><a href="#Why-I-Still-Read-SICP">Why I Still Read SICP</a></li>
+</ul>
+<div class="chapter-level-extent" id="Why-I-Still-Read-SICP">
+<h2 class="chapter"><span>1 Why I Still Read SICP<a class="copiable-link" href="#Why-I-Still-Read-SICP"> &para;</a></span></h2>
+
+<p>Every few years I return to <cite class="cite">Structure and Interpretation of Computer
+Programs</cite>. Not because I need the refresher, the ideas are by now old
+friends, but because the book is the clearest account I have found of
+what programming <em class="emph">actually is</em>.
+</p>
+<p>Most programming books teach you a language or a framework. SICP teaches
+you that a program is a description of a process, and that understanding
+how processes evolve over time is the central skill of the
+discipline.<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a>
+</p>
+<ul class="mini-toc">
+<li><a href="#The-Language-Is-Not-the-Point">The Language Is Not the Point</a></li>
+<li><a href="#Lisp-Is-Where-the-Modern-Came-From">Lisp Is Where the Modern Came From</a></li>
+<li><a href="#The-Base-Is-Everything">The Base Is Everything</a></li>
+</ul>
+<div class="section-level-extent" id="The-Language-Is-Not-the-Point">
+<h3 class="section"><span>1.1 The Language Is Not the Point<a class="copiable-link" href="#The-Language-Is-Not-the-Point"> &para;</a></span></h3>
+
+<p>The book uses Scheme (a small, elegant Lisp) as its notation. Some
+readers get stuck on this. They want examples in Python or JavaScript, as though
+the language were the subject matter.
+</p>
+<p>But the language is a <em class="emph">tool for thinking</em>. Scheme&rsquo;s parentheses
+enforce a discipline: there is no ambiguity in
+</p>
+<div class="example">
+<pre class="example-preformatted">(define (square x) (* x x))
+</pre></div>
+
+<p>compared to the many ways other languages let you write the same thing.
+The surface area of the language is small enough that it never gets between
+you and the idea.
+</p>
+</div>
+<div class="section-level-extent" id="Lisp-Is-Where-the-Modern-Came-From">
+<h3 class="section"><span>1.2 Lisp Is Where the Modern Came From<a class="copiable-link" href="#Lisp-Is-Where-the-Modern-Came-From"> &para;</a></span></h3>
+
+<p>It is easy to miss this if you learned programming after 2000. By then,
+the ideas Lisp introduced had been absorbed so thoroughly into mainstream
+languages that their origin became invisible.
+</p>
+<p>Garbage collection. Lisp, 1959. The REPL. Lisp, 1964. First-class
+functions, closures, higher-order procedures, dynamic typing, homoiconicity,
+macros that operate on code as data. All of it comes from the same
+<em class="emph">House of Thought</em>, the one Abelson and Sussman are teaching in this book.
+</p>
+<p>When Python added lambda. When JavaScript shipped closures. When Java
+eventually got generics and then streams. When Rust introduced iterators
+as first-class combinators. Each of those was a language catching up to
+ideas that were already mature and battle-tested in the Lisp world. The
+genealogy is not a matter of opinion. It is traceable, commit by commit,
+paper by paper, decade by decade, back to McCarthy&rsquo;s 1960 paper and to the
+interpreter that could be written in its own notation.
+</p>
+<p>SICP is not a book about Scheme. It is a book about computation, and it
+uses Scheme because Scheme is small enough to get out of the way. What
+you are reading, underneath the parentheses, is the shape of the thing
+itself. The lambda calculus made executable, the Church encoding made
+concrete, the substitution model turned into something you can run. The
+lambda is not decoration. It is the whole story.
+</p>
+</div>
+<div class="section-level-extent" id="The-Base-Is-Everything">
+<h3 class="section"><span>1.3 The Base Is Everything<a class="copiable-link" href="#The-Base-Is-Everything"> &para;</a></span></h3>
+
+<p>There is a temptation, when learning to program, to stay close to the
+surface. To learn the framework before the language. To learn the library
+before the algorithm. To learn the tool before the principle. This works,
+in the short term. You can build a great deal on a foundation you do not
+fully understand.
+</p>
+<p>Until you cannot.
+</p>
+<p>The moment you hit a performance cliff you cannot explain, a concurrency
+bug you cannot reason about, an abstraction that does not compose... that
+is the moment the foundation matters. And if you never built it, you
+have no ground to stand on.
+</p>
+<p>This is not only true of programming. The base is everything in life.
+The musician who cannot hear intervals is trapped by sheet music. The
+carpenter who does not understand wood grain is at the mercy of the
+material. The programmer who has never written an interpreter does not
+really know what a variable is but only what it does in the particular
+system they learned first.
+</p>
+<p>SICP is one of the few books that builds the base deliberately. It does
+not give you Scheme and then teach you to program. It builds an
+interpreter, then builds abstraction on top of the interpreter, then
+shows you how the interpreter could have been different and what that
+difference means. By the end you have not just learned to program. You
+understand what programming is built on and that understanding does
+not go stale.
+</p>
+<p>That is why I keep coming back. Not for the exercises, not for the
+Scheme, not for the nostalgia. Because every time I return I find
+something in the foundation I had not seen clearly before, and it
+changes how I see everything above it.
+</p>
+<script src="js/highlight.min.js"></script>
+<script>
+document.querySelectorAll('pre.example-preformatted').forEach(function (el) {
+  hljs.highlightElement(el);
+});
+</script>
+<div class="footnotes-segment">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h5 class="footnote-body-heading"><a id="FOOT1" href="#DOCF1">(1)</a></h5>
+<p>Abelson and Sussman open with: &ldquo;We are about to
+study the idea of a <em class="emph">computational process</em>. Computational processes
+are abstract beings that inhabit computers.&rdquo; The word &ldquo;inhabit&rdquo; is
+doing real work.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>

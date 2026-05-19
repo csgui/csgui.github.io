@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Publishing with Texinfo</title>
+
+<meta name="description" content="Publishing with Texinfo">
+<meta name="keywords" content="Publishing with Texinfo">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2any">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="#Top" rel="start" title="Top">
+<style type="text/css">
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+ul.mark-bullet {list-style-type: disc}
+</style>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+</head>
+
+<body>
+
+<div class="top-level-extent" id="Top">
+<h1 class="top" id="g_t0xPage"><span>0xPage<a class="copiable-link" href="#g_t0xPage"> &para;</a></span></h1>
+
+<nav class="site-nav">
+  [&thinsp;<a href="index.html">Home</a>&thinsp;|&thinsp;<a href="archive.html">Archive</a>&thinsp;|&thinsp;<a href="about.html">About</a>&thinsp;]
+</nav>
+
+<div class="post-meta">April 24, 2026 &middot; <a href="article-texinfo.pdf">PDF Version</a></div>
+
+
+<ul class="mini-toc">
+<li><a href="#Publishing-with-Texinfo">Publishing with Texinfo</a></li>
+<li><a href="#Conclusion">Conclusion</a></li>
+</ul>
+<div class="chapter-level-extent" id="Publishing-with-Texinfo">
+<h2 class="chapter"><span>1 Publishing with Texinfo<a class="copiable-link" href="#Publishing-with-Texinfo"> &para;</a></span></h2>
+
+<p>I used to have a blog where I dumped ideas, experiments and projects.
+That sense of publishing in public, or working in the open, felt like
+a commitment that would push me to finish things. But that is not always true.
+And also that blog made me feel like a millennial :-p,
+and it was built on a framework my technical instincts didn’t really like.
+</p>
+<p>But I miss writing, so enter Texinfo: a familiar face.
+</p>
+<p>Texinfo is the official documentation format of the GNU Project. Most
+people encounter it through <code class="command">info</code> pages and assume it is only for
+software manuals. It is not.
+</p>
+<p>With a Makefile containing one rule and a small CSS file, Texinfo produces
+clean, readable HTML from a plain-text source. This blog is built that way.
+</p>
+<ul class="mini-toc">
+<li><a href="#Why-Texinfo">Why Texinfo</a></li>
+<li><a href="#A-Minimal-Document">A Minimal Document</a></li>
+<li><a href="#Common-Markup">Common Markup</a></li>
+<li><a href="#Limitations">Limitations</a></li>
+</ul>
+<div class="section-level-extent" id="Why-Texinfo">
+<h3 class="section"><span>1.1 Why Texinfo<a class="copiable-link" href="#Why-Texinfo"> &para;</a></span></h3>
+
+<ul class="itemize mark-bullet">
+<li><strong class="strong">One source, multiple outputs.</strong> The same <samp class="file">.texi</samp> file generates
+HTML, Info, PDF (via TeX) and plain text. You decide the output format
+at build time and not at writing time.
+
+</li><li><strong class="strong">Semantic markup.</strong> You describe <em class="emph">what</em> something is:
+<code class="code">@code</code> for inline code, <code class="code">@emph</code> for emphasis, <code class="code">@file</code>
+for filenames. The stylesheet decides how it looks.
+
+</li><li><strong class="strong">No dependencies.</strong> <code class="command">texi2any</code> ships with most Linux
+distributions and is available on macOS via Homebrew. The build does not require Node,
+bundlers or a network connection.
+</li></ul>
+
+</div>
+<div class="section-level-extent" id="A-Minimal-Document">
+<h3 class="section"><span>1.2 A Minimal Document<a class="copiable-link" href="#A-Minimal-Document"> &para;</a></span></h3>
+
+<p>Every Texinfo document starts with a small header, then content, then
+<code class="code">@bye</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">\input texinfo
+@setfilename doc.info
+@settitle My Document
+@documentencoding UTF-8
+@node Top
+@top My Document
+
+Content here.
+
+@bye
+</pre></div>
+
+<p>That is the entire scaffold. Running <code class="code">texi2any --html --no-split</code>
+turns it into a single HTML file. Add <code class="code">--css-ref=style.css</code> to link
+an external stylesheet.
+</p>
+</div>
+<div class="section-level-extent" id="Common-Markup">
+<h3 class="section"><span>1.3 Common Markup<a class="copiable-link" href="#Common-Markup"> &para;</a></span></h3>
+
+<p>A short reference for the elements used most often:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">@emph{text}</code> &mdash; emphasis (a.k.a. italic), rendered as <em class="emph">text</em>.
+
+</li><li><code class="code">@strong{text}</code> &mdash; bold, rendered as <strong class="strong">text</strong>.
+
+</li><li><code class="code">@code{text}</code> &mdash; inline code, rendered as <code class="code">text</code>.
+
+</li><li><code class="code">@example</code> / <code class="code">@end example</code> &mdash; a preformatted code block.
+
+</li><li><code class="code">@footnote{note}</code> &mdash; an inline footnote.<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a> The text appears at the bottom of the page with a backlink.
+
+</li><li><code class="code">@uref{url, label}</code> &mdash; a hyperlink.
+</li></ul>
+
+</div>
+<div class="section-level-extent" id="Limitations">
+<h3 class="section"><span>1.4 Limitations<a class="copiable-link" href="#Limitations"> &para;</a></span></h3>
+
+<p>Texinfo was designed for software documentation, not long-form prose. It
+has no native support for bibliographies, figure captions or tables with
+merged cells. For a short blog post these rarely matter. For a book-length
+work you would feel them.
+</p>
+<p>The format also does not allow arbitrary HTML inline, and you must use
+<code class="code">@html</code> / <code class="code">@end html</code> blocks to escape. Use that hatch
+sparingly. Overuse makes the source hard to read.
+</p>
+</div>
+</div>
+<div class="chapter-level-extent" id="Conclusion">
+<h2 class="chapter"><span>2 Conclusion<a class="copiable-link" href="#Conclusion"> &para;</a></span></h2>
+
+<p>Texinfo occupies an unusual place in modern publishing. It is old,
+minimal and largely unchanged, yet it continues to solve a real problem:
+turning structured plain text into durable documentation without a large
+toolchain. For small websites, technical notes and software manuals, that
+simplicity becomes a strength rather than a limitation.
+</p>
+<p>The modern web often treats publishing as an application problem requiring
+frameworks, package managers and build pipelines. Texinfo approaches it as
+a text-processing problem. The source remains readable without special
+tools, the output formats are generated from the same document and the
+entire system can be understood in an afternoon.
+</p>
+<p>That does not make Texinfo the right tool for every project. It lacks many
+features expected from contemporary publishing systems, especially for
+visually complex layouts. But for writers who value plain text,
+reproducibility and long-term readability, it remains a surprisingly
+practical format decades after its creation.
+</p>
+<p>And about the old posts I’ve written, and now locked in a version-control system,
+they will occasionally find a home here as well.
+</p>
+<script src="js/highlight.min.js"></script>
+<script>
+document.querySelectorAll('pre.example-preformatted').forEach(function (el) {
+  hljs.highlightElement(el);
+});
+</script>
+<div class="footnotes-segment">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h5 class="footnote-body-heading"><a id="FOOT1" href="#DOCF1">(1)</a></h5>
+<p>Texinfo is
+older than the modern static-site ecosystem by decades. The format was
+originally developed in the 1980s for GNU manuals and remains actively
+maintained today.</p>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>

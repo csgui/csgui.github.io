@@ -1,0 +1,272 @@
+:root {
+    --bg:      #fffff8;
+    --text:    #111111;
+    --muted:   #666666;
+    --link:    #0000cc;
+    --visited: #0000cc;
+    --border:  #aaaaaa;
+    --code-bg: #ebebeb;
+    --max-width: 72ch;
+}
+
+html { overflow-y: scroll; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+}
+
+/* ---------- layout ---------- */
+
+nav.site-nav,
+.top-level-extent,
+.chapter-level-extent,
+.unnumbered-level-extent,
+.section-level-extent,
+.unnumberedsec-level-extent {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.top-level-extent              { padding-bottom: 5rem; }
+.chapter-level-extent,
+.unnumbered-level-extent       { padding-top: 2.5rem; }
+
+/* ---------- nav ---------- */
+
+nav.site-nav {
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+}
+
+nav.site-nav a       { color: var(--text); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+
+/* ---------- hide texi2any boilerplate ---------- */
+
+h1.top, p.nav-panel, ul.mini-toc { display: none; }
+
+/* ---------- links ---------- */
+
+a          { color: var(--link); }
+a:visited  { color: var(--visited); }
+a:hover    { text-decoration: underline; }
+
+/* ---------- body text ---------- */
+
+p { margin: 1rem 0; }
+
+em.emph       { font-style: italic; }
+strong.strong { font-weight: bold; }
+cite.cite     { font-style: italic; }
+
+/* ---------- headings ---------- */
+
+h2.chapter, h2.unnumbered {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0.4rem 0 1.25rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 2px solid var(--text);
+    letter-spacing: 0.03em;
+}
+
+h3.section, h3.unnumberedsec {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 2.25rem 0 0.6rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px dashed var(--border);
+}
+
+/* ---------- post meta (date) ---------- */
+
+.post-meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 2.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* ---------- home page ---------- */
+
+
+.post-list { display: flex; flex-direction: column; }
+
+.post-card {
+    padding: 1.25rem 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.post-card .post-meta { margin-top: 0; }
+
+h2.post-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.2rem 0 0.5rem;
+    line-height: 1.45;
+}
+
+h2.post-title a         { color: var(--text); text-decoration: none; }
+h2.post-title a:hover   { text-decoration: underline; }
+h2.post-title a:visited { color: var(--visited); }
+
+p.post-summary { font-size: 0.875rem; color: var(--muted); margin: 0 0 0.5rem; }
+
+a.read-more { font-size: 0.85rem; }
+
+/* ---------- archive ---------- */
+
+.archive-summary {
+    margin: -0.25rem 0 1.25rem;
+}
+
+.tag-cloud {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+}
+
+.tag-label { font-weight: bold; margin-right: 0.2rem; color: var(--text); }
+
+.tag         { cursor: pointer; }
+.tag:hover   { color: var(--text); text-decoration: underline; }
+.tag.active  { color: var(--text); font-weight: bold; text-decoration: underline; text-underline-offset: 2px; }
+
+.archive-table {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.875rem;
+}
+
+.archive-col-header {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    color: var(--muted);
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.archive-entry {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.entry-meta {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    margin-bottom: 0.2rem;
+}
+
+.entry-date   { color: var(--muted); }
+.entry-domain { color: var(--text); }
+
+.entry-link {
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.875rem;
+    color: var(--link);
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.entry-link:hover   { text-decoration: underline; }
+.entry-link:visited { color: var(--visited); }
+
+.tree-char { color: var(--border); margin-right: 0.3rem; }
+
+/* ---------- code ---------- */
+
+code.code, samp, kbd {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 0.05em 0.25em;
+}
+
+div.example { margin: 1.5rem 0; }
+
+pre.example-preformatted {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    background: var(--code-bg);
+    border-left: 3px solid var(--border);
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+/* ---------- lists ---------- */
+
+ul.itemize      { margin: 1rem 0 1rem 2rem; list-style: disc; }
+ul.itemize li   { margin: 0.35rem 0; }
+
+/* ---------- footnotes ---------- */
+
+div.footnotes-segment > hr {
+    display: none;
+}
+
+div.footnotes-segment {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+h4.footnotes-heading {
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+}
+
+h5.footnote-body-heading {
+    font-size: 0.85rem;
+    font-weight: normal;
+    margin: 0.6rem 0 0.1rem;
+}
+
+/* ---------- copiable anchors ---------- */
+
+a.copiable-link { display: none; }
+
+/* ---------- syntax highlighting (highlight.js retro theme) ---------- */
+
+.hljs-keyword,
+.hljs-built_in   { font-weight: bold; }
+
+.hljs-string,
+.hljs-doctag     { color: #005500; }
+
+.hljs-comment    { color: #777777; font-style: italic; }
+
+.hljs-number,
+.hljs-literal    { color: #880000; }
+
+.hljs-title,
+.hljs-title.function__ { color: inherit; font-weight: bold; }
+
+.hljs-params,
+.hljs-variable,
+.hljs-attr       { color: inherit; }
+
+.hljs-operator,
+.hljs-punctuation { color: inherit; }
