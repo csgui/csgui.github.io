@@ -244,6 +244,63 @@ h5.footnote-body-heading {
     margin: 0.6rem 0 0.1rem;
 }
 
+/* ---------- annotation callouts ---------- */
+
+.preamble {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--border);
+    padding-left: 0.75rem;
+}
+
+.original {
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--text);
+    background: var(--code-bg);
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+.original p { margin: 0.6rem 0; }
+.original p:first-of-type { margin-top: 0.4rem; }
+.original p:last-child    { margin-bottom: 0; }
+
+.original-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+}
+
+.proposed {
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid #b8860b;
+    background: #fdf6e3;
+    font-size: 0.875rem;
+}
+
+.proposed p  { margin: 0.6rem 0; }
+.proposed p:first-of-type { margin-top: 0.4rem; }
+.proposed p:last-child    { margin-bottom: 0; }
+
+.proposed ul.itemize { margin: 0.5rem 0 0.5rem 1.5rem; }
+
+.proposed-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #b8860b;
+    margin-bottom: 0.4rem;
+}
+
 /* ---------- copiable anchors ---------- */
 
 a.copiable-link { display: none; }
